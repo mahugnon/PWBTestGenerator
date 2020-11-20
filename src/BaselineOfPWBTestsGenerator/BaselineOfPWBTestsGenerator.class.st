@@ -15,7 +15,7 @@ BaselineOfPWBTestsGenerator >> baseline: spec [
 		do: [ self baselineOfPowerBuilderParser: spec.
 			spec
 				package: 'Iceberg-ProjectLocator';
-				package: 'PWBTestsDataGenerator-Model'
+				package: 'PWBTestsDataGenerator-DataModel'
 					with: [ spec requires: #('Glorp' 'P3') ];
 				package: 'PWBTestsGenerator'
 					with: [ spec requires: #('PowerBuilderParser' 'Glorp' 'P3') ] ]
@@ -35,6 +35,14 @@ BaselineOfPWBTestsGenerator >> baselineOfP3: spec [
 		baseline: 'P3'
 		with: [ spec
 				repository: 'github://mahugnon/P3:29-P3DatabaseDriver-should-have-connectSSL' ]
+]
+
+{ #category : #baselines }
+BaselineOfPWBTestsGenerator >> baselineOfPWBTestsDataGenerator: spec [
+	spec
+		baseline: 'PWBTestsDataGenerator'
+		with:
+			[ spec repository: 'github://mahugnon/PWBTestsDataGenerator:master' ]
 ]
 
 { #category : #baselines }
