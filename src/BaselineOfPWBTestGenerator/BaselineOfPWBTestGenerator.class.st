@@ -15,7 +15,7 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 		do: [ self baselineOfPowerBuilderParser: spec.
 			spec
 				package: 'Iceberg-ProjectLocator';
-				package: 'PWBTestsDataGenerator-DataModel'
+				package: 'PWBTestsGenerator-DataModel'
 					with: [ spec requires: #('Glorp' 'P3') ];
 				package: 'PWBTestsGenerator'
 					with: [ spec requires: #('PowerBuilderParser' 'Glorp' 'P3') ] ]
