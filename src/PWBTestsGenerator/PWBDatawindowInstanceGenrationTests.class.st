@@ -1,5 +1,5 @@
 Class {
-	#name : #MrlDatawindowInstanceGenrationTests,
+	#name : #PWBDatawindowInstanceGenrationTests,
 	#superclass : #TestCase,
 	#instVars : [
 		'mRLDatawindowInstanceGenrator'
@@ -8,18 +8,18 @@ Class {
 }
 
 { #category : #running }
-MrlDatawindowInstanceGenrationTests >> setUp [
+PWBDatawindowInstanceGenrationTests >> setUp [
 	mRLDatawindowInstanceGenrator := PWBDatawindowInstanceGenrator new
 		name: 'dw_dlq'
 ]
 
 { #category : #tests }
-MrlDatawindowInstanceGenrationTests >> tearDown [ 
+PWBDatawindowInstanceGenrationTests >> tearDown [ 
 
 ]
 
 { #category : #tests }
-MrlDatawindowInstanceGenrationTests >> testCreateDatawindowdlq [
+PWBDatawindowInstanceGenrationTests >> testCreateDatawindowdlq [
 	self
 		assert:
 			(mRLDatawindowInstanceGenrator initializeDatawindowScript
