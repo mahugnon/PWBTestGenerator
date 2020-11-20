@@ -1,0 +1,9 @@
+
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'PWBTestsDataGenerator',
+      #directory : 'src',
+      #platforms : [  #pharo ]
+    }
+  ]
