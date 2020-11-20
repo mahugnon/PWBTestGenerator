@@ -14,7 +14,7 @@ Class {
 		'originalParameter',
 		'parameter_dataobject'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }

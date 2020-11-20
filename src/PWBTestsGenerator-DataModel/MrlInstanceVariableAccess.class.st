@@ -10,7 +10,7 @@ Class {
 		'afterValue',
 		'variable'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #'as yet unclassified' }

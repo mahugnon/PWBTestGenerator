@@ -5,7 +5,7 @@ Class {
 		'access_id',
 		'mrlvalue'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }

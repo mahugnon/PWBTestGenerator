@@ -5,7 +5,7 @@ Class {
 		'parameter_id',
 		'parameter_value'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }

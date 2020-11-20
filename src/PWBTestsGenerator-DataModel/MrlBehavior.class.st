@@ -12,7 +12,7 @@ Class {
 		'timestamps',
 		'mrlInstanceVariablesAccesses'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #'as yet unclassified' }

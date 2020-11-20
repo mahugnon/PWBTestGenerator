@@ -7,7 +7,7 @@ Class {
 		'line_number',
 		'timestamp'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #'as yet unclassified' }

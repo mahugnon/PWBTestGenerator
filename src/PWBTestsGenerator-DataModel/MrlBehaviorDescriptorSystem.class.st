@@ -1,7 +1,7 @@
 Class {
 	#name : #MrlBehaviorDescriptorSystem,
 	#superclass : #MrlDescriptorAbstractSystem,
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }

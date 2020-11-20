@@ -1,7 +1,7 @@
 Class {
 	#name : #'MrlParameter_after_valueDescriptorSystem',
 	#superclass : #MrlDescriptorAbstractSystem,
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }

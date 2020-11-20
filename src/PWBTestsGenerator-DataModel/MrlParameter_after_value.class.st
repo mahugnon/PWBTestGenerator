@@ -1,14 +1,14 @@
 Class {
-	#name : #'MrlParameter_before_value',
+	#name : #'MrlParameter_after_value',
 	#superclass : #'MrlParameter_value',
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #'as yet unclassified' }
-MrlParameter_before_value class >> session [
+MrlParameter_after_value class >> session [
 	| session login |
 	login := self login.
-	session := MrlParameter_before_valueDescriptorSystem
+	session := MrlParameter_after_valueDescriptorSystem
 		sessionForLogin: login.
 	session login.
 	^ session

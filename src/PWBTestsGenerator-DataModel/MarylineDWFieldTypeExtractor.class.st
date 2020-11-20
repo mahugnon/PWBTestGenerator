@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'parameter'
 	],
-	#category : #'PWBTestsDataGenerator-Model'
+	#category : #'PWBTestsGenerator-DataModel'
 }
 
 { #category : #accessing }
