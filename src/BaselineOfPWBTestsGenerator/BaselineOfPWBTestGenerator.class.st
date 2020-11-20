@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfPWBTestsGenerator,
+	#name : #BaselineOfPWBTestGenerator,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfPWBTestsGenerator
 }
 
 { #category : #baselines }
-BaselineOfPWBTestsGenerator >> baseline: spec [
+BaselineOfPWBTestGenerator >> baseline: spec [
 	<baseline>
 	self
 		baselineOfP3: spec;
@@ -22,7 +22,7 @@ BaselineOfPWBTestsGenerator >> baseline: spec [
 ]
 
 { #category : #baselines }
-BaselineOfPWBTestsGenerator >> baselineOfGlorp: spec [
+BaselineOfPWBTestGenerator >> baselineOfGlorp: spec [
 	spec
 		baseline: 'Glorp'
 		with: [ spec
@@ -30,7 +30,7 @@ BaselineOfPWBTestsGenerator >> baselineOfGlorp: spec [
 ]
 
 { #category : #baselines }
-BaselineOfPWBTestsGenerator >> baselineOfP3: spec [
+BaselineOfPWBTestGenerator >> baselineOfP3: spec [
 	spec
 		baseline: 'P3'
 		with: [ spec
@@ -38,7 +38,7 @@ BaselineOfPWBTestsGenerator >> baselineOfP3: spec [
 ]
 
 { #category : #baselines }
-BaselineOfPWBTestsGenerator >> baselineOfPWBTestsDataGenerator: spec [
+BaselineOfPWBTestGenerator >> baselineOfPWBTestsDataGenerator: spec [
 	spec
 		baseline: 'PWBTestsDataGenerator'
 		with:
@@ -46,7 +46,7 @@ BaselineOfPWBTestsGenerator >> baselineOfPWBTestsDataGenerator: spec [
 ]
 
 { #category : #baselines }
-BaselineOfPWBTestsGenerator >> baselineOfPowerBuilderParser: spec [
+BaselineOfPWBTestGenerator >> baselineOfPowerBuilderParser: spec [
 	spec
 		baseline: 'PowerBuilderParser'
 		with: [ spec
