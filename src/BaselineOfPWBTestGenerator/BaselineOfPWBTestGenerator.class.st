@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfPWBTestGenerator,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfPWBTestsGenerator
+	#category : #BaselineOfPWBTestGenerator
 }
 
 { #category : #baselines }
