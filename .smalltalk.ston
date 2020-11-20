@@ -2,7 +2,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'PWBTestsDataGenerator',
+      #baseline : 'PWBTestsGenerator',
       #directory : 'src',
       #platforms : [  #pharo ]
     }
