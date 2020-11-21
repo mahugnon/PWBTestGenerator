@@ -11,8 +11,15 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestCase class >> generateForModel: aFamixPWBModel [
-	aFamixPWBModel getBusinessRuleFunctions
+	aFamixPWBModel getBusinessRuleFunctions values flatten
 		do: [ :behavior | self testCaseForFunction: behavior ]
+]
+
+{ #category : #'as yet unclassified' }
+PWBTestCase class >> generateForModel: aFamixPWBModel in: aFolder [
+	aFamixPWBModel getBusinessRuleFunctions values flatten
+		do:
+			[ :aFamixPWBFunction | self testCaseForFunction: aFamixPWBFunction in: aFolder ]
 ]
 
 { #category : #tests }
@@ -20,6 +27,13 @@ PWBTestCase class >> testCaseForFunction: aFamixPWBFunction [
 	^ self new
 		behaviorUnderTest: aFamixPWBFunction;
 		printPWBDeclarationScript
+]
+
+{ #category : #tests }
+PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
+	^ self new
+		behaviorUnderTest: aFamixPWBFunction;
+		printPWBDeclarationScript: aFolder
 ]
 
 { #category : #adding }
@@ -134,6 +148,26 @@ PWBTestCase >> printPWBDeclarationScript [
 	^ ((IceBergProjectLocator
 		locationOfProjectRepo: 'MarylineTestsGenerator')
 		/ (self name , '.sru')) asFileReference
+		ensureCreateFile;
+		writeStreamDo: [ :stream | 
+			stream
+				<< self testFileHeader;
+				<< self forword;
+				<< self fileDeclaredType;
+				crlf.
+			testUnits
+				do: [ :units | 
+					units printPWBDeclarationScriptOn: stream.
+					stream crlf ].
+			stream
+				<< self onCreate;
+				crlf;
+				<< self onDestroy ]
+]
+
+{ #category : #printing }
+PWBTestCase >> printPWBDeclarationScript: aFolder [
+	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
 			stream

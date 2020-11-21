@@ -25,7 +25,6 @@ PWBUnitTest class >> acceptFunction: aFamixPWBFunction [
 
 { #category : #'as yet unclassified' }
 PWBUnitTest class >> unitTestForFunction: aFamixPWBFunction [
-	aFamixPWBFunction setParameters.
 	^ (self subclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
 		functionUnderTest: aFamixPWBFunction
