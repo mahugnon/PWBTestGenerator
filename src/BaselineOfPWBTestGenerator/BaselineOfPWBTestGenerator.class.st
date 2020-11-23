@@ -10,7 +10,8 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 	self
 		baselineOfP3: spec;
 		baselineOfGlorp: spec;
-		baselineOfPowerBuilderParser: spec.
+		baselineOfPowerBuilderParser: spec;
+		baselineOfSmaCC: spec.
 	spec
 		for: #common
 		do: [ self baselineOfPowerBuilderParser: spec.
