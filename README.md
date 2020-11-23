@@ -11,3 +11,4 @@ Load
         
     	load
 ```
+[![Build Status](https://travis-ci.com/mahugnon/PWBTestGenerator.svg?branch=master)](https://travis-ci.com/mahugnon/PWBTestGenerator)
