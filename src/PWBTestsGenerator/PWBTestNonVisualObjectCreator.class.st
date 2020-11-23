@@ -19,6 +19,6 @@ PWBTestNonVisualObjectCreator >> initialize: aString On: aStream [
 		space;
 		<< 'create';
 		space;
-		<< aStream;
+		<< varName;
 		crlf
 ]
