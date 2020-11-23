@@ -44,6 +44,7 @@ PWBTestCase class >> updateData: aBuilder [
 		help: 'Generate PBUnit test classes';
 		label: 'GeneratePWBTests';
 		action: [ | folder |
+			PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver.
 			MooseModel root
 				ifEmpty: [ self error: 'You must install a Powerbuilder model' ].
 			folder := UITheme builder
