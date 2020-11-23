@@ -36,7 +36,9 @@ BaselineOfPWBTestGenerator >> baselineOfP3: spec [
 	spec
 		baseline: 'P3'
 		with: [ spec
-				repository: 'github://mahugnon/P3:29-P3DatabaseDriver-should-have-connectSSL' ]
+				loads: #('glorp');
+				repository: 'github://mahugnon/P3:master' ].
+	PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver
 ]
 
 { #category : #baselines }
@@ -59,5 +61,5 @@ BaselineOfPWBTestGenerator >> baselineOfPowerBuilderParser: spec [
 BaselineOfPWBTestGenerator >> baselineOfSmaCC: spec [
 	spec
 		baseline: 'SmaCC'
-		with: [ spec repository: 'github://SmaCCRefactoring/SmaCC' ]
+		with: [ spec repository: 'github://mahugnon/SmaCC' ]
 ]
