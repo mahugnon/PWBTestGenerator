@@ -36,6 +36,22 @@ PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
 		printPWBDeclarationScript: aFolder
 ]
 
+{ #category : #'as yet unclassified' }
+PWBTestCase class >> updateData: aBuilder [
+	<worldMenu>
+	(aBuilder item: #GeneratePWBTests)
+		parent: #PWBTools;
+		help: 'Generate PBUnit test classes';
+		label: 'GeneratePWBTests';
+		action: [ | folder |
+			MooseModel root
+				ifEmpty: [ self error: 'You must install a Powerbuilder model' ].
+			folder := UITheme builder
+				chooseDirectory: 'Choose the destination folder'.
+			folder
+				ifNotNil: [ self generateForModel: MooseModel root first in: folder ] ]
+]
+
 { #category : #adding }
 PWBTestCase >> addUnitTest: aUnitTest [
 	testUnits add: aUnitTest
