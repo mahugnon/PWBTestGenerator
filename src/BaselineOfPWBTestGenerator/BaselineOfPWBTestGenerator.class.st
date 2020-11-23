@@ -27,8 +27,7 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 BaselineOfPWBTestGenerator >> baselineOfGlorp: spec [
 	spec
 		baseline: 'Glorp'
-		with: [ spec
-				repository: 'github://mahugnon/glorp:32-Glorp-doesnt-support-ssl-connexion-for-P3' ]
+		with: [ spec repository: 'github://mahugnon/glorp:master' ]
 ]
 
 { #category : #baselines }
