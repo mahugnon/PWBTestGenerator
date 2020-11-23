@@ -1,24 +1,32 @@
 Class {
-	#name : #MrlAbstractModel,
+	#name : #PWBAbstractModel,
 	#superclass : #Object,
 	#classInstVars : [
 		'login'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }
-MrlAbstractModel class >> loadAll [
-	^ self session read: self
+PWBAbstractModel class >> loadAll [
+	| result session |
+	session := self session.
+	result := session read: self.
+	session logout.
+	^ result
 ]
 
 { #category : #'as yet unclassified' }
-MrlAbstractModel class >> loadWhere: aBlock [
-	^ self session read: self where: aBlock
+PWBAbstractModel class >> loadWhere: aBlock [
+	| result session |
+	session := self session.
+	result := session read: self where: aBlock.
+	session logout.
+	^ result
 ]
 
 { #category : #accessing }
-MrlAbstractModel class >> login [
+PWBAbstractModel class >> login [
 	login
 		ifNil: [ login := Login new
 				setSSL;
@@ -34,12 +42,12 @@ MrlAbstractModel class >> login [
 ]
 
 { #category : #initialization }
-MrlAbstractModel class >> resetLogin [
+PWBAbstractModel class >> resetLogin [
 	<script>
 	login := nil
 ]
 
 { #category : #'as yet unclassified' }
-MrlAbstractModel class >> session [
+PWBAbstractModel class >> session [
 	^ self subclassResponsibility
 ]

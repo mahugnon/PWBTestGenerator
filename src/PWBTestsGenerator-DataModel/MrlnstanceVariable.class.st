@@ -1,6 +1,6 @@
 Class {
 	#name : #MrlnstanceVariable,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'instance_variable_dataobject',
 		'instance_variable_id',
@@ -9,7 +9,7 @@ Class {
 		'accesses',
 		'famixPWBAttribute'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

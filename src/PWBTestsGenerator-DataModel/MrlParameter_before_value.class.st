@@ -1,7 +1,7 @@
 Class {
 	#name : #'MrlParameter_before_value',
 	#superclass : #'MrlParameter_value',
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

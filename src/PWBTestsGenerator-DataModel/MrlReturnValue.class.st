@@ -1,13 +1,13 @@
 Class {
 	#name : #MrlReturnValue,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'mrlValue',
 		'behavior_id',
 		'line_number',
 		'timestamp'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

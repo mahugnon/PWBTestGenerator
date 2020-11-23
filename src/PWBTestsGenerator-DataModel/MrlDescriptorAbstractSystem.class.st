@@ -1,7 +1,7 @@
 Class {
 	#name : #MrlDescriptorAbstractSystem,
 	#superclass : #DescriptorSystem,
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-SystemDescriptors'
 }
 
 { #category : #'accessing structure variables' }

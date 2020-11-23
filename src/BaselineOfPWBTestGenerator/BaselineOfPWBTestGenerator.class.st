@@ -53,3 +53,10 @@ BaselineOfPWBTestGenerator >> baselineOfPowerBuilderParser: spec [
 		with: [ spec
 				repository: 'github://moosetechnology/PowerBuilderParser:master' ]
 ]
+
+{ #category : #baselines }
+BaselineOfPWBTestGenerator >> baselineOfSmaCC: spec [
+	spec
+		baseline: 'SmaCC'
+		with: [ spec repository: 'github://SmaCCRefactoring/SmaCC' ]
+]

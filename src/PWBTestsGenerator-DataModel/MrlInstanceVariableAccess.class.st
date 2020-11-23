@@ -1,6 +1,6 @@
 Class {
 	#name : #MrlInstanceVariableAccess,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'instance_variable_access_accessed',
 		'instance_variable_access_accessor',
@@ -10,7 +10,7 @@ Class {
 		'afterValue',
 		'variable'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

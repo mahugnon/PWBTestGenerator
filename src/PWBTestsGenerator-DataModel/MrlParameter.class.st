@@ -1,6 +1,6 @@
 Class {
 	#name : #MrlParameter,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'parameter_id',
 		'parameter_name',
@@ -14,7 +14,7 @@ Class {
 		'originalParameter',
 		'parameter_dataobject'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #accessing }

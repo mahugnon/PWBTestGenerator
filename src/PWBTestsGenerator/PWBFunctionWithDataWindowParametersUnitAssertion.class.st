@@ -78,7 +78,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printParameterInitialization
 
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printWindowDwSetUpOn: stream [
-	^ (MarylineDWFieldTypeExtractor
+	^ (PWBDWFieldTypeExtractor
 		parameter: (self mrlParameters detect: [ :param | param isPWBDataWindow ]))
 		extractOn: stream
 ]

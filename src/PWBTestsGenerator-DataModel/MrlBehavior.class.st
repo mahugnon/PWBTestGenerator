@@ -1,6 +1,6 @@
 Class {
 	#name : #MrlBehavior,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'behaviorUnderTest',
 		'behavior_name',
@@ -12,7 +12,7 @@ Class {
 		'timestamps',
 		'mrlInstanceVariablesAccesses'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

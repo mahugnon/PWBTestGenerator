@@ -1,19 +1,19 @@
 Class {
-	#name : #MarylineDWFieldTypeExtractor,
+	#name : #PWBDWFieldTypeExtractor,
 	#superclass : #Object,
 	#instVars : [
 		'parameter'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Utilities'
 }
 
 { #category : #accessing }
-MarylineDWFieldTypeExtractor class >> parameter: aMrlParameter [
+PWBDWFieldTypeExtractor class >> parameter: aMrlParameter [
 	^ self new parameter: aMrlParameter
 ]
 
 { #category : #'as yet unclassified' }
-MarylineDWFieldTypeExtractor >> extractOn: aStream [
+PWBDWFieldTypeExtractor >> extractOn: aStream [
 	self setUpDw: aStream.
 	self setBeforeValues: aStream.
 	parameter parameter_after_value
@@ -21,17 +21,17 @@ MarylineDWFieldTypeExtractor >> extractOn: aStream [
 ]
 
 { #category : #accessing }
-MarylineDWFieldTypeExtractor >> parameter [
+PWBDWFieldTypeExtractor >> parameter [
 	^ parameter
 ]
 
 { #category : #accessing }
-MarylineDWFieldTypeExtractor >> parameter: anObject [
+PWBDWFieldTypeExtractor >> parameter: anObject [
 	parameter := anObject
 ]
 
 { #category : #initialization }
-MarylineDWFieldTypeExtractor >> setAfterValues: aStream [
+PWBDWFieldTypeExtractor >> setAfterValues: aStream [
 	| colones |
 	colones := (CSVParser
 		parseWithHeader: parameter parameter_after_value) anyOne.
@@ -59,7 +59,7 @@ MarylineDWFieldTypeExtractor >> setAfterValues: aStream [
 ]
 
 { #category : #initialization }
-MarylineDWFieldTypeExtractor >> setBeforeValues: aStream [
+PWBDWFieldTypeExtractor >> setBeforeValues: aStream [
 	| colones |
 	colones := (CSVParser
 		parseWithHeader: parameter parameter_before_value) anyOne.
@@ -87,7 +87,7 @@ MarylineDWFieldTypeExtractor >> setBeforeValues: aStream [
 ]
 
 { #category : #initialization }
-MarylineDWFieldTypeExtractor >> setUpDw: aStream [
+PWBDWFieldTypeExtractor >> setUpDw: aStream [
 	aStream
 		<< 'lw_maryline_test_window.dw_input.dataobject = ';
 		<< '"';

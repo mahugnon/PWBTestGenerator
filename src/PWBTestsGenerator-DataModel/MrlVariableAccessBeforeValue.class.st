@@ -1,7 +1,7 @@
 Class {
 	#name : #MrlVariableAccessBeforeValue,
 	#superclass : #MrlVariableAccessValue,
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

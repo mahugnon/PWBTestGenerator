@@ -1,11 +1,11 @@
 Class {
 	#name : #MrlVariableAccessValue,
-	#superclass : #MrlAbstractModel,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'access_id',
 		'mrlvalue'
 	],
-	#category : #'PWBTestsGenerator-DataModel'
+	#category : #'PWBTestsGenerator-DataModel-Model'
 }
 
 { #category : #accessing }
