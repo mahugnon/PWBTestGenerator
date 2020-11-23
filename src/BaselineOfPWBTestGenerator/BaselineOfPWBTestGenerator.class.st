@@ -37,7 +37,7 @@ BaselineOfPWBTestGenerator >> baselineOfP3: spec [
 		with: [ spec
 				loads: #('glorp');
 				repository: 'github://mahugnon/P3:master' ].
-	PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver
+	"PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver"
 ]
 
 { #category : #baselines }
