@@ -37,7 +37,7 @@ PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBDeclarationScriptOn: str
 	self printReturnValueDeclarationOn: stream.
 	assertions
 		do: [ :assert | 
-			self printInstanceVariableAccessAt: assert timestamp on: stream.
+			"self printInstanceVariableAccessAt: assert timestamp on: stream."
 			assert printPWBDeclarationScriptOn: stream ].
 	self endOn: stream.
 	^ stream

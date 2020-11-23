@@ -160,6 +160,7 @@ PWBUnitTest >> owner: anObject [
 PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 	| accesses |
 	accesses := self testsData getInstanceVariableAccess: aString.
+	accesses ifNil: [ ^ aStream ].
 	accesses
 		do: [ :access | 
 			| varname |

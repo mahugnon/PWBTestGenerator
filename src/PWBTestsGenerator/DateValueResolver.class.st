@@ -1,7 +1,7 @@
 Class {
 	#name : #DateValueResolver,
 	#superclass : #PWBTypeValueResolver,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
@@ -11,5 +11,6 @@ DateValueResolver class >> accept: aTypeName [
 
 { #category : #resolving }
 DateValueResolver >> resolve: aString [
+	aString ifNil: [ ^ 'SetNull(' , aString , ')' ].
 	^ 'date("' , aString , '")'
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #NumberValueResolver,
 	#superclass : #PWBTypeValueResolver,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
@@ -12,5 +12,5 @@ NumberValueResolver class >> accept: aTypeName [
 
 { #category : #resolving }
 NumberValueResolver >> resolve: aString [
-	^ aString
+	^ aString ifNil: [ 'SetNull(' , aString asString , ')' ] ifNotNil: [ aString ]
 ]

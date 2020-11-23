@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dw_fullName'
 	],
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }

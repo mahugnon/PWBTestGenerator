@@ -1,15 +1,15 @@
 Class {
-	#name : #BooleanValueResolver,
+	#name : #AnyValueResolver,
 	#superclass : #PWBTypeValueResolver,
 	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
-BooleanValueResolver class >> accept: aTypeName [
-	^ aTypeName asLowercase = 'boolean'
+AnyValueResolver class >> accept: aTypeName [
+	^ aTypeName asLowercase = 'any'
 ]
 
 { #category : #resolving }
-BooleanValueResolver >> resolve: aString [
+AnyValueResolver >> resolve: aString [
 	^ aString
 ]

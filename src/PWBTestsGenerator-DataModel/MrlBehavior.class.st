@@ -120,6 +120,7 @@ MrlBehavior >> behavior_name: anObject [
 MrlBehavior >> createAssertionsFromData [
 	| assertons |
 	assertons := OrderedCollection new.
+	self mrlReturnValues ifEmpty: [ ^ assertons ].
 	self mrlParameters
 		keysAndValuesDo: [ :key :value | 
 			(value allSatisfy: #isBasic)
@@ -162,7 +163,9 @@ MrlBehavior >> generateTestCaseFromData [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> getInstanceVariableAccess: aTimestampString [
-	^ self mrlInstanceVariablesAccesses at: aTimestampString
+	^ self mrlInstanceVariablesAccesses
+		at: aTimestampString
+		ifAbsent: [  ]
 ]
 
 { #category : #initialization }

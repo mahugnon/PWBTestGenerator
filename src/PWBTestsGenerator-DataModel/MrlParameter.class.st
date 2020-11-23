@@ -162,7 +162,7 @@ MrlParameter >> parameter_syntax: anObject [
 
 { #category : #accessing }
 MrlParameter >> startPosition [
-	^ originalParameter startPos
+	^ originalParameter sourceAnchor startPos
 ]
 
 { #category : #accessing }

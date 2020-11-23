@@ -11,7 +11,7 @@ PWBUnitTestForFunctionWithDatawindowArguments class >> acceptFunction: aFamixPWB
 ]
 
 { #category : #'instance creation' }
-PWBUnitTestForFunctionWithDatawindowArguments >> newMarylineTestWindowOn: aStream [
+PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 	aStream
 		<< 'w_maryline_test_window lw_maryline_test_window';
 		crlf;
@@ -27,7 +27,7 @@ PWBUnitTestForFunctionWithDatawindowArguments >> printPWBDeclarationScriptOn: st
 	self beginOn: stream.
 	"self printAccessSetUpOn: stream."
 	self printPWBObjectCreationOn: stream.
-	self newMarylineTestWindowOn: stream.
+	self newPWBTestWindowOn: stream.
 	self printReturnValueDeclarationOn: stream.
 	self printParameterDeclarationOn: stream.
 	self assertions

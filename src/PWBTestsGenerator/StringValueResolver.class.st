@@ -1,7 +1,7 @@
 Class {
 	#name : #StringValueResolver,
 	#superclass : #PWBTypeValueResolver,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
