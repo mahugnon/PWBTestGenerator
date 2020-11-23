@@ -11,6 +11,6 @@ DateValueResolver class >> accept: aTypeName [
 
 { #category : #resolving }
 DateValueResolver >> resolve: aString [
-	aString ifNil: [ ^ 'SetNull(' , aString , ')' ].
+	aString ifNil: [ ^ 'SetNull(' , aString asString , ')' ].
 	^ 'date("' , aString , '")'
 ]
