@@ -51,18 +51,6 @@ PWBUnitTest >> assertions [
 ]
 
 { #category : #accessing }
-PWBUnitTest >> begin [
-	^ String
-		streamContents: [ :stream | 
-			stream
-				<< 'event';
-				space;
-				<< self name;
-				<< '();';
-				crlf ]
-]
-
-{ #category : #accessing }
 PWBUnitTest >> beginOn: stream [
 	^ stream
 		<< 'event';
@@ -76,16 +64,6 @@ PWBUnitTest >> beginOn: stream [
 { #category : #'as yet unclassified' }
 PWBUnitTest >> createAssertionsFromData [
 	assertions addAll: self testsData createAssertionsFromData
-]
-
-{ #category : #accessing }
-PWBUnitTest >> end [
-	^ String
-		streamContents: [ :stream | 
-			stream
-				<< 'return;';
-				crlf;
-				<< 'end event' ]
 ]
 
 { #category : #accessing }
@@ -186,50 +164,19 @@ PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 ]
 
 { #category : #printing }
-PWBUnitTest >> printPWBDeclarationScript [
-	^ String
-		streamContents: [ :stream | 
-			stream
-				<< self begin;
-				crlf.
-			assertions
-				do: [ :assert | assert printPWBDeclarationScriptOn: stream ].
-			stream
-				<< self end;
-				crlf ]
-]
-
-{ #category : #printing }
 PWBUnitTest >> printPWBDeclarationScriptOn: stream [
-	stream
-		<< self begin;
-		crlf.
+	self beginOn: stream.
 	assertions
 		do: [ :assert | assert printPWBDeclarationScriptOn: stream ].
-	stream
-		<< self end;
-		crlf.
+	self endOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
-	| localVar |
-	"self loadTestData."
-	localVar := 'l_' , self testsData pwb_object.
-	^ aStream
-		<< self testsData pwb_object;
-		space;
-		<< localVar;
-		crlf;
-		<< localVar;
-		space;
-		<< '=';
-		space;
-		<< 'create';
-		space;
-		<< self testsData pwb_object;
-		crlf
+	^ PWBTestObjectCreator
+		createAndInitialize: self testsData pwb_object
+		On: aStream
 ]
 
 { #category : #printing }

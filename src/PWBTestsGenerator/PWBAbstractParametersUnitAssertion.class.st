@@ -43,11 +43,6 @@ PWBAbstractParametersUnitAssertion >> behaviorReturnValue: anObject [
 ]
 
 { #category : #accessing }
-PWBAbstractParametersUnitAssertion >> mrlParameters [
-	^ mrlParameters sortAscending: #startPosition
-]
-
-{ #category : #accessing }
 PWBAbstractParametersUnitAssertion >> mrlParameters: anObject [
 	mrlParameters := anObject
 ]
@@ -74,8 +69,8 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				nextPut: $.;
 				<< behaviorName;
 				nextPut: $(.
-			1 to: self mrlParameters size - 1 do: [ :iter | 
-				param := self mrlParameters at: iter.
+			1 to: self pwbParameters size - 1 do: [ :iter | 
+				param := self pwbParameters at: iter.
 				stream
 					<<
 						(PWBTypeValueResolver
@@ -83,7 +78,7 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 							withType: param parameterType name);
 					space;
 					nextPut: $, ].
-			param := self mrlParameters last.
+			param := self pwbParameters last.
 			stream
 				<<
 					(PWBTypeValueResolver
@@ -104,6 +99,11 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				<< 'l_result';
 				nextPut: $);
 				crlf ]
+]
+
+{ #category : #accessing }
+PWBAbstractParametersUnitAssertion >> pwbParameters [
+	^ mrlParameters sortAscending: #startPosition
 ]
 
 { #category : #accessing }

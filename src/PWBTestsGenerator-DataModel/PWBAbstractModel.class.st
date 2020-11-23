@@ -25,6 +25,15 @@ PWBAbstractModel class >> loadWhere: aBlock [
 	^ result
 ]
 
+{ #category : #'as yet unclassified' }
+PWBAbstractModel class >> loadWhere: aBlock limit: anInteger [
+	| result session |
+	session := self session.
+	result := session read: self where: aBlock limit: anInteger.
+	session logout.
+	^ result
+]
+
 { #category : #accessing }
 PWBAbstractModel class >> login [
 	login

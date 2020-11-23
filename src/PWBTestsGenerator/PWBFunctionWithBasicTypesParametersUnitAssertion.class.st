@@ -20,32 +20,49 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> assertNilOn: stream [
 
 { #category : #printing }
 PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
-	| param localVar |
-	localVar := 'l_' , behaviorParent.
+	| param |
+	self printInitializeInvocationVariablesOn: stream.
 	stream
-		<< 'l_result = ';
-		<< localVar;
-		nextPut: $.;
 		<< behaviorName;
 		nextPut: $(.
-	1 to: self mrlParameters size - 1 do: [ :iter | 
-		param := self mrlParameters at: iter.
+	1 to: self pwbParameters size - 1 do: [ :iter | 
+		param := self pwbParameters at: iter.
 		stream
-			<<
-				(PWBTypeValueResolver
-					resolveValue: param parameter_before_value
-					withType: param parameterType name);
+			<< 'l';
+			<< (param parameter_name copyFrom: 2 to: param parameter_name size);
 			space;
 			nextPut: $, ].
-	param := self mrlParameters last.
+	param := self pwbParameters last.
 	stream
-		<<
-			(PWBTypeValueResolver
-				resolveValue: param parameter_before_value
-				withType: param parameterType name);
+		<< 'l';
+		<< (param parameter_name copyFrom: 2 to: param parameter_name size);
 		space;
 		nextPut: $);
 		crlf
+]
+
+{ #category : #printing }
+PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVariablesOn: stream [
+	self pwbParameters
+		do: [ :param | 
+			stream
+				<< param parameterType name;
+				space;
+				<< 'l';
+				<< (param parameter_name copyFrom: 2 to: param parameter_name size);
+				space;
+				<< '=';
+				space;
+				<<
+					(PWBTypeValueResolver
+						resolveValue: param parameter_before_value
+						withType: param parameterType name);
+				crlf ].
+	stream
+		<< 'l_result = ';
+		<< 'l_';
+		<< behaviorParent;
+		nextPut: $.
 ]
 
 { #category : #printing }

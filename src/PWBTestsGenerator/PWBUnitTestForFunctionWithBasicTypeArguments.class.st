@@ -17,19 +17,6 @@ PWBUnitTestForFunctionWithBasicTypeArguments class >> acceptFunction: aFamixPWBF
 ]
 
 { #category : #printing }
-PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBDeclarationScript [
-	self createAssertionsFromData.
-	^ String
-		streamContents: [ :stream | 
-			self beginOn: stream.
-			self printPWBObjectCreationOn: stream.
-			self printReturnValueDeclarationOn: stream.
-			assertions
-				do: [ :assert | stream << assert printPWBDeclarationScript ].
-			self endOn: stream ]
-]
-
-{ #category : #printing }
 PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBDeclarationScriptOn: stream [
 	self createAssertionsFromData.
 	self beginOn: stream.

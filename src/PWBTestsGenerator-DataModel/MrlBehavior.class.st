@@ -121,7 +121,7 @@ MrlBehavior >> createAssertionsFromData [
 	| assertons |
 	assertons := OrderedCollection new.
 	self mrlReturnValues ifEmpty: [ ^ assertons ].
-	self mrlParameters
+	self pwbParameters
 		keysAndValuesDo: [ :key :value | 
 			(value allSatisfy: #isBasic)
 				ifTrue: [ assertons
@@ -214,15 +214,15 @@ MrlBehavior >> mrlInstanceVariablesAccesses [
 ]
 
 { #category : #accessing }
-MrlBehavior >> mrlParameters [
-	mrlParameters ifEmpty: [ self loadMrlParameters ].
-	^ (mrlParameters groupedBy: #timestamp) asOrderedDictionary
-]
-
-{ #category : #accessing }
 MrlBehavior >> mrlReturnValues [
 	mrlReturnValues ifEmpty: [ self loadMrlReturnValues ].
 	^ mrlReturnValues
+]
+
+{ #category : #accessing }
+MrlBehavior >> pwbParameters [
+	mrlParameters ifEmpty: [ self loadMrlParameters ].
+	^ (mrlParameters groupedBy: #timestamp) asOrderedDictionary
 ]
 
 { #category : #accessing }
@@ -262,6 +262,6 @@ MrlBehavior >> setOriginalParameters [
 
 { #category : #accessing }
 MrlBehavior >> timestamps [
-	timestamps ifNil: [ timestamps := self mrlParameters keys ].
+	timestamps ifNil: [ timestamps := self pwbParameters keys ].
 	^ timestamps
 ]

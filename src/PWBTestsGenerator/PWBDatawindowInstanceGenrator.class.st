@@ -8,7 +8,7 @@ Class {
 		'script',
 		'selectSql'
 	],
-	#category : #PWBTestsGenerator
+	#category : #'PWBTestsGenerator-Utilities'
 }
 
 { #category : #accessing }
