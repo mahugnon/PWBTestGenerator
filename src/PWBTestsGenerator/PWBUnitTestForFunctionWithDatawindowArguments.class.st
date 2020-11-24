@@ -13,9 +13,9 @@ PWBUnitTestForFunctionWithDatawindowArguments class >> acceptFunction: aFamixPWB
 { #category : #'instance creation' }
 PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 	aStream
-		<< 'w_maryline_test_window lw_maryline_test_window';
+		<< 'w_PBUnitTest_window lw_PBUnitTest_window';
 		crlf;
-		<< 'open(lw_maryline_test_window)';
+		<< 'open(lw_PBUnitTest_window)';
 		crlf
 ]
 

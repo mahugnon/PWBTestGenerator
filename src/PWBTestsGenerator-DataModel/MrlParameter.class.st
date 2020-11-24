@@ -108,9 +108,19 @@ MrlParameter >> parameter_after_value [
 ]
 
 { #category : #accessing }
+MrlParameter >> parameter_after_value: anObject [
+	parameter_after_value := anObject
+]
+
+{ #category : #accessing }
 MrlParameter >> parameter_before_value [
 	parameter_before_value ifNil: [ self loadMrlParameter_before_value ].
 	^ parameter_before_value parameter_value
+]
+
+{ #category : #accessing }
+MrlParameter >> parameter_before_value: anObject [
+	parameter_before_value := anObject
 ]
 
 { #category : #accessing }

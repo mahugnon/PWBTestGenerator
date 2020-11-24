@@ -8,6 +8,10 @@ Class {
 	#category : #'PWBTestsGenerator-Tests'
 }
 
+{ #category : #'as yet unclassified' }
+PWBFunctionTestGenerationTest >> dwDataExample [
+]
+
 { #category : #running }
 PWBFunctionTestGenerationTest >> setUp [
 	testModel := FamixPWBModel new.
@@ -69,6 +73,25 @@ PWBFunctionTestGenerationTest >> testPWBReturnInitialization [
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
 			'string l_result
+'
+]
+
+{ #category : #tests }
+PWBFunctionTestGenerationTest >> testSetUpDataWindowParameter [
+	| dwTestData result param |
+	dwTestData := 'DLQ_AOC,DLQ_DAC
+1,0'.
+	param := MrlParameter new
+		parameter_dataobject: 'dw_dlq';
+		parameter_before_value: (MrlParameter_before_value new parameter_value: dwTestData).
+	result := DatawindowValueResolver resolve: param.
+	self
+		assert: (result copyReplaceAll: String crlf with: String cr)
+		equals:
+			'lw_PBUnitTest_window.dw_before.dataobject = "dw_dlq"
+lw_PBUnitTest_window.dw_before.setTrans(SQLCA)
+lw_PBUnitTest_window.dw_before.ImportString(DLQ_AOC,DLQ_DAC
+1,0)
 '
 ]
 

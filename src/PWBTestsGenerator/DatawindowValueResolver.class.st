@@ -1,76 +1,47 @@
 Class {
 	#name : #DatawindowValueResolver,
-	#superclass : #PWBTypeValueResolver,
+	#superclass : #Object,
 	#instVars : [
-		'dw_fullName'
+		'parameter'
 	],
 	#category : #'PWBTestsGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
-DatawindowValueResolver class >> accept: aTypeName [
-	^ aTypeName asLowercase beginsWith: 'dw_'
-]
-
-{ #category : #accessing }
-DatawindowValueResolver >> dw_fullName [
-	^ dw_fullName
-]
-
-{ #category : #accessing }
-DatawindowValueResolver >> dw_fullName: anObject [
-	dw_fullName := anObject
+DatawindowValueResolver class >> resolve: aMrlParameter [
+	^ self new resolve: aMrlParameter
 ]
 
 { #category : #resolving }
-DatawindowValueResolver >> resolve: aValue [
-	^ String
-		streamContents: [ :stream | 
-			
-			self setUpWith: aValue on: stream ]
+DatawindowValueResolver >> resolve: aPWBParameter [
+	parameter := aPWBParameter.
+	^ String streamContents: [ :stream | self scriptOn: stream ]
+]
+
+{ #category : #resolving }
+DatawindowValueResolver >> scriptOn: aStream [
+	self setValues: aStream tag: 'before'.
+	parameter parameter_after_value
+		ifNotNil: [ self setValues: aStream tag: 'after' ]
 ]
 
 { #category : #initialization }
-DatawindowValueResolver >> setUpDw: aStream [
+DatawindowValueResolver >> setValues: aStream tag: aTag [
+	| dwName |
+	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	aStream
-		<< dw_fullName;
+		<< dwName;
+		<< '.dataobject = ';
+		<< '"';
+		<< parameter parameter_dataobject;
+		<< '"';
+		crlf;
+		<< dwName;
 		<< '.setTrans(SQLCA)';
 		crlf;
-		<< dw_fullName;
-		<< '.insertRow(0)';
+		<< dwName;
+		<< '.ImportString(';
+		<< parameter parameter_before_value;
+		<< ')';
 		crlf
-]
-
-{ #category : #initialization }
-DatawindowValueResolver >> setUpWith: aString on: stream [
-	| rows data |
-	data := CSVParser parseWithHeader: aString.
-	data ifEmpty: [ ^ stream ].
-	self setUpDw: stream.
-	rows := data anyOne.
-	rows
-		keysAndValuesDo: [ :key :value | 
-			value
-				ifNotNil: [ stream
-						<< dw_fullName;
-						<< '.setItem(';
-						<< dw_fullName;
-						<< '.rowcount(),';
-						<< '"';
-						<< key asString;
-						<< '",';
-						<< 'f_mrl_parse(';
-						space;
-						nextPut: $";
-						<< value;
-						nextPut: $";
-						nextPut: $,;
-						<< dw_fullName;
-						<< '.object.';
-						<< key asString;
-						<< '.colType';
-						nextPut: $);
-						nextPut: $);
-						crlf ] ].
-	^ stream
 ]

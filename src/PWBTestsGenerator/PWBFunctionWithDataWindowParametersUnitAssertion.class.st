@@ -19,7 +19,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 		param := self pwbParameters at: iter.
 		param isPWBDataWindow
 			ifTrue: [ stream
-					<< 'lw_maryline_test_window.dw_input';
+					<< 'lw_PBUnitTest_window.dw_before';
 					space;
 					nextPut: $, ]
 			ifFalse: [ stream
@@ -28,7 +28,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 					nextPut: $, ] ].
 	param := self pwbParameters last.
 	param isPWBDataWindow
-		ifTrue: [ stream << 'lw_maryline_test_window.dw_input' ]
+		ifTrue: [ stream << 'lw_PBUnitTest_window.dw_before' ]
 		ifFalse: [ stream
 				<< param parameter_name;
 				space;
@@ -78,7 +78,8 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printParameterInitialization
 
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printWindowDwSetUpOn: stream [
-	^ (PWBDWFieldTypeExtractor
-		parameter: (self pwbParameters detect: [ :param | param isPWBDataWindow ]))
-		extractOn: stream
+	^ stream
+		<<
+			(DatawindowValueResolver
+				resolve: (self pwbParameters detect: [ :param | param isPWBDataWindow ]))
 ]
