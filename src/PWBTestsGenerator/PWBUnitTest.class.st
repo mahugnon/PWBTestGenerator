@@ -10,7 +10,7 @@ Class {
 		'receiver',
 		'testsData'
 	],
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #visiting }
@@ -164,25 +164,25 @@ PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 ]
 
 { #category : #printing }
-PWBUnitTest >> printPWBDeclarationScriptOn: stream [
+PWBUnitTest >> printPWBObjectCreationOn: aStream [
+	^ PWBTestObjectCreator
+		createAndInitialize: self testsData pwb_object
+		on: aStream
+]
+
+{ #category : #printing }
+PWBUnitTest >> printPWBScriptOn: stream [
 	self beginOn: stream.
 	assertions
-		do: [ :assert | assert printPWBDeclarationScriptOn: stream ].
+		do: [ :assert | assert printPWBScriptOn: stream ].
 	self endOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBUnitTest >> printPWBObjectCreationOn: aStream [
-	^ PWBTestObjectCreator
-		createAndInitialize: self testsData pwb_object
-		On: aStream
-]
-
-{ #category : #printing }
 PWBUnitTest >> printReturnValueDeclarationOn: stream [
 	^ stream
-		<< testsData returnType;
+		<< functionUnderTest returnType name;
 		space;
 		<< 'l_result';
 		crlf

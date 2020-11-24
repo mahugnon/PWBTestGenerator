@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestNonVisualObjectCreator,
 	#superclass : #PWBTestObjectCreator,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #'as yet unclassified' }
@@ -11,7 +11,7 @@ PWBTestNonVisualObjectCreator class >> accept: aString [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestNonVisualObjectCreator >> initialize: aString On: aStream [
+PWBTestNonVisualObjectCreator >> initialize: aString on: aStream [
 	^ aStream
 		<< varName;
 		space;
@@ -19,6 +19,6 @@ PWBTestNonVisualObjectCreator >> initialize: aString On: aStream [
 		space;
 		<< 'create';
 		space;
-		<< varName;
+		<< aString;
 		crlf
 ]

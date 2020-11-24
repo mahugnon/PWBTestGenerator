@@ -9,7 +9,7 @@ Class {
 		'originalBehavior',
 		'timestamp'
 	],
-	#category : #'PWBTestsGenerator-assertions'
+	#category : #'PWBTestsGenerator-Assertions'
 }
 
 { #category : #accessing }

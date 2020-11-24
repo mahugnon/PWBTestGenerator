@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBUnitTestForFunctionWithDatawindowArguments,
 	#superclass : #PWBUnitTest,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #visiting }
@@ -20,7 +20,7 @@ PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 ]
 
 { #category : #printing }
-PWBUnitTestForFunctionWithDatawindowArguments >> printPWBDeclarationScriptOn: stream [
+PWBUnitTestForFunctionWithDatawindowArguments >> printPWBScriptOn: stream [
 	"self loadTestData."
 
 	self createAssertionsFromData.
@@ -33,7 +33,7 @@ PWBUnitTestForFunctionWithDatawindowArguments >> printPWBDeclarationScriptOn: st
 	self assertions
 		do: [ :assert | 
 			self printInstanceVariableAccessAt: assert timestamp on: stream.
-			assert printPWBDeclarationScriptOn: stream ].
+			assert printPWBScriptOn: stream ].
 	self endOn: stream.
 	^ stream
 ]

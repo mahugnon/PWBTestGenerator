@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBFunctionWithDataWindowParametersUnitAssertion,
 	#superclass : #PWBAbstractParametersUnitAssertion,
-	#category : #'PWBTestsGenerator-assertions'
+	#category : #'PWBTestsGenerator-Assertions'
 }
 
 { #category : #printing }
@@ -37,7 +37,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 ]
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBDeclarationScriptOn: stream [
+PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	self printFunctionInvocationScriptOn: stream.
 	stream

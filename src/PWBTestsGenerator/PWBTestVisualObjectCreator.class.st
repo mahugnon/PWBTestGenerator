@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestVisualObjectCreator,
 	#superclass : #PWBTestObjectCreator,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #'as yet unclassified' }
@@ -10,13 +10,13 @@ PWBTestVisualObjectCreator class >> accept: aString [
 ]
 
 { #category : #initialization }
-PWBTestVisualObjectCreator >> initialize: aString On: aStream [
+PWBTestVisualObjectCreator >> initialize: aString on: aStream [
 	^ aStream
-		<< varName;
-		<< '.hide()';
-		crlf;
 		<< 'open(';
 		<< varName;
 		<< ')';
+		crlf;
+		<< varName;
+		<< '.hide()';
 		crlf
 ]

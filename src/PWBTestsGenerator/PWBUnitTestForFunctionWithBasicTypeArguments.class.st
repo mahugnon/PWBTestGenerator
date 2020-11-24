@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBUnitTestForFunctionWithBasicTypeArguments,
 	#superclass : #PWBUnitTest,
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #visiting }
@@ -17,15 +17,28 @@ PWBUnitTestForFunctionWithBasicTypeArguments class >> acceptFunction: aFamixPWBF
 ]
 
 { #category : #printing }
-PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBDeclarationScriptOn: stream [
+PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBScriptOn: stream [
 	self createAssertionsFromData.
 	self beginOn: stream.
 	self printPWBObjectCreationOn: stream.
 	self printReturnValueDeclarationOn: stream.
+	self printParametersDeclarationOn: stream.
 	assertions
-		do: [ :assert | 
-			"self printInstanceVariableAccessAt: assert timestamp on: stream."
-			assert printPWBDeclarationScriptOn: stream ].
+		do:
+			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ].
 	self endOn: stream.
+	^ stream
+]
+
+{ #category : #printing }
+PWBUnitTestForFunctionWithBasicTypeArguments >> printParametersDeclarationOn: stream [
+	self functionUnderTest parameters
+		do: [ :param | 
+			stream
+				<< param parameterType name;
+				space;
+				<< 'l';
+				<< (param name copyFrom: 2 to: param name size);
+				crlf ].
 	^ stream
 ]

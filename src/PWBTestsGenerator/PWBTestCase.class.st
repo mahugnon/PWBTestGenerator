@@ -6,7 +6,7 @@ Class {
 		'behaviorUnderTest',
 		'globalTypes'
 	],
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestCase'
 }
 
 { #category : #'as yet unclassified' }
@@ -33,7 +33,7 @@ PWBTestCase class >> testCaseForFunction: aFamixPWBFunction [
 PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
 	^ self new
 		behaviorUnderTest: aFamixPWBFunction;
-		printPWBDeclarationScript: aFolder
+		printPWBScript: aFolder
 ]
 
 { #category : #'as yet unclassified' }
@@ -161,29 +161,7 @@ PWBTestCase >> onDestroy [
 ]
 
 { #category : #printing }
-PWBTestCase >> printPWBDeclarationScript [
-	^ ((IceBergProjectLocator
-		locationOfProjectRepo: 'MarylineTestsGenerator')
-		/ (self name , '.sru')) asFileReference
-		ensureCreateFile;
-		writeStreamDo: [ :stream | 
-			stream
-				<< self testFileHeader;
-				<< self forword;
-				<< self fileDeclaredType;
-				crlf.
-			testUnits
-				do: [ :units | 
-					units printPWBDeclarationScriptOn: stream.
-					stream crlf ].
-			stream
-				<< self onCreate;
-				crlf;
-				<< self onDestroy ]
-]
-
-{ #category : #printing }
-PWBTestCase >> printPWBDeclarationScript: aFolder [
+PWBTestCase >> printPWBScript: aFolder [
 	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
@@ -194,7 +172,7 @@ PWBTestCase >> printPWBDeclarationScript: aFolder [
 				crlf.
 			testUnits
 				do: [ :units | 
-					units printPWBDeclarationScriptOn: stream.
+					units printPWBScriptOn: stream.
 					stream crlf ].
 			stream
 				<< self onCreate;

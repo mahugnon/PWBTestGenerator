@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'varName'
 	],
-	#category : #'PWBTestsGenerator-PWBTestUnitStrategy'
+	#category : #'PWBTestsGenerator-PWBTestUnit'
 }
 
 { #category : #'as yet unclassified' }
@@ -13,10 +13,10 @@ PWBTestObjectCreator class >> accept: aString [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator class >> createAndInitialize: aString On: aStream [
+PWBTestObjectCreator class >> createAndInitialize: aString on: aStream [
 	^ (self subclasses detect: [ :sub | sub accept: aString ]) new
 		createAndInitialize: aString
-		On: aStream
+		on: aStream
 ]
 
 { #category : #'as yet unclassified' }
@@ -29,12 +29,12 @@ PWBTestObjectCreator >> create: aString On: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator >> createAndInitialize: aString On: aStream [
-	varName := 'l_' , aString.
-	^ self initialize: aString On: (self create: aString On: aStream)
+PWBTestObjectCreator >> createAndInitialize: aString on: aStream [
+	varName := 'l' , aString.
+	^ self initialize: aString on: (self create: aString On: aStream)
 ]
 
 { #category : #initialization }
-PWBTestObjectCreator >> initialize: aString On: aStream [
+PWBTestObjectCreator >> initialize: aString on: aStream [
 	self subclassResponsibility
 ]

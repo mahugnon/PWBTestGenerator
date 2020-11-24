@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBFunctionWithBasicTypesParametersUnitAssertion,
 	#superclass : #PWBAbstractParametersUnitAssertion,
-	#category : #'PWBTestsGenerator-assertions'
+	#category : #'PWBTestsGenerator-Assertions'
 }
 
 { #category : #printing }
@@ -46,8 +46,6 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVar
 	self pwbParameters
 		do: [ :param | 
 			stream
-				<< param parameterType name;
-				space;
 				<< 'l';
 				<< (param parameter_name copyFrom: 2 to: param parameter_name size);
 				space;
@@ -66,7 +64,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVar
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printPWBDeclarationScriptOn: stream [
+PWBFunctionWithBasicTypesParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printFunctionInvocationScriptOn: stream.
 	self printReturnAssertionOn: stream.
 	^ stream
