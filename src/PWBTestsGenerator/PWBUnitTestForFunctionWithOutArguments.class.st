@@ -13,3 +13,8 @@ PWBUnitTestForFunctionWithOutArguments class >> accept: aFamixPWBInvocation [
 PWBUnitTestForFunctionWithOutArguments class >> acceptFunction: aFamixPWBFunction [
 	^ aFamixPWBFunction parameters isEmpty
 ]
+
+{ #category : #printing }
+PWBUnitTestForFunctionWithOutArguments >> printPWBScriptOn: stream [
+"self halt . Print Nothing for now"
+]

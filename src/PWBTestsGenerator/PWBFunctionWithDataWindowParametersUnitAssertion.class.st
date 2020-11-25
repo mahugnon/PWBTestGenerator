@@ -8,7 +8,7 @@ Class {
 PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param localVar |
 	self printParameterInitializationOn: stream.
-	localVar := 'l_' , behaviorParent.
+	localVar := 'l' , behaviorParent.
 	stream
 		<< 'l_result = ';
 		<< localVar;
@@ -28,7 +28,9 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 					nextPut: $, ] ].
 	param := self pwbParameters last.
 	param isPWBDataWindow
-		ifTrue: [ stream << 'lw_PBUnitTest_window.dw_before' ]
+		ifTrue: [ stream
+				<< 'lw_PBUnitTest_window.dw_before';
+				nextPut: $) ]
 		ifFalse: [ stream
 				<< param parameter_name;
 				space;

@@ -10,12 +10,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PWBTestCase class >> generateForModel: aFamixPWBModel [
-	aFamixPWBModel getBusinessRuleFunctions values flatten
-		do: [ :behavior | self testCaseForFunction: behavior ]
-]
-
-{ #category : #'as yet unclassified' }
 PWBTestCase class >> generateForModel: aFamixPWBModel in: aFolder [
 	aFamixPWBModel getBusinessRuleFunctions values flatten
 		do:

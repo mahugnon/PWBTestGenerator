@@ -12,6 +12,39 @@ DatawindowValueResolver class >> resolve: aMrlParameter [
 	^ self new resolve: aMrlParameter
 ]
 
+{ #category : #initialization }
+DatawindowValueResolver >> addDwRows: dwName tag: aTag on: aStream [
+	| colones paramValue |
+	paramValue := aTag = 'before'
+		ifTrue: [ parameter parameter_before_value ]
+		ifFalse: [ parameter parameter_after_value ].
+	colones := (CSVParser parseWithHeader: paramValue) anyOne.
+	colones
+		keysAndValuesDo: [ :key :value | 
+			value
+				ifNotNil: [ aStream
+						<< dwName;
+						<< '.setItem(';
+						<< dwName;
+						<< '.rowcount(),';
+						<< '"';
+						<< key asString;
+						<< '",';
+						<< 'f_mrl_parse(';
+						space;
+						nextPut: $";
+						<< value;
+						nextPut: $";
+						nextPut: $,;
+						<< dwName;
+						<< '.object.';
+						<< key asString;
+						<< '.colType';
+						nextPut: $);
+						nextPut: $);
+						crlf ] ]
+]
+
 { #category : #resolving }
 DatawindowValueResolver >> resolve: aPWBParameter [
 	parameter := aPWBParameter.
@@ -40,8 +73,7 @@ DatawindowValueResolver >> setValues: aStream tag: aTag [
 		<< '.setTrans(SQLCA)';
 		crlf;
 		<< dwName;
-		<< '.ImportString(';
-		<< parameter parameter_before_value;
-		<< ')';
-		crlf
+		<< '.insertRow(0)';
+		crlf.
+	self addDwRows: dwName tag: aTag on: aStream
 ]

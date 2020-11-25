@@ -13,3 +13,8 @@ PWBUnitTestForSubRoutine class >> accept: aFamixPWBInvocation [
 PWBUnitTestForSubRoutine class >> acceptFunction: aFamixPWBFunction [
 	^ false
 ]
+
+{ #category : #printing }
+PWBUnitTestForSubRoutine >> printPWBScriptOn: stream [
+self halt.
+]

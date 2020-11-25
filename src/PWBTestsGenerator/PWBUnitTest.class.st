@@ -142,7 +142,7 @@ PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 	accesses
 		do: [ :access | 
 			| varname |
-			varname := 'l_' , self testsData pwb_object , '.' , access variable.
+			varname := 'l' , self testsData pwb_object , '.' , access variable.
 			access isBasic
 				ifTrue: [ aStream
 						<< varname;
