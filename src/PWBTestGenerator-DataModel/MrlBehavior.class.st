@@ -176,6 +176,11 @@ MrlBehavior >> initialize [
 	mrlInstanceVariablesAccesses := OrderedCollection new
 ]
 
+{ #category : #testing }
+MrlBehavior >> isPrivate [
+	^ behaviorUnderTest isPrivate
+]
+
 { #category : #'as yet unclassified' }
 MrlBehavior >> loadMrlInstanceVariablesAccesses [
 	mrlInstanceVariablesAccesses := MrlInstanceVariableAccess

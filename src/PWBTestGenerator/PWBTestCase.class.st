@@ -25,6 +25,8 @@ PWBTestCase class >> testCaseForFunction: aFamixPWBFunction [
 
 { #category : #tests }
 PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
+	aFamixPWBFunction isPrivate
+		ifTrue: [ ^ self ].
 	^ self new
 		behaviorUnderTest: aFamixPWBFunction;
 		printPWBScript: aFolder

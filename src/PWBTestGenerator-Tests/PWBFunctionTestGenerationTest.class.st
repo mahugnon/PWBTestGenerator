@@ -17,7 +17,9 @@ PWBFunctionTestGenerationTest >> setUp [
 	testModel := FamixPWBModel new.
 	testFunction := FamixPWBFunction new
 		name: 'testFunction';
-		mooseModel: testModel
+		mooseModel: testModel.
+	PharoDatabaseAccessor DefaultDriver isNil
+		ifNil: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
 ]
 
 { #category : #tests }
