@@ -73,7 +73,7 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				param := self pwbParameters at: iter.
 				stream
 					<<
-						(PWBTypeValueResolver
+						(PWBTypeValueSolver
 							resolveValue: param parameter_before_value
 							withType: param parameterType name);
 					space;
@@ -81,7 +81,7 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 			param := self pwbParameters last.
 			stream
 				<<
-					(PWBTypeValueResolver
+					(PWBTypeValueSolver
 						resolveValue: param parameter_before_value
 						withType: param parameterType name);
 				space;
@@ -90,7 +90,7 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				<< 'this.assert(';
 				space;
 				<<
-					(PWBTypeValueResolver
+					(PWBTypeValueSolver
 						resolveValue: behaviorReturnValue mrlValue
 						withType: originalBehavior returnType name);
 				space;

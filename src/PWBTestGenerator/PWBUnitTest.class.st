@@ -150,13 +150,13 @@ PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 						nextPut: $=;
 						space;
 						<<
-							(PWBTypeValueResolver
+							(PWBTypeValueSolver
 								resolveValue: access beforeValue
 								withType: access variableTypeName);
 						crlf ]
 				ifFalse: [ aStream
 						<<
-							(DatawindowValueResolver new
+							(DatawindowValueSolver new
 								dw_fullName: varname;
 								resolve: access beforeValue) ] ].
 	aStream crlf.

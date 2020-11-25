@@ -1,5 +1,5 @@
 Class {
-	#name : #DatawindowValueResolver,
+	#name : #DatawindowValueSolver,
 	#superclass : #Object,
 	#instVars : [
 		'parameter'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-DatawindowValueResolver class >> resolve: aMrlParameter [
+DatawindowValueSolver class >> resolve: aMrlParameter [
 	^ self new resolve: aMrlParameter
 ]
 
 { #category : #initialization }
-DatawindowValueResolver >> addDwRows: dwName tag: aTag on: aStream [
+DatawindowValueSolver >> addDwRows: dwName tag: aTag on: aStream [
 	| colones paramValue |
 	paramValue := aTag = 'before'
 		ifTrue: [ parameter parameter_before_value ]
@@ -46,20 +46,20 @@ DatawindowValueResolver >> addDwRows: dwName tag: aTag on: aStream [
 ]
 
 { #category : #resolving }
-DatawindowValueResolver >> resolve: aPWBParameter [
+DatawindowValueSolver >> resolve: aPWBParameter [
 	parameter := aPWBParameter.
 	^ String streamContents: [ :stream | self scriptOn: stream ]
 ]
 
 { #category : #resolving }
-DatawindowValueResolver >> scriptOn: aStream [
+DatawindowValueSolver >> scriptOn: aStream [
 	self setValues: aStream tag: 'before'.
 	parameter parameter_after_value
 		ifNotNil: [ self setValues: aStream tag: 'after' ]
 ]
 
 { #category : #initialization }
-DatawindowValueResolver >> setValues: aStream tag: aTag [
+DatawindowValueSolver >> setValues: aStream tag: aTag [
 	| dwName |
 	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	aStream

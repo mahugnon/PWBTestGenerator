@@ -1,16 +1,16 @@
 Class {
-	#name : #NumberValueResolver,
-	#superclass : #PWBTypeValueResolver,
+	#name : #NumberValueSolver,
+	#superclass : #PWBTypeValueSolver,
 	#category : #'PWBTestGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }
-NumberValueResolver class >> accept: aTypeName [
+NumberValueSolver class >> accept: aTypeName [
 	^ #('Integer' 'Decimal' 'Int' 'Double' 'Number' 'Long')
 		anySatisfy: [ :type | type asLowercase = aTypeName asLowercase ]
 ]
 
 { #category : #resolving }
-NumberValueResolver >> resolve: aString [
-	^ aString ifNil: [ 'SetNull(' , aString asString , ')' ] ifNotNil: [ aString ]
+NumberValueSolver >> resolve: aString [
+	^ aString ifNotNil: [ aString ]
 ]

@@ -52,7 +52,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVar
 				<< '=';
 				space;
 				<<
-					(PWBTypeValueResolver
+					(PWBTypeValueSolver
 						resolveValue: param parameter_before_value
 						withType: param parameterType name);
 				crlf ].
@@ -78,7 +78,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printReturnAssertionOn: stre
 				<< 'this.assert(';
 				space;
 				<<
-					(PWBTypeValueResolver
+					(PWBTypeValueSolver
 						resolveValue: behaviorReturnValue mrlValue
 						withType: originalBehavior returnType name);
 				space;

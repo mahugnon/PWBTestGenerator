@@ -86,7 +86,7 @@ PWBFunctionTestGenerationTest >> testSetUpDataWindowParameter [
 	param := MrlParameter new
 		parameter_dataobject: 'dw_dlq';
 		parameter_before_value: (MrlParameter_before_value new parameter_value: dwTestData).
-	result := DatawindowValueResolver resolve: param.
+	result := DatawindowValueSolver resolve: param.
 	self
 		assert: (result copyReplaceAll: String crlf with: String cr)
 		equals:
