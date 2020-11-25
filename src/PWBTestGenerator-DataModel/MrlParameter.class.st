@@ -81,6 +81,12 @@ MrlParameter >> loadMrlParameter_before_value [
 		anyOne
 ]
 
+{ #category : #'as yet unclassified' }
+MrlParameter >> loadValue [
+	self loadMrlParameter_before_value.
+	self loadMrlParameter_after_value
+]
+
 { #category : #accessing }
 MrlParameter >> originalParameter [
 	^ originalParameter
@@ -103,7 +109,6 @@ MrlParameter >> parameterTypeName [
 
 { #category : #accessing }
 MrlParameter >> parameter_after_value [
-	parameter_after_value ifNil: [ self loadMrlParameter_after_value ].
 	^ parameter_after_value parameter_value
 ]
 
@@ -114,7 +119,6 @@ MrlParameter >> parameter_after_value: anObject [
 
 { #category : #accessing }
 MrlParameter >> parameter_before_value [
-	parameter_before_value ifNil: [ self loadMrlParameter_before_value ].
 	^ parameter_before_value parameter_value
 ]
 

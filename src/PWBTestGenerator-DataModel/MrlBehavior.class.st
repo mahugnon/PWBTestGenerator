@@ -191,8 +191,9 @@ MrlBehavior >> loadMrlInstanceVariablesAccesses [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> loadMrlParameters [
-	mrlParameters := MrlParameter
-		loadWhere: [ :mrlParameter | mrlParameter behavior_id = self behavior_id ]
+	mrlParameters := (MrlParameter
+		loadWhere: [ :mrlParameter | mrlParameter behavior_id = self behavior_id ])
+		do: #loadValue
 ]
 
 { #category : #'as yet unclassified' }
