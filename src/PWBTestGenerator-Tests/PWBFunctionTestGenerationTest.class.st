@@ -92,8 +92,9 @@ PWBFunctionTestGenerationTest >> testSetUpDataWindowParameter [
 		equals:
 			'lw_PBUnitTest_window.dw_before.dataobject = "dw_dlq"
 lw_PBUnitTest_window.dw_before.setTrans(SQLCA)
-lw_PBUnitTest_window.dw_before.ImportString(DLQ_AOC,DLQ_DAC
-1,0)
+lw_PBUnitTest_window.dw_before.insertRow(0)
+lw_PBUnitTest_window.dw_before.setItem(lw_PBUnitTest_window.dw_before.rowcount(),"DLQ_AOC",f_mrl_parse( "1",lw_PBUnitTest_window.dw_before.object.DLQ_AOC.colType))
+lw_PBUnitTest_window.dw_before.setItem(lw_PBUnitTest_window.dw_before.rowcount(),"DLQ_DAC",f_mrl_parse( "0",lw_PBUnitTest_window.dw_before.object.DLQ_DAC.colType))
 '
 ]
 
