@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBUnitTestForFunctionWithBasicTypeArguments,
 	#superclass : #PWBUnitTest,
-	#category : #'PWBTestGenerator-PWBTestUnit'
+	#category : #'PWBTestGenerator-PWBTestCase'
 }
 
 { #category : #visiting }

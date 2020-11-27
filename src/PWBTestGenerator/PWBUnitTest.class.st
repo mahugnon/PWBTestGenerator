@@ -10,7 +10,7 @@ Class {
 		'receiver',
 		'testsData'
 	],
-	#category : #'PWBTestGenerator-PWBTestUnit'
+	#category : #'PWBTestGenerator-PWBTestCase'
 }
 
 { #category : #visiting }

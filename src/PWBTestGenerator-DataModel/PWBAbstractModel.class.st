@@ -40,11 +40,11 @@ PWBAbstractModel class >> login [
 		ifNil: [ login := Login new
 				setSSL;
 				database: PostgreSQLPlatform new;
-				username: 'lpavlalufjmnyh';
-				password: 'b7b6af9d4457652c5595770cc5e8dac18fa78386e4f4ca995067ad4ea5c3baff';
-				host: 'ec2-18-233-32-61.compute-1.amazonaws.com';
+				username: 'tosca';
+				password: 'nkgqK8DHxzbT';
+				host: 'cldb01tsc999p.sa-cim.local';
 				port: '5432';
-				databaseName: 'd6dfd82tvqmqe0'.
+				databaseName: 'tosca'.
 			login secure: false.
 			(DatabaseAccessor forLogin: login) login ].
 	^ login

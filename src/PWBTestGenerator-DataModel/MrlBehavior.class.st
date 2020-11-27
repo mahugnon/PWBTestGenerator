@@ -37,7 +37,8 @@ MrlBehavior class >> loadAll [
 	^ super loadAll
 		reject: [ :each | 
 			{'nvo_mdb_rdg' . 'nvo_config' . 'nvo_database_manager'.
-			'nvo_tools_file' . 'nvo_tools_ini'.'nvo_database_transac_properties'.'nvo_database_base'}
+			'nvo_tools_file' . 'nvo_tools_ini' . 'nvo_database_transac_properties'.
+			'nvo_database_base'}
 				anySatisfy: [ :aString | aString = each pwb_object ] ]
 ]
 
@@ -146,7 +147,7 @@ MrlBehavior >> ensureCreateAssertion: assertionClass with: timeStamp and: aColle
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> generateTestCaseFromData [
-	PWBTestCase
+	PWBTestSuite
 		testCaseForFunction:
 			((MooseModel root first allWithType: FamixPWBFunction)
 				detect: [ :uf | uf name = self behavior_name ])

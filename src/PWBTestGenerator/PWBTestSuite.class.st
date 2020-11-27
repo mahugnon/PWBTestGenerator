@@ -1,30 +1,30 @@
 Class {
-	#name : #PWBTestCase,
+	#name : #PWBTestSuite,
 	#superclass : #Object,
 	#instVars : [
 		'testUnits',
 		'behaviorUnderTest',
 		'globalTypes'
 	],
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-PWBTestSuite'
 }
 
 { #category : #'as yet unclassified' }
-PWBTestCase class >> generateForModel: aFamixPWBModel in: aFolder [
+PWBTestSuite class >> generateForModel: aFamixPWBModel in: aFolder [
 	aFamixPWBModel getBusinessRuleFunctions values flatten
 		do:
 			[ :aFamixPWBFunction | self testCaseForFunction: aFamixPWBFunction in: aFolder ]
 ]
 
 { #category : #tests }
-PWBTestCase class >> testCaseForFunction: aFamixPWBFunction [
+PWBTestSuite class >> testCaseForFunction: aFamixPWBFunction [
 	^ self new
 		behaviorUnderTest: aFamixPWBFunction;
 		printPWBDeclarationScript
 ]
 
 { #category : #tests }
-PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
+PWBTestSuite class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
 	aFamixPWBFunction isPrivate
 		ifTrue: [ ^ self ].
 	^ self new
@@ -33,7 +33,7 @@ PWBTestCase class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestCase class >> updateData: aBuilder [
+PWBTestSuite class >> updateData: aBuilder [
 	<worldMenu>
 	(aBuilder item: #GeneratePWBTests)
 		parent: #PWBTools;
@@ -50,24 +50,24 @@ PWBTestCase class >> updateData: aBuilder [
 ]
 
 { #category : #adding }
-PWBTestCase >> addUnitTest: aUnitTest [
+PWBTestSuite >> addUnitTest: aUnitTest [
 	testUnits add: aUnitTest
 ]
 
 { #category : #accessing }
-PWBTestCase >> behaviorUnderTest [
+PWBTestSuite >> behaviorUnderTest [
 	^ behaviorUnderTest
 ]
 
 { #category : #accessing }
-PWBTestCase >> behaviorUnderTest: anObject [
+PWBTestSuite >> behaviorUnderTest: anObject [
 	behaviorUnderTest := anObject.
 	self
 		addUnitTest: (PWBUnitTest unitTestForFunction: behaviorUnderTest)
 ]
 
 { #category : #tests }
-PWBTestCase >> fileDeclaredType [
+PWBTestSuite >> fileDeclaredType [
 	^ String
 		streamContents: [ :stream | 
 			stream
@@ -96,7 +96,7 @@ PWBTestCase >> fileDeclaredType [
 ]
 
 { #category : #tests }
-PWBTestCase >> forword [
+PWBTestSuite >> forword [
 	^ String
 		streamContents: [ :stream | 
 			stream
@@ -116,18 +116,18 @@ PWBTestCase >> forword [
 ]
 
 { #category : #printing }
-PWBTestCase >> initialize [
+PWBTestSuite >> initialize [
 	super initialize.
 	testUnits := OrderedCollection new
 ]
 
 { #category : #tests }
-PWBTestCase >> name [
+PWBTestSuite >> name [
 	^ 'test_' , behaviorUnderTest name , '_case'
 ]
 
 { #category : #tests }
-PWBTestCase >> onCreate [
+PWBTestSuite >> onCreate [
 	^ String
 		streamContents: [ :stream | 
 			stream
@@ -142,7 +142,7 @@ PWBTestCase >> onCreate [
 ]
 
 { #category : #tests }
-PWBTestCase >> onDestroy [
+PWBTestSuite >> onDestroy [
 	^ String
 		streamContents: [ :stream | 
 			stream
@@ -157,7 +157,7 @@ PWBTestCase >> onDestroy [
 ]
 
 { #category : #printing }
-PWBTestCase >> printPWBScript: aFolder [
+PWBTestSuite >> printPWBScript: aFolder [
 	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
@@ -177,12 +177,12 @@ PWBTestCase >> printPWBScript: aFolder [
 ]
 
 { #category : #tests }
-PWBTestCase >> testCaseName [
+PWBTestSuite >> testCaseName [
 	^ 'test_' , behaviorUnderTest name
 ]
 
 { #category : #tests }
-PWBTestCase >> testFileHeader [
+PWBTestSuite >> testFileHeader [
 	^ String
 		streamContents: [ :stream | 
 			stream
