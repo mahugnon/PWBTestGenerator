@@ -56,15 +56,6 @@ MrlBehavior class >> loadWithMrlParameterAndMrlReturnValuesWhere: aBlock [
 	^ (self loadWhere: aBlock) do: #loadMrlParametersAndReturnValues
 ]
 
-{ #category : #'as yet unclassified' }
-MrlBehavior class >> session [
-	| session login |
-	login := self login.
-	session := MrlBehaviorDescriptorSystem sessionForLogin: login.
-	session login.
-	^ session
-]
-
 { #category : #adding }
 MrlBehavior >> addAllMrlParameters: aCollection [
 	mrlParameters addAll: aCollection

@@ -10,16 +10,6 @@ Class {
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
 
-{ #category : #'as yet unclassified' }
-MrlReturnValue class >> session [
-	| session login |
-	login := self login.
-	session := MrlReturnValueDescriptorSystem
-		sessionForLogin: login.
-	session login.
-	^ session
-]
-
 { #category : #accessing }
 MrlReturnValue >> behavior_id [
 	^ behavior_id

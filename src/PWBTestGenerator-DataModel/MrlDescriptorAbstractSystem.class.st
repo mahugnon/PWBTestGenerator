@@ -10,6 +10,11 @@ MrlDescriptorAbstractSystem class >> driver [
 	PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver
 ]
 
+{ #category : #'as yet unclassified' }
+MrlDescriptorAbstractSystem class >> getDescriptor: aClassName [
+	^ self subclasses detect: [ :sub | sub name beginsWith: aClassName ]
+]
+
 { #category : #private }
 MrlDescriptorAbstractSystem >> cleanTableName: aString [
 ^ (aString  copyReplaceAll: 'PUBLIC.' with:'' ) copyReplaceAll: '"' with: ''

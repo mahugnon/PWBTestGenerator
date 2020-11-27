@@ -18,15 +18,6 @@ Class {
 }
 
 { #category : #accessing }
-MrlParameter class >> session [
-	| session login |
-	login := self login.
-	session := MrlParameterDescriptorSystem sessionForLogin: login.
-	session login.
-	^ session
-]
-
-{ #category : #accessing }
 MrlParameter >> behavior_id [
 	^ behavior_id
 ]

@@ -12,16 +12,6 @@ Class {
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
 
-{ #category : #'as yet unclassified' }
-MrlnstanceVariable class >> session [
-	| session login |
-	login := self login.
-	session := MrlnstanceVariableDescriptorSystem
-		sessionForLogin: login.
-	session login.
-	^ session
-]
-
 { #category : #accessing }
 MrlnstanceVariable >> accesses [
 	accesses ifEmpty: [ self loadAccesses ].

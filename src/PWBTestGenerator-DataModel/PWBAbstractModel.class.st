@@ -58,5 +58,17 @@ PWBAbstractModel class >> resetLogin [
 
 { #category : #'as yet unclassified' }
 PWBAbstractModel class >> session [
-	^ self subclassResponsibility
+	| session |
+	self setDriver.
+	session := (MrlDescriptorAbstractSystem getDescriptor: self name)
+		sessionForLogin: self login.
+	session login.
+	^ session
+]
+
+{ #category : #initialization }
+PWBAbstractModel class >> setDriver [
+	Smalltalk
+		at: #NativePostgresDriver
+		ifAbsent: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
 ]

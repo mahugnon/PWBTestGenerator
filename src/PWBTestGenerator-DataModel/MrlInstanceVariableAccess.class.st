@@ -13,16 +13,6 @@ Class {
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
 
-{ #category : #'as yet unclassified' }
-MrlInstanceVariableAccess class >> session [
-	| session login |
-	login := self login.
-	session := MrlInstanceVariableAccessDescriptorSystem
-		sessionForLogin: login.
-	session login.
-	^ session
-]
-
 { #category : #accessing }
 MrlInstanceVariableAccess >> afterValue [
 	beforeValue
