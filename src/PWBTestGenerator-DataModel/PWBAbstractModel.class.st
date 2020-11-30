@@ -36,15 +36,16 @@ PWBAbstractModel class >> loadWhere: aBlock limit: anInteger [
 
 { #category : #accessing }
 PWBAbstractModel class >> login [
+	self setUpP3Driver.
 	login
 		ifNil: [ login := Login new
 				setSSL;
 				database: PostgreSQLPlatform new;
-				username: 'tosca';
-				password: 'nkgqK8DHxzbT';
-				host: 'cldb01tsc999p.sa-cim.local';
+				username: 'lpavlalufjmnyh';
+				password: 'b7b6af9d4457652c5595770cc5e8dac18fa78386e4f4ca995067ad4ea5c3baff';
+				host: 'ec2-18-233-32-61.compute-1.amazonaws.com';
 				port: '5432';
-				databaseName: 'tosca'.
+				databaseName: 'd6dfd82tvqmqe0'.
 			login secure: false.
 			(DatabaseAccessor forLogin: login) login ].
 	^ login
@@ -68,6 +69,13 @@ PWBAbstractModel class >> session [
 
 { #category : #initialization }
 PWBAbstractModel class >> setDriver [
+	Smalltalk
+		at: #NativePostgresDriver
+		ifAbsent: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
+]
+
+{ #category : #initialization }
+PWBAbstractModel class >> setUpP3Driver [
 	Smalltalk
 		at: #NativePostgresDriver
 		ifAbsent: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
