@@ -49,7 +49,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 		<<
 			(PWBTypeValueSolver
 				resolveValue: behaviorReturnValue mrlValue
-				withType: originalBehavior returnType name);
+				withType: functionUnderTest returnType name);
 		space;
 		<< '=';
 		space;

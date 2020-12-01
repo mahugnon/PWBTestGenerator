@@ -1,5 +1,5 @@
 Class {
-	#name : #PWBFunctionTestGenerationTest,
+	#name : #PWBTestAssertionGenerationTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'testFunction',
@@ -9,21 +9,26 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PWBFunctionTestGenerationTest >> dwDataExample [
+PWBTestAssertionGenerationTest >> dwDataExample [
 ]
 
 { #category : #running }
-PWBFunctionTestGenerationTest >> setUp [
+PWBTestAssertionGenerationTest >> setUp [
+	| testObject |
 	testModel := FamixPWBModel new.
+	testObject := FamixPWBUserObject new
+		name: 'testObject';
+		mooseModel: testModel.
 	testFunction := FamixPWBFunction new
 		name: 'testFunction';
+		parentType: testObject;
 		mooseModel: testModel.
 	PharoDatabaseAccessor DefaultDriver isNil
 		ifNil: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
 ]
 
 { #category : #tests }
-PWBFunctionTestGenerationTest >> testNonVisualObjetCreationScript [
+PWBTestAssertionGenerationTest >> testNonVisualObjetCreationScript [
 	| script |
 	script := String
 		streamContents:
@@ -37,7 +42,37 @@ luo_liq_cal = create uo_liq_cal
 ]
 
 { #category : #tests }
-PWBFunctionTestGenerationTest >> testPWBParametersInitialization [
+PWBTestAssertionGenerationTest >> testPWBFunctionInvocation [
+	| script testParam1 testParam2 |
+	testParam1 := Mock named: 'testParam1'.
+	testParam1 stub parameter_before_value willReturn: 'hallo'.
+	testParam1 stub parameter_name willReturn: 'testParam1'.
+	testParam1 stub parameterType
+		willReturn: (FamixPWBBasicType new name: 'string').
+	testParam2 := Mock named: 'testParam2'.
+	testParam2 stub parameter_before_value willReturn: '3'.
+	testParam2 stub parameter_name willReturn: 'testParam2'.
+	testParam2 stub parameterType
+		willReturn: (FamixPWBBasicType new name: 'integer').
+	script := String
+		streamContents: [ :stream | 
+			PWBFunctionWithBasicTypesParametersUnitAssertion new
+				pwbParameters:
+					{testParam1.
+					testParam2};
+				functionUnderTest: testFunction;
+				printFunctionInvocationScriptOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'lestParam2 = 3
+lestParam1 = "hallo"
+l_result = l_testObject.testFunction(lestParam2 ,lestParam1 )
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testPWBParametersInitialization [
 	| script |
 	FamixPWBParameter new
 		name: 'as_param1';
@@ -63,7 +98,7 @@ integer li_param2
 ]
 
 { #category : #tests }
-PWBFunctionTestGenerationTest >> testPWBReturnInitialization [
+PWBTestAssertionGenerationTest >> testPWBReturnInitialization [
 	| script |
 	testFunction returnType: (FamixPWBBasicType new name: 'string').
 	script := String
@@ -79,7 +114,23 @@ PWBFunctionTestGenerationTest >> testPWBReturnInitialization [
 ]
 
 { #category : #tests }
-PWBFunctionTestGenerationTest >> testSetUpDataWindowParameter [
+PWBTestAssertionGenerationTest >> testReturnAssertionScript [
+	| utility result |
+	testFunction returnType: (FamixPWBBasicType new name: 'integer').
+	utility := PWBFunctionWithBasicTypesParametersUnitAssertion new
+		behaviorReturnValue: (MrlReturnValue new mrlValue: '3');
+		functionUnderTest: testFunction.
+	result := String
+		streamContents: [ :stream | utility printReturnAssertionOn: stream ].
+	self
+		assert: (result copyReplaceAll: String crlf with: String cr)
+		equals:
+			'this.assert( 3 = l_result)
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testSetUpDataWindowParameter [
 	| dwTestData result param |
 	dwTestData := 'DLQ_AOC,DLQ_DAC
 1,0'.
@@ -99,7 +150,7 @@ lw_PBUnitTest_window.dw_before.setItem(lw_PBUnitTest_window.dw_before.rowcount()
 ]
 
 { #category : #tests }
-PWBFunctionTestGenerationTest >> testVisualObjetCreationScript [
+PWBTestAssertionGenerationTest >> testVisualObjetCreationScript [
 	| script |
 	script := String
 		streamContents: [ :stream | 

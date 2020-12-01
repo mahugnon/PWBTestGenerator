@@ -134,8 +134,8 @@ MrlBehavior >> createAssertionsFromData [
 { #category : #'as yet unclassified' }
 MrlBehavior >> ensureCreateAssertion: assertionClass with: timeStamp and: aCollection [
 	^ assertionClass new
-		mrlParameters: aCollection;
-		originalBehavior: self behaviorUnderTest;
+		pwbParameters: aCollection;
+		functionUnderTest: self behaviorUnderTest;
 		behaviorName: self behavior_name;
 		behaviorParent: self pwb_object;
 		timestamp: timeStamp;

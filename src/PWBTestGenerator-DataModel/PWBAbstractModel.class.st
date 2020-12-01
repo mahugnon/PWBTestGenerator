@@ -36,7 +36,6 @@ PWBAbstractModel class >> loadWhere: aBlock limit: anInteger [
 
 { #category : #accessing }
 PWBAbstractModel class >> login [
-	self setUpP3Driver.
 	login
 		ifNil: [ login := Login new
 				setSSL;

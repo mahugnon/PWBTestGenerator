@@ -23,7 +23,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScrip
 	| param |
 	self printInitializeInvocationVariablesOn: stream.
 	stream
-		<< behaviorName;
+		<< self behaviorName;
 		nextPut: $(.
 	1 to: self pwbParameters size - 1 do: [ :iter | 
 		param := self pwbParameters at: iter.
@@ -59,7 +59,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVar
 	stream
 		<< 'l_result = ';
 		<< 'l_';
-		<< behaviorParent;
+		<< self behaviorParent;
 		nextPut: $.
 ]
 
@@ -80,7 +80,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printReturnAssertionOn: stre
 				<<
 					(PWBTypeValueSolver
 						resolveValue: behaviorReturnValue mrlValue
-						withType: originalBehavior returnType name);
+						withType: functionUnderTest returnType name);
 				space;
 				<< '=';
 				space;

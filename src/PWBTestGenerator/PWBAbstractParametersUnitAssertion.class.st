@@ -2,34 +2,22 @@ Class {
 	#name : #PWBAbstractParametersUnitAssertion,
 	#superclass : #Object,
 	#instVars : [
-		'mrlParameters',
-		'behaviorName',
-		'behaviorParent',
 		'behaviorReturnValue',
-		'originalBehavior',
-		'timestamp'
+		'timestamp',
+		'functionUnderTest',
+		'pwbParameters'
 	],
 	#category : #'PWBTestGenerator-Assertions'
 }
 
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> behaviorName [
-	^ behaviorName
-]
-
-{ #category : #accessing }
-PWBAbstractParametersUnitAssertion >> behaviorName: anObject [
-	behaviorName := anObject
+	^ functionUnderTest name
 ]
 
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> behaviorParent [
-	^ behaviorParent
-]
-
-{ #category : #accessing }
-PWBAbstractParametersUnitAssertion >> behaviorParent: anObject [
-	behaviorParent := anObject
+	^ functionUnderTest parentType name
 ]
 
 { #category : #accessing }
@@ -43,31 +31,26 @@ PWBAbstractParametersUnitAssertion >> behaviorReturnValue: anObject [
 ]
 
 { #category : #accessing }
-PWBAbstractParametersUnitAssertion >> mrlParameters: anObject [
-	mrlParameters := anObject
+PWBAbstractParametersUnitAssertion >> functionUnderTest [
+	^ functionUnderTest
 ]
 
 { #category : #accessing }
-PWBAbstractParametersUnitAssertion >> originalBehavior [
-	^ originalBehavior
-]
-
-{ #category : #accessing }
-PWBAbstractParametersUnitAssertion >> originalBehavior: anObject [
-	originalBehavior := anObject
+PWBAbstractParametersUnitAssertion >> functionUnderTest: anObject [
+	functionUnderTest := anObject
 ]
 
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 	| localVar param |
-	localVar := 'l_' , behaviorParent.
+	localVar := 'l_' , self behaviorParent.
 	^ String
 		streamContents: [ :stream | 
 			stream
 				<< 'l_result = ';
 				<< localVar;
 				nextPut: $.;
-				<< behaviorName;
+				<< self behaviorName;
 				nextPut: $(.
 			1 to: self pwbParameters size - 1 do: [ :iter | 
 				param := self pwbParameters at: iter.
@@ -92,7 +75,7 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				<<
 					(PWBTypeValueSolver
 						resolveValue: behaviorReturnValue mrlValue
-						withType: originalBehavior returnType name);
+						withType: functionUnderTest returnType name);
 				space;
 				<< '=';
 				space;
@@ -103,7 +86,12 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> pwbParameters [
-	^ mrlParameters sortAscending: #startPosition
+	^ pwbParameters sortAscending: #startPosition
+]
+
+{ #category : #accessing }
+PWBAbstractParametersUnitAssertion >> pwbParameters: anObject [
+	pwbParameters := anObject
 ]
 
 { #category : #accessing }
