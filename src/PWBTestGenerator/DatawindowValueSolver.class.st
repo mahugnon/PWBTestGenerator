@@ -2,7 +2,7 @@ Class {
 	#name : #DatawindowValueSolver,
 	#superclass : #Object,
 	#instVars : [
-		'parameter'
+		'focus'
 	],
 	#category : #'PWBTestGenerator-TypeResolver'
 }
@@ -13,11 +13,11 @@ DatawindowValueSolver class >> resolve: aMrlParameter [
 ]
 
 { #category : #initialization }
-DatawindowValueSolver >> addDwRows: dwName tag: aTag on: aStream [
+DatawindowValueSolver >> addRows: dwName tag: aTag on: aStream [
 	| colones paramValue |
 	paramValue := aTag = 'before'
-		ifTrue: [ parameter parameter_before_value ]
-		ifFalse: [ parameter parameter_after_value ].
+		ifTrue: [ focus parameter_before_value ]
+		ifFalse: [ focus parameter_after_value ].
 	colones := (CSVParser parseWithHeader: paramValue) anyOne.
 	colones
 		keysAndValuesDo: [ :key :value | 
@@ -46,15 +46,21 @@ DatawindowValueSolver >> addDwRows: dwName tag: aTag on: aStream [
 ]
 
 { #category : #resolving }
+DatawindowValueSolver >> printParameter: aPWBParameter on: stream [
+	focus := aPWBParameter.
+	^ self scriptOn: stream
+]
+
+{ #category : #resolving }
 DatawindowValueSolver >> resolve: aPWBParameter [
-	parameter := aPWBParameter.
+	focus := aPWBParameter.
 	^ String streamContents: [ :stream | self scriptOn: stream ]
 ]
 
 { #category : #resolving }
 DatawindowValueSolver >> scriptOn: aStream [
 	self setValues: aStream tag: 'before'.
-	parameter parameter_after_value
+	focus parameter_after_value
 		ifNotNil: [ self setValues: aStream tag: 'after' ]
 ]
 
@@ -66,7 +72,7 @@ DatawindowValueSolver >> setValues: aStream tag: aTag [
 		<< dwName;
 		<< '.dataobject = ';
 		<< '"';
-		<< parameter parameter_dataobject;
+		<< focus parameter_dataobject;
 		<< '"';
 		crlf;
 		<< dwName;
@@ -75,5 +81,5 @@ DatawindowValueSolver >> setValues: aStream tag: aTag [
 		<< dwName;
 		<< '.insertRow(0)';
 		crlf.
-	self addDwRows: dwName tag: aTag on: aStream
+	self addRows: dwName tag: aTag on: aStream
 ]

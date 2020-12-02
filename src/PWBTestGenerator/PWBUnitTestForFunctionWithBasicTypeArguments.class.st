@@ -21,11 +21,10 @@ PWBUnitTestForFunctionWithBasicTypeArguments >> printPWBScriptOn: stream [
 	self createAssertionsFromData.
 	self beginOn: stream.
 	self printPWBObjectCreationOn: stream.
-	self printReturnValueDeclarationOn: stream.
+	functionUnderTest returnType
+		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParametersDeclarationOn: stream.
-	assertions
-		do:
-			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ].
+	self printAssersionsOn: stream.
 	self endOn: stream.
 	^ stream
 ]

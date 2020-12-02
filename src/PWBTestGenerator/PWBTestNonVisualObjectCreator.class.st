@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestNonVisualObjectCreator class >> accept: aString [
-	^ {'uo_'}
+	^ {'uo_' . 'f_'}
 		anySatisfy: [ :each | aString asLowercase beginsWith: each ]
 ]
 

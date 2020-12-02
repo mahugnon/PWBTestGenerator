@@ -4,12 +4,26 @@ Class {
 	#category : #'PWBTestGenerator-TypeResolver'
 }
 
-{ #category : #visiting }
-NilValueSolver class >> accept: aString [
+{ #category : #printing }
+NilValueSolver class >> accept: aMrlParameter [
 	^ false
 ]
 
+{ #category : #printing }
+NilValueSolver class >> acceptType: aTypeName [
+	^ false
+]
+
+{ #category : #printing }
+NilValueSolver >> printValue: aString [
+	^ 'SetNull("' , aString asString , '")'
+]
+
 { #category : #resolving }
-NilValueSolver >> resolve: aString [
-	^ 'SetNull(' , aString asString , ')'
+NilValueSolver >> rightSideOn: stream [
+	^ stream
+		<< 'SetNull("';
+		<< focus parameter_before_value asString;
+		<< '")';
+		crlf
 ]

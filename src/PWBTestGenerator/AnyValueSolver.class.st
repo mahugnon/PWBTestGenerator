@@ -5,11 +5,23 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-AnyValueSolver class >> accept: aTypeName [
+AnyValueSolver class >> accept: aMrlParameter [
+	^ aMrlParameter parameterType name asLowercase = 'any'
+]
+
+{ #category : #printing }
+AnyValueSolver class >> acceptType: aTypeName [
 	^ aTypeName asLowercase = 'any'
 ]
 
-{ #category : #resolving }
-AnyValueSolver >> resolve: aString [
+{ #category : #printing }
+AnyValueSolver >> printValue: aString [
 	^ aString
+]
+
+{ #category : #resolving }
+AnyValueSolver >> rightSideOn: stream [
+	^ stream
+		<< focus parameter_before_value;
+		crlf
 ]

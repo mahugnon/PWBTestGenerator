@@ -5,11 +5,25 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-StringValueSolver class >> accept: aTypeName [
-	^ aTypeName asLowercase ='string'
+StringValueSolver class >> accept: aMrlParameter [
+	^ aMrlParameter parameterType name asLowercase = 'string'
+]
+
+{ #category : #printing }
+StringValueSolver class >> acceptType: aTypeName [
+	^ aTypeName asLowercase = 'string'
+]
+
+{ #category : #printing }
+StringValueSolver >> printValue: aString [
+	^ '"' , aString , '"'
 ]
 
 { #category : #resolving }
-StringValueSolver >> resolve: aString [
-	^ '"' , aString , '"'
+StringValueSolver >> rightSideOn: stream [
+	^ stream
+		<< '"';
+		<< focus parameter_before_value;
+		<< '"';
+		crlf
 ]

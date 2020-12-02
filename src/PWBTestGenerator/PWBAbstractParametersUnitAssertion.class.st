@@ -43,6 +43,7 @@ PWBAbstractParametersUnitAssertion >> functionUnderTest: anObject [
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 	| localVar param |
+	self halt.
 	localVar := 'l_' , self behaviorParent.
 	^ String
 		streamContents: [ :stream | 
@@ -57,16 +58,16 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				stream
 					<<
 						(PWBTypeValueSolver
-							resolveValue: param parameter_before_value
-							withType: param parameterType name);
+							printParameter: param parameter_before_value
+							on: param parameterType name);
 					space;
 					nextPut: $, ].
 			param := self pwbParameters last.
 			stream
 				<<
 					(PWBTypeValueSolver
-						resolveValue: param parameter_before_value
-						withType: param parameterType name);
+						printParameter: param parameter_before_value
+						on: param parameterType name);
 				space;
 				nextPut: $);
 				crlf;
@@ -74,8 +75,8 @@ PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
 				space;
 				<<
 					(PWBTypeValueSolver
-						resolveValue: behaviorReturnValue mrlValue
-						withType: functionUnderTest returnType name);
+						printValue: behaviorReturnValue mrlValue
+						ofType: functionUnderTest returnType name);
 				space;
 				<< '=';
 				space;

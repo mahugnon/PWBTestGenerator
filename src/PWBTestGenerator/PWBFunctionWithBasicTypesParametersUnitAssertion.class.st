@@ -21,8 +21,11 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> assertNilOn: stream [
 { #category : #printing }
 PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param |
-	self printInitializeInvocationVariablesOn: stream.
 	stream
+		<< 'l_result = ';
+		<< 'l_';
+		<< self behaviorParent;
+		nextPut: $.;
 		<< self behaviorName;
 		nextPut: $(.
 	1 to: self pwbParameters size - 1 do: [ :iter | 
@@ -42,32 +45,18 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScrip
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printInitializeInvocationVariablesOn: stream [
-	self pwbParameters
-		do: [ :param | 
-			stream
-				<< 'l';
-				<< (param parameter_name copyFrom: 2 to: param parameter_name size);
-				space;
-				<< '=';
-				space;
-				<<
-					(PWBTypeValueSolver
-						resolveValue: param parameter_before_value
-						withType: param parameterType name);
-				crlf ].
-	stream
-		<< 'l_result = ';
-		<< 'l_';
-		<< self behaviorParent;
-		nextPut: $.
-]
-
-{ #category : #printing }
 PWBFunctionWithBasicTypesParametersUnitAssertion >> printPWBScriptOn: stream [
+	self printParametersInitializationOn: stream.
 	self printFunctionInvocationScriptOn: stream.
 	self printReturnAssertionOn: stream.
 	^ stream
+]
+
+{ #category : #printing }
+PWBFunctionWithBasicTypesParametersUnitAssertion >> printParametersInitializationOn: stream [
+	self pwbParameters
+		do:
+			[ :param | PWBTypeValueSolver printParameter: param on: stream ]
 ]
 
 { #category : #printing }
@@ -79,8 +68,8 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printReturnAssertionOn: stre
 				space;
 				<<
 					(PWBTypeValueSolver
-						resolveValue: behaviorReturnValue mrlValue
-						withType: functionUnderTest returnType name);
+						printValue: behaviorReturnValue mrlValue
+						ofType: functionUnderTest returnType name);
 				space;
 				<< '=';
 				space;

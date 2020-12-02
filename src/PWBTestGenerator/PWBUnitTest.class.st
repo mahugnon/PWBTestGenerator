@@ -25,17 +25,9 @@ PWBUnitTest class >> acceptFunction: aFamixPWBFunction [
 
 { #category : #'as yet unclassified' }
 PWBUnitTest class >> unitTestForFunction: aFamixPWBFunction [
-	^ (self subclasses
+	^ (self allSubclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
 		functionUnderTest: aFamixPWBFunction
-]
-
-{ #category : #'as yet unclassified' }
-PWBUnitTest class >> unitTestsForFunction: aFamixPWBFunction [
-	aFamixPWBFunction setParameters.
-	^ (self subclasses
-		select: [ :sub | sub acceptFunction: aFamixPWBFunction ])
-		do: [ :sub | sub new functionUnderTest: aFamixPWBFunction ]
 ]
 
 { #category : #adding }
@@ -134,6 +126,13 @@ PWBUnitTest >> owner: anObject [
 	owner addType: self
 ]
 
+{ #category : #printing }
+PWBUnitTest >> printAssersionsOn: stream [
+	assertions
+		do:
+			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ]
+]
+
 { #category : #api }
 PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 	| accesses |
@@ -151,8 +150,8 @@ PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
 						space;
 						<<
 							(PWBTypeValueSolver
-								resolveValue: access beforeValue
-								withType: access variableTypeName);
+								printParameter: access beforeValue
+								on: access variableTypeName);
 						crlf ]
 				ifFalse: [ aStream
 						<<

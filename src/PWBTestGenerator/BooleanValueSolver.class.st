@@ -5,11 +5,23 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BooleanValueSolver class >> accept: aTypeName [
+BooleanValueSolver class >> accept: aMrlParameter [
+	^ aMrlParameter parameterType name asLowercase = 'boolean'
+]
+
+{ #category : #printing }
+BooleanValueSolver class >> acceptType: aTypeName [
 	^ aTypeName asLowercase = 'boolean'
 ]
 
-{ #category : #resolving }
-BooleanValueSolver >> resolve: aString [
+{ #category : #printing }
+BooleanValueSolver >> printValue: aString [
 	^ aString
+]
+
+{ #category : #resolving }
+BooleanValueSolver >> rightSideOn: stream [
+	^ stream
+		<< focus parameter_before_value;
+		crlf
 ]

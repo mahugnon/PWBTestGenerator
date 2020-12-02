@@ -11,35 +11,34 @@ Class {
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueBooleanSolver [
 	self
-		assert: (PWBTypeValueSolver resolveValue: 'true' withType: 'boolean')
+		assert: (PWBTypeValueSolver printValue: 'true' ofType: 'boolean')
 		equals: 'true'
 ]
 
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueDateSolver [
 	self
-		assert: (PWBTypeValueSolver resolveValue: '06/01/2020' withType: 'date')
+		assert: (PWBTypeValueSolver printValue: '06/01/2020' ofType: 'date')
 		equals: 'date("06/01/2020")'
 ]
 
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueNilSolver [
 	self
-		assert: (PWBTypeValueSolver resolveValue: nil  withType: 'string')
+		assert: (PWBTypeValueSolver printValue: nil ofType: 'string')
 		equals: 'SetNull(nil)'
 ]
 
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueNumberSolver [
 	self
-		assert: (PWBTypeValueSolver resolveValue: '2.5' withType: 'double')
-		equals: '2.5'.
-	
+		assert: (PWBTypeValueSolver printValue: '2.5' ofType: 'double')
+		equals: '2.5'
 ]
 
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueStringSolver [
 	self
-		assert: (PWBTypeValueSolver resolveValue: 'hello' withType: 'string')
+		assert: (PWBTypeValueSolver printValue: 'hello' ofType: 'string')
 		equals: '"hello"'
 ]

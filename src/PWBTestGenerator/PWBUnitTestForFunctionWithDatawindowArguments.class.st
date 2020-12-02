@@ -21,8 +21,6 @@ PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 
 { #category : #printing }
 PWBUnitTestForFunctionWithDatawindowArguments >> printPWBScriptOn: stream [
-	"self loadTestData."
-
 	self createAssertionsFromData.
 	self beginOn: stream.
 	"self printAccessSetUpOn: stream."
@@ -30,10 +28,7 @@ PWBUnitTestForFunctionWithDatawindowArguments >> printPWBScriptOn: stream [
 	self newPWBTestWindowOn: stream.
 	self printReturnValueDeclarationOn: stream.
 	self printParameterDeclarationOn: stream.
-	self assertions
-		do: [ :assert | 
-			self printInstanceVariableAccessAt: assert timestamp on: stream.
-			assert printPWBScriptOn: stream ].
+	self printAssersionsOn: stream.
 	self endOn: stream.
 	^ stream
 ]

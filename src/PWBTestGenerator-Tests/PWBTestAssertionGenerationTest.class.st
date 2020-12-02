@@ -72,6 +72,35 @@ l_result = l_testObject.testFunction(lestParam2 ,lestParam1 )
 ]
 
 { #category : #tests }
+PWBTestAssertionGenerationTest >> testPWBInitializeInvocationVariables [
+	| script testParam1 testParam2 |
+	testParam1 := Mock named: 'testParam1'.
+	testParam1 stub parameter_before_value willReturn: 'hallo'.
+	testParam1 stub parameter_name willReturn: 'testParam1'.
+	testParam1 stub parameterType
+		willReturn: (FamixPWBBasicType new name: 'string').
+	testParam2 := Mock named: 'testParam2'.
+	testParam2 stub parameter_before_value willReturn: '3'.
+	testParam2 stub parameter_name willReturn: 'testParam2'.
+	testParam2 stub parameterType
+		willReturn: (FamixPWBBasicType new name: 'integer').
+	script := String
+		streamContents: [ :stream | 
+			PWBFunctionWithBasicTypesParametersUnitAssertion new
+				functionUnderTest: testFunction;
+				pwbParameters:
+					{testParam1.
+					testParam2};
+				printParametersInitializationOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'lestParam2 = 3
+lestParam1 = "hallo"
+'
+]
+
+{ #category : #tests }
 PWBTestAssertionGenerationTest >> testPWBParametersInitialization [
 	| script |
 	FamixPWBParameter new

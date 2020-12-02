@@ -115,17 +115,17 @@ MrlBehavior >> createAssertionsFromData [
 	self mrlReturnValues ifEmpty: [ ^ assertons ].
 	self pwbParameters
 		keysAndValuesDo: [ :key :value | 
-			(value allSatisfy: #isBasic)
+			(value anySatisfy: #isPWBDataWindow)
 				ifTrue: [ assertons
 						add:
 							(self
-								ensureCreateAssertion: PWBFunctionWithBasicTypesParametersUnitAssertion
+								ensureCreateAssertion: PWBFunctionWithDataWindowParametersUnitAssertion
 								with: key
 								and: value) ]
 				ifFalse: [ assertons
 						add:
 							(self
-								ensureCreateAssertion: PWBFunctionWithDataWindowParametersUnitAssertion
+								ensureCreateAssertion: PWBFunctionWithBasicTypesParametersUnitAssertion
 								with: key
 								and: value) ] ].
 	^ assertons
@@ -136,8 +136,6 @@ MrlBehavior >> ensureCreateAssertion: assertionClass with: timeStamp and: aColle
 	^ assertionClass new
 		pwbParameters: aCollection;
 		functionUnderTest: self behaviorUnderTest;
-		behaviorName: self behavior_name;
-		behaviorParent: self pwb_object;
 		timestamp: timeStamp;
 		behaviorReturnValue:
 			(self mrlReturnValues

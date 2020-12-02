@@ -5,11 +5,25 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-DateValueSolver class >> accept: aTypeName [
+DateValueSolver class >> accept: aMrlParameter [
+	^ aMrlParameter parameterType name asLowercase = 'date'
+]
+
+{ #category : #printing }
+DateValueSolver class >> acceptType: aTypeName [
 	^ aTypeName asLowercase = 'date'
 ]
 
-{ #category : #resolving }
-DateValueSolver >> resolve: aString [
+{ #category : #printing }
+DateValueSolver >> printValue: aString [
 	^ 'date("' , aString , '")'
+]
+
+{ #category : #resolving }
+DateValueSolver >> rightSideOn: stream [
+	^ stream
+		<< 'date("';
+		<< focus parameter_before_value;
+		<< '")';
+		crlf
 ]
