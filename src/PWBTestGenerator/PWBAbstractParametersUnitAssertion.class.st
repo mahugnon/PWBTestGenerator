@@ -40,51 +40,6 @@ PWBAbstractParametersUnitAssertion >> functionUnderTest: anObject [
 	functionUnderTest := anObject
 ]
 
-{ #category : #printing }
-PWBAbstractParametersUnitAssertion >> printPWBDeclarationScript [
-	| localVar param |
-	self halt.
-	localVar := 'l_' , self behaviorParent.
-	^ String
-		streamContents: [ :stream | 
-			stream
-				<< 'l_result = ';
-				<< localVar;
-				nextPut: $.;
-				<< self behaviorName;
-				nextPut: $(.
-			1 to: self pwbParameters size - 1 do: [ :iter | 
-				param := self pwbParameters at: iter.
-				stream
-					<<
-						(PWBTypeValueSolver
-							printParameter: param parameter_before_value
-							on: param parameterType name);
-					space;
-					nextPut: $, ].
-			param := self pwbParameters last.
-			stream
-				<<
-					(PWBTypeValueSolver
-						printParameter: param parameter_before_value
-						on: param parameterType name);
-				space;
-				nextPut: $);
-				crlf;
-				<< 'this.assert(';
-				space;
-				<<
-					(PWBTypeValueSolver
-						printValue: behaviorReturnValue mrlValue
-						ofType: functionUnderTest returnType name);
-				space;
-				<< '=';
-				space;
-				<< 'l_result';
-				nextPut: $);
-				crlf ]
-]
-
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition
