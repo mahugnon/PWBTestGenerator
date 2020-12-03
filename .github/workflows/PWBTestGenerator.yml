@@ -10,8 +10,6 @@ jobs:
         smalltalk:
           - Pharo64-8.0
           - Pharo64-7.0
-          - Pharo64-6.1
-          - Pharo64-6.0
           - Moose64-8.0
           - Moose64-7.0
     runs-on: ${{ matrix.os }}
