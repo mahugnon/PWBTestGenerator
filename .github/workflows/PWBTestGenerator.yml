@@ -1,4 +1,4 @@
-name: smalltalkCI Self Test
+name: PWBTestsGenerator health   
 
 on: [push, pull_request]
 
@@ -6,12 +6,9 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [  macos-latest ]
         smalltalk:
           - Pharo64-8.0
-          - Pharo64-7.0
-          - Moose64-8.0
-          - Moose64-7.0
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:
@@ -25,3 +22,4 @@ jobs:
         timeout-minutes: 15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
