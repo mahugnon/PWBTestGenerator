@@ -45,7 +45,7 @@ BaselineOfPWBTestGenerator >> baselineOfP3: spec [
 BaselineOfPWBTestGenerator >> baselineOfPWBTestsDataGenerator: spec [
 	spec
 		baseline: 'PWBTestsDataGenerator'
-		with: [ spec repository: 'github://mahugnon/PWBTestsDataGenerator' ]
+		with: [ spec repository: 'github://mahugnon/PWBTestsDataGenerator:main' ]
 ]
 
 { #category : #baselines }
@@ -53,7 +53,7 @@ BaselineOfPWBTestGenerator >> baselineOfPowerBuilderParser: spec [
 	spec
 		baseline: 'PowerBuilderParser'
 		with: [ spec
-				repository: 'github://moosetechnology/PowerBuilderParser' ]
+				repository: 'github://moosetechnology/PowerBuilderParser:main' ]
 ]
 
 { #category : #baselines }
