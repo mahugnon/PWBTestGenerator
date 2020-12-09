@@ -9,7 +9,7 @@ Load
 
 ```Smalltalk
  Metacello new
-    	githubUser: 'mahugnon' project: 'PWBTestGenerator' commitish: 'master' path: 'src';
+    	githubUser: 'mahugnon' project: 'PWBTestGenerator' commitish: 'main' path: 'src';
     	baseline: 'PWBTestGenerator';
 	 onConflict: [ :e | e useIncoming ];
         onUpgrade: [ :e | e useIncoming ];
