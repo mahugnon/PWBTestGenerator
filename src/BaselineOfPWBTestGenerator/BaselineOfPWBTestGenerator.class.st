@@ -11,7 +11,8 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 		baselineOfP3: spec;
 		baselineOfGlorp: spec;
 		baselineOfPowerBuilderParser: spec;
-		baselineOfSmaCC: spec.
+		baselineOfSmaCC: spec;
+		baselineOfPWBTestsDataGenerator: spec.
 	spec
 		for: #common
 		do: [ self baselineOfPowerBuilderParser: spec.
@@ -44,8 +45,7 @@ BaselineOfPWBTestGenerator >> baselineOfP3: spec [
 BaselineOfPWBTestGenerator >> baselineOfPWBTestsDataGenerator: spec [
 	spec
 		baseline: 'PWBTestsDataGenerator'
-		with:
-			[ spec repository: 'github://mahugnon/PWBTestsDataGenerator:master' ]
+		with: [ spec repository: 'github://mahugnon/PWBTestsDataGenerator' ]
 ]
 
 { #category : #baselines }
