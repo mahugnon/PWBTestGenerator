@@ -61,6 +61,7 @@ PWBTestAssertionGenerationTest >> testPWBFunctionInvocation [
 					{testParam1.
 					testParam2};
 				functionUnderTest: testFunction;
+				printParametersInitializationOn: stream;
 				printFunctionInvocationScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)

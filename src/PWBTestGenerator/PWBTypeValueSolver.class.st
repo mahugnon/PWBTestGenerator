@@ -37,14 +37,6 @@ PWBTypeValueSolver class >> printValue: aValue ofType: aTypeName [
 		ifNil: [ NilValueSolver new printValue: aValue ]
 ]
 
-{ #category : #'as yet unclassified' }
-PWBTypeValueSolver class >> resolveValue: aMrlParameter [
-	^ aMrlParameter parameter_before_value
-		ifNotNil: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
-				resolve: aMrlParameter ]
-		ifNil: [ self handleNilValue: aMrlParameter ]
-]
-
 { #category : #resolving }
 PWBTypeValueSolver >> leftSideOn: stream [
 	varName := 'l'

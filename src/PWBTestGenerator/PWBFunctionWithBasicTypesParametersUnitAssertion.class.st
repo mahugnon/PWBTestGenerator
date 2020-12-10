@@ -5,20 +5,6 @@ Class {
 }
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> assertNilOn: stream [
-	stream
-		<< 'this.assert(';
-		space;
-		<< 'IsNull(';
-		space;
-		<< 'l_result';
-		space;
-		nextPut: $);
-		nextPut: $);
-		crlf
-]
-
-{ #category : #printing }
 PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param |
 	stream
@@ -57,24 +43,4 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printParametersInitializatio
 	self pwbParameters
 		do:
 			[ :param | PWBTypeValueSolver printParameter: param on: stream ]
-]
-
-{ #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printReturnAssertionOn: stream [
-	behaviorReturnValue mrlValue
-		ifNil: [ self assertNilOn: stream ]
-		ifNotNil: [ stream
-				<< 'this.assert(';
-				space;
-				<<
-					(PWBTypeValueSolver
-						printValue: behaviorReturnValue mrlValue
-						ofType: functionUnderTest returnType name);
-				space;
-				<< '=';
-				space;
-				<< 'l_result';
-				nextPut: $);
-				crlf ].
-	^ stream
 ]

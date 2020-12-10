@@ -42,20 +42,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	self printFunctionInvocationScriptOn: stream.
-	stream
-		crlf;
-		<< 'this.assert(';
-		space;
-		<<
-			(PWBTypeValueSolver
-				printValue: behaviorReturnValue mrlValue
-				ofType: functionUnderTest returnType name);
-		space;
-		<< '=';
-		space;
-		<< 'l_result';
-		nextPut: $);
-		crlf.
+	self printReturnAssertionOn: stream.
 	^ stream
 ]
 

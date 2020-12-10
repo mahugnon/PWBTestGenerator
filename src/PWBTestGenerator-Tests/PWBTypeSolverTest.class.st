@@ -23,13 +23,6 @@ PWBTypeSolverTest >> testTypeValueDateSolver [
 ]
 
 { #category : #tests }
-PWBTypeSolverTest >> testTypeValueNilSolver [
-	self
-		assert: (PWBTypeValueSolver printValue: nil ofType: 'string')
-		equals: 'SetNull(nil)'
-]
-
-{ #category : #tests }
 PWBTypeSolverTest >> testTypeValueNumberSolver [
 	self
 		assert: (PWBTypeValueSolver printValue: '2.5' ofType: 'double')

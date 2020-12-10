@@ -10,6 +10,20 @@ Class {
 	#category : #'PWBTestGenerator-Assertions'
 }
 
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
+	stream
+		<< 'this.assert(';
+		space;
+		<< 'IsNull(';
+		space;
+		<< 'l_result';
+		space;
+		nextPut: $);
+		nextPut: $);
+		crlf
+]
+
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> behaviorName [
 	^ functionUnderTest name
@@ -38,6 +52,26 @@ PWBAbstractParametersUnitAssertion >> functionUnderTest [
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> functionUnderTest: anObject [
 	functionUnderTest := anObject
+]
+
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> printReturnAssertionOn: stream [
+	behaviorReturnValue mrlValue
+		ifNil: [ self assertNilOn: stream ]
+		ifNotNil: [ stream
+				<< 'this.assert(';
+				space;
+				<<
+					(PWBTypeValueSolver
+						printValue: behaviorReturnValue mrlValue
+						ofType: functionUnderTest returnType name);
+				space;
+				<< '=';
+				space;
+				<< 'l_result';
+				nextPut: $);
+				crlf ].
+	^ stream
 ]
 
 { #category : #accessing }
