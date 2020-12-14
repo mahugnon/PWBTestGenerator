@@ -137,6 +137,9 @@ MrlBehavior >> ensureCreateAssertion: assertionClass with: timeStamp and: aColle
 		pwbParameters: aCollection;
 		functionUnderTest: self behaviorUnderTest;
 		timestamp: timeStamp;
+		behaviorAccesses:
+			(self mrlInstanceVariablesAccesses
+				select: [ :acc | acc timestamp = timeStamp ]);
 		behaviorReturnValue:
 			(self mrlReturnValues
 				detect: [ :returnValue | returnValue timestamp = timeStamp ]);

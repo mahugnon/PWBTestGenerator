@@ -6,10 +6,15 @@ Class {
 		'timestamp',
 		'functionUnderTest',
 		'pwbParameters',
-		'pwbInstVarAccess'
+		'behaviorAccesses'
 	],
 	#category : #'PWBTestGenerator-Assertions'
 }
+
+{ #category : #adding }
+PWBAbstractParametersUnitAssertion >> addAccess: aMrlAccess [
+	behaviorAccesses add: aMrlAccess
+]
 
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
@@ -23,6 +28,11 @@ PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
 		nextPut: $);
 		nextPut: $);
 		crlf
+]
+
+{ #category : #accessing }
+PWBAbstractParametersUnitAssertion >> behaviorAccesses [
+	^ behaviorAccesses
 ]
 
 { #category : #accessing }
@@ -53,6 +63,46 @@ PWBAbstractParametersUnitAssertion >> functionUnderTest [
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> functionUnderTest: anObject [
 	functionUnderTest := anObject
+]
+
+{ #category : #initialization }
+PWBAbstractParametersUnitAssertion >> initialize [
+	behaviorAccesses := OrderedCollection new
+]
+
+{ #category : #api }
+PWBAbstractParametersUnitAssertion >> printAccesInitializationOn: aStream [
+	behaviorAccesses
+		do: [ :acc | 
+			aStream
+				<< 'l';
+				<< acc pwb_object;
+				nextPut: $.;
+				<< (acc variableName copyReplaceAll: 'this.' with: '');
+				space;
+				nextPut: $=;
+				space;
+				<<
+					(PWBTypeValueSolver
+						printValue: acc beforeValue
+						ofType: acc variableTypeName);
+				crlf ]
+]
+
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> printAccessAssertionOn: stream [
+	behaviorAccesses
+		do: [ :acc | 
+			stream
+				<< 'this.assert(';
+				<< acc afterValue;
+				nextPut: $=;
+				<< 'l';
+				<< acc pwb_object;
+				nextPut: $.;
+				<< (acc variableName copyReplaceAll: 'this.' with: '');
+				nextPut: $);
+				crlf ]
 ]
 
 { #category : #printing }

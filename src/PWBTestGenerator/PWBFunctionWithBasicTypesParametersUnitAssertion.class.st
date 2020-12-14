@@ -4,16 +4,6 @@ Class {
 	#category : #'PWBTestGenerator-Assertions'
 }
 
-{ #category : #api }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printAccesInitializationOn: aWriteStream [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printAccessAssertionOn: stream [
-	self halt
-]
-
 { #category : #printing }
 PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param |

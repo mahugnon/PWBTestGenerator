@@ -42,6 +42,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	self printFunctionInvocationScriptOn: stream.
+	self printAccessAssertionOn: stream.
 	self printReturnAssertionOn: stream.
 	^ stream
 ]

@@ -90,7 +90,12 @@ MrlInstanceVariableAccess >> loadVariable [
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> variable [
 	self loadVariable.
-	^ variable instance_variable_name
+	^ variable
+]
+
+{ #category : #accessing }
+MrlInstanceVariableAccess >> variableName [
+	^ self variable instance_variable_name
 ]
 
 { #category : #'as yet unclassified' }
