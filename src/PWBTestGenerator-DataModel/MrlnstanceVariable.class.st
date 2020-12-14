@@ -7,7 +7,8 @@ Class {
 		'instance_variable_name',
 		'instance_variable_pwb_object',
 		'accesses',
-		'famixPWBAttribute'
+		'famixPWBAttribute',
+		'type'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
@@ -98,6 +99,5 @@ MrlnstanceVariable >> type [
 
 { #category : #initialization }
 MrlnstanceVariable >> typeName [
-	famixPWBAttribute ifNil: [ self linkToFamixPWBAttribute ].
-	^ famixPWBAttribute typeName
+	^ self type name
 ]
