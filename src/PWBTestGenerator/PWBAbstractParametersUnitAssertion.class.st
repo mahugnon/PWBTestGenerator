@@ -5,7 +5,8 @@ Class {
 		'behaviorReturnValue',
 		'timestamp',
 		'functionUnderTest',
-		'pwbParameters'
+		'pwbParameters',
+		'pwbInstVarAccess'
 	],
 	#category : #'PWBTestGenerator-Assertions'
 }

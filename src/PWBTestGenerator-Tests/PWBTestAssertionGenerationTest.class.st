@@ -1,31 +1,8 @@
 Class {
 	#name : #PWBTestAssertionGenerationTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'testFunction',
-		'testModel'
-	],
+	#superclass : #PWBAbstractTestGenerationTest,
 	#category : #'PWBTestGenerator-Tests'
 }
-
-{ #category : #'as yet unclassified' }
-PWBTestAssertionGenerationTest >> dwDataExample [
-]
-
-{ #category : #running }
-PWBTestAssertionGenerationTest >> setUp [
-	| testObject |
-	testModel := FamixPWBModel new.
-	testObject := FamixPWBUserObject new
-		name: 'testObject';
-		mooseModel: testModel.
-	testFunction := FamixPWBFunction new
-		name: 'testFunction';
-		parentType: testObject;
-		mooseModel: testModel.
-	PharoDatabaseAccessor DefaultDriver isNil
-		ifNil: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
-]
 
 { #category : #tests }
 PWBTestAssertionGenerationTest >> testNonVisualObjetCreationScript [
