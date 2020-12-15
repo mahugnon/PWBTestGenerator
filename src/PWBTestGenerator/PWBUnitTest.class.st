@@ -133,35 +133,6 @@ PWBUnitTest >> printAssersionsOn: stream [
 			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ]
 ]
 
-{ #category : #api }
-PWBUnitTest >> printInstanceVariableAccessAt: aString on: aStream [
-	| accesses |
-	accesses := self testsData getInstanceVariableAccess: aString.
-	accesses ifNil: [ ^ aStream ].
-	accesses
-		do: [ :access | 
-			| varname |
-			varname := 'l' , self testsData pwb_object , '.' , access variable.
-			access isBasic
-				ifTrue: [ aStream
-						<< varname;
-						space;
-						nextPut: $=;
-						space;
-						<<
-							(PWBTypeValueSolver
-								printParameter: access beforeValue
-								on: access variableTypeName);
-						crlf ]
-				ifFalse: [ aStream
-						<<
-							(DatawindowValueSolver new
-								dw_fullName: varname;
-								resolve: access beforeValue) ] ].
-	aStream crlf.
-	^ aStream
-]
-
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
 	^ PWBTestObjectCreator

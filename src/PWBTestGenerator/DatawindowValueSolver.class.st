@@ -1,9 +1,6 @@
 Class {
 	#name : #DatawindowValueSolver,
-	#superclass : #Object,
-	#instVars : [
-		'focus'
-	],
+	#superclass : #PWBTypeValueSolver,
 	#category : #'PWBTestGenerator-TypeResolver'
 }
 

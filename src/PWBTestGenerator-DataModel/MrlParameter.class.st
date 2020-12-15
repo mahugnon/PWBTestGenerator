@@ -130,6 +130,13 @@ MrlParameter >> parameter_dataobject: anObject [
 	parameter_dataobject := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+MrlParameter >> parameter_dataobjectForTag: aTag [
+	^ aTag = 'before'
+		ifTrue: [ parameter_before_value parameter_dataobject ]
+		ifFalse: [ parameter_after_value parameter_dataobject ]
+]
+
 { #category : #accessing }
 MrlParameter >> parameter_id [
 	^ parameter_id
