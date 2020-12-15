@@ -4,39 +4,6 @@ Class {
 	#category : #'PWBTestGenerator-Assertions'
 }
 
-{ #category : #adding }
-PWBFunctionWithDataWindowParametersUnitAssertion >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
-	| colones paramValue |
-	paramValue := aTag = 'before'
-		ifTrue: [ aDwParam parameter_before_value ]
-		ifFalse: [ aDwParam parameter_after_value ].
-	colones := (CSVParser parseWithHeader: paramValue) anyOne.
-	colones
-		keysAndValuesDo: [ :key :value | 
-			value
-				ifNotNil: [ aStream
-						<< dwName;
-						<< '.setItem(';
-						<< dwName;
-						<< '.rowcount(),';
-						<< '"';
-						<< key asString;
-						<< '",';
-						<< 'f_mrl_parse(';
-						space;
-						nextPut: $";
-						<< value;
-						nextPut: $";
-						nextPut: $,;
-						<< dwName;
-						<< '.object.';
-						<< key asString;
-						<< '.colType';
-						nextPut: $);
-						nextPut: $);
-						crlf ] ]
-]
-
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param localVar |
@@ -112,9 +79,6 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> setValues: stream tag: aTag 
 		crlf;
 		<< dwName;
 		<< '.setTrans(SQLCA)';
-		crlf;
-		<< dwName;
-		<< '.insertRow(0)';
 		crlf.
 	self
 		addRows: dwName

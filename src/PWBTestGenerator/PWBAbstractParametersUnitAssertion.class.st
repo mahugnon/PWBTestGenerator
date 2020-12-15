@@ -16,6 +16,43 @@ PWBAbstractParametersUnitAssertion >> addAccess: aMrlAccess [
 	behaviorAccesses add: aMrlAccess
 ]
 
+{ #category : #adding }
+PWBAbstractParametersUnitAssertion >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
+	| pwbData paramValue |
+	paramValue := aTag = 'before'
+		ifTrue: [ aDwParam beforeValue ]
+		ifFalse: [ aDwParam afterValue ].
+	pwbData := (CSVParser parseWithHeader: paramValue) anyOne.
+	pwbData
+		keysAndValuesDo: [ :key :value | 
+			aStream
+				<< dwName;
+				<< '.insertRow(0)';
+				crlf.
+			value
+				ifNotNil: [ aStream
+						<< dwName;
+						<< '.setItem(';
+						<< dwName;
+						<< '.rowcount(),';
+						<< '"';
+						<< key asString;
+						<< '",';
+						<< 'f_mrl_parse(';
+						space;
+						nextPut: $";
+						<< value;
+						nextPut: $";
+						nextPut: $,;
+						<< dwName;
+						<< '.object.';
+						<< key asString;
+						<< '.colType';
+						nextPut: $);
+						nextPut: $);
+						crlf ] ]
+]
+
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
 	stream
@@ -27,6 +64,31 @@ PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
 		space;
 		nextPut: $);
 		nextPut: $);
+		crlf
+]
+
+{ #category : #'as yet unclassified' }
+PWBAbstractParametersUnitAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
+	^ stream
+		<< 'this.assert(';
+		<< aMrlInstanceVariableAccess afterValue;
+		nextPut: $=;
+		<< aMrlInstanceVariableAccess pwbTestVariableName;
+		nextPut: $);
+		crlf
+]
+
+{ #category : #api }
+PWBAbstractParametersUnitAssertion >> basicTypeAccess: acc initializationOn: aStream [
+	^ aStream
+		<< acc pwbTestVariableName;
+		space;
+		nextPut: $=;
+		space;
+		<<
+			(PWBTypeValueSolver
+				printValue: acc beforeValue
+				ofType: acc variableTypeName);
 		crlf
 ]
 
@@ -55,6 +117,44 @@ PWBAbstractParametersUnitAssertion >> behaviorReturnValue: anObject [
 	behaviorReturnValue := anObject
 ]
 
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> dataControlAccess: acc assertionOn: stream [
+	stream
+		<< 'this.assert(';
+		<< acc pwbTestVariableName;
+		<< '.dataobject = ';
+		<< acc afterValueDataobject;
+		nextPut: $);
+		crlf.
+	stream
+		<< 'this.assert(f_get_datacontrol_content(';
+		<< acc pwbTestVariableName;
+		<< ') = "';
+		<< acc afterValue mrlValue;
+		<< '")';
+		crlf.
+	^ stream
+]
+
+{ #category : #api }
+PWBAbstractParametersUnitAssertion >> dataControlAccess: acc initializationOn: aStream [
+	aStream
+		<< acc pwbTestVariableName;
+		<< '.reset()';
+		crlf;
+		<< acc pwbTestVariableName;
+		<< '.dataobject = "';
+		<< acc beforeValueDataobject;
+		nextPut: $";
+		crlf.
+	self
+		addRows: acc pwbTestVariableName
+		tag: 'before'
+		on: aStream
+		dwParam: acc variable.
+	^ aStream
+]
+
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> functionUnderTest [
 	^ functionUnderTest
@@ -74,11 +174,11 @@ PWBAbstractParametersUnitAssertion >> initialize [
 PWBAbstractParametersUnitAssertion >> printAccesInitializationOn: aStream [
 	behaviorAccesses
 		do: [ :acc | 
+			acc beforeValueDataobject
+				ifNil: [ self basicTypeAccess: acc initializationOn: aStream ]
+				ifNotNil: [ self dataControlAccess: acc initializationOn: aStream ].
 			aStream
-				<< 'l';
-				<< acc pwb_object;
-				nextPut: $.;
-				<< (acc variableName copyReplaceAll: 'this.' with: '');
+				<< acc pwbTestVariableName;
 				space;
 				nextPut: $=;
 				space;
@@ -93,16 +193,9 @@ PWBAbstractParametersUnitAssertion >> printAccesInitializationOn: aStream [
 PWBAbstractParametersUnitAssertion >> printAccessAssertionOn: stream [
 	behaviorAccesses
 		do: [ :acc | 
-			stream
-				<< 'this.assert(';
-				<< acc afterValue;
-				nextPut: $=;
-				<< 'l';
-				<< acc pwb_object;
-				nextPut: $.;
-				<< (acc variableName copyReplaceAll: 'this.' with: '');
-				nextPut: $);
-				crlf ]
+			acc beforeValueDataobject
+				ifNil: [ self basicTypeAccess: acc assertionOn: stream ]
+				ifNotNil: [ self dataControlAccess: acc assertionOn: stream ] ]
 ]
 
 { #category : #printing }
