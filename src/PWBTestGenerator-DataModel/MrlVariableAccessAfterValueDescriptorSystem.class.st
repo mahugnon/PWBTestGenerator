@@ -13,7 +13,8 @@ MrlVariableAccessAfterValueDescriptorSystem >> allTableNames [
 { #category : #'as yet unclassified' }
 MrlVariableAccessAfterValueDescriptorSystem >> classModelForMaryline_access_after_value: aClassModel [
 	aClassModel newAttributeNamed: #access_id.
-	aClassModel newAttributeNamed: #mrlvalue
+	aClassModel newAttributeNamed: #mrlvalue.
+	aClassModel newAttributeNamed: #dataobject
 ]
 
 { #category : #'as yet unclassified' }
@@ -26,21 +27,15 @@ MrlVariableAccessAfterValueDescriptorSystem >> descriptorForMrlVariableAccessAft
 		to: (table fieldNamed: 'access_id').
 	(aDescriptor newMapping: DirectMapping)
 		from: #mrlvalue
-		to: (table fieldNamed: 'mrlvalue')
+		to: (table fieldNamed: 'mrlvalue').
+	(aDescriptor newMapping: DirectMapping)
+		from: #dataobject
+		to: (table fieldNamed: 'dataobject')
 ]
 
 { #category : #'as yet unclassified' }
 MrlVariableAccessAfterValueDescriptorSystem >> tableForMARYLINE_ACCESS_AFTER_VALUE: aTable [
-	| fk |
-	fk := aTable
-		createFieldNamed: 'access_id'
-		type: platform int4.
-	aTable
-		createFieldNamed: 'mrlvalue'
-		type: (platform varChar: 100).
-	"aTable
-		addForeignKeyFrom: fk
-		to:
-			((self tableNamed: 'MARYLINE_INSTANCE_VARIABLE_ACCESS')
-				fieldNamed: 'instance_variable_access_id')"
+	aTable createFieldNamed: 'access_id' type: platform int4.
+	aTable createFieldNamed: 'mrlvalue' type: (platform varChar: 100).
+	aTable createFieldNamed: 'dataobject' type: (platform varChar: 100)
 ]

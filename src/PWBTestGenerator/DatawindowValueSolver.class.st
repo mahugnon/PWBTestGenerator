@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'focus'
 	],
-	#category : #'PWBTestGenerator-DataModel'
+	#category : #'PWBTestGenerator-TypeResolver'
 }
 
 { #category : #'as yet unclassified' }

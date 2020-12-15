@@ -3,7 +3,8 @@ Class {
 	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'access_id',
-		'mrlvalue'
+		'mrlvalue',
+		'dataobject'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
@@ -16,6 +17,16 @@ MrlVariableAccessValue >> access_id [
 { #category : #accessing }
 MrlVariableAccessValue >> access_id: anObject [
 	access_id := anObject
+]
+
+{ #category : #accessing }
+MrlVariableAccessValue >> dataobject [
+	^ dataobject
+]
+
+{ #category : #accessing }
+MrlVariableAccessValue >> dataobject: anObject [
+	dataobject := anObject
 ]
 
 { #category : #accessing }

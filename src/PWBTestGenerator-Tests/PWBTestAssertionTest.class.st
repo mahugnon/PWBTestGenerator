@@ -1,6 +1,10 @@
 Class {
 	#name : #PWBTestAssertionTest,
 	#superclass : #PWBAbstractTestGenerationTest,
+	#instVars : [
+		'testAcc1',
+		'testAcc2'
+	],
 	#category : #'PWBTestGenerator-Tests'
 }
 

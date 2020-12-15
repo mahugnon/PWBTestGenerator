@@ -3,10 +3,21 @@ Class {
 	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'parameter_id',
-		'parameter_value'
+		'parameter_value',
+		'parameter_dataobject'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
+
+{ #category : #accessing }
+MrlParameter_value >> parameter_dataobject [
+	^ parameter_dataobject
+]
+
+{ #category : #accessing }
+MrlParameter_value >> parameter_dataobject: anObject [
+	parameter_dataobject := anObject
+]
 
 { #category : #accessing }
 MrlParameter_value >> parameter_id [
