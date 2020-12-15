@@ -139,10 +139,11 @@ MrlBehavior >> ensureCreateAssertion: assertionClass with: timeStamp and: aColle
 		timestamp: timeStamp;
 		behaviorAccesses:
 			(self mrlInstanceVariablesAccesses
-				select: [ :acc | acc timestamp = timeStamp ]);
+				select: [ :acc | acc instance_variable_access_timestamp = timeStamp ]);
 		behaviorReturnValue:
 			(self mrlReturnValues
-				detect: [ :returnValue | returnValue timestamp = timeStamp ]);
+				detect: [ :returnValue | returnValue timestamp = timeStamp ]
+				ifNone: [  ]);
 		yourself
 ]
 
@@ -208,8 +209,7 @@ MrlBehavior >> loadMrlReturnValues [
 MrlBehavior >> mrlInstanceVariablesAccesses [
 	mrlInstanceVariablesAccesses
 		ifEmpty: [ self loadMrlInstanceVariablesAccesses ].
-	^ (mrlInstanceVariablesAccesses groupedBy: #instance_variable_access_timestamp)
-		asOrderedDictionary
+	^ mrlInstanceVariablesAccesses
 ]
 
 { #category : #accessing }

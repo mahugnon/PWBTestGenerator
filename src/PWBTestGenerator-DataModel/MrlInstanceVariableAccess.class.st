@@ -25,7 +25,7 @@ MrlInstanceVariableAccess >> afterValue [
 
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> afterValueDataobject [
-	^ self afterValue dataobject
+	^ afterValue dataobject
 ]
 
 { #category : #accessing }
@@ -40,7 +40,7 @@ MrlInstanceVariableAccess >> beforeValue [
 
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> beforeValueDataobject [
-	^ self beforeValue dataobject
+	^ beforeValue dataobject
 ]
 
 { #category : #accessing }

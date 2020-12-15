@@ -98,6 +98,11 @@ PWBAbstractParametersUnitAssertion >> behaviorAccesses [
 ]
 
 { #category : #accessing }
+PWBAbstractParametersUnitAssertion >> behaviorAccesses: anObject [
+	behaviorAccesses := anObject
+]
+
+{ #category : #accessing }
 PWBAbstractParametersUnitAssertion >> behaviorName [
 	^ functionUnderTest name
 ]
