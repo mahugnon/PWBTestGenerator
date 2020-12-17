@@ -61,7 +61,8 @@ PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
 		streamContents: [ :stream | 
 			PWBFunctionWithBasicTypesParametersUnitAssertion new
 				functionUnderTest: testFunction;
-				basicTypeAccess: access1 initializationOn: stream ].
+				addAccess: access1;
+				printAccesInitializationOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
@@ -101,8 +102,8 @@ PWBTestAssertionGenerationTest >> testDataControlAccessInitializationOn [
 	script := String
 		streamContents: [ :stream | 
 			PWBAbstractParametersUnitAssertion new
-				dataControlAccess: access1
-				initializationOn: stream ].
+				addAccess: access1;
+				printAccesInitializationOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
