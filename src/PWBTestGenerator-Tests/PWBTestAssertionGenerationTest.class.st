@@ -1,9 +1,6 @@
 Class {
 	#name : #PWBTestAssertionGenerationTest,
 	#superclass : #PWBAbstractTestGenerationTest,
-	#instVars : [
-		'access1'
-	],
 	#category : #'PWBTestGenerator-Tests'
 }
 
