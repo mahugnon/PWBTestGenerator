@@ -18,6 +18,11 @@ Class {
 }
 
 { #category : #accessing }
+MrlParameter >> beforeValue [
+	^ self parameter_before_value
+]
+
+{ #category : #accessing }
 MrlParameter >> behavior_id [
 	^ behavior_id
 ]
@@ -112,7 +117,7 @@ MrlParameter >> parameter_after_value: anObject [
 
 { #category : #accessing }
 MrlParameter >> parameter_before_value [
-	^ parameter_before_value parameter_value
+	^ parameter_before_value
 ]
 
 { #category : #accessing }

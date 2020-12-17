@@ -23,7 +23,7 @@ DateValueSolver >> printValue: aString [
 DateValueSolver >> rightSideOn: stream [
 	^ stream
 		<< 'date("';
-		<< focus parameter_before_value;
+		<< focus parameter_before_value mrlValue;
 		<< '")';
 		crlf
 ]

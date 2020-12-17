@@ -20,12 +20,12 @@ MrlInstanceVariableAccess >> afterValue [
 				loadWhere:
 					[ :access_value | access_value access_id = self instance_variable_access_id ])
 				anyOne ].
-	^ beforeValue mrlValue
+	^ beforeValue
 ]
 
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> afterValueDataobject [
-	^ afterValue dataobject
+	^ self afterValue dataobject
 ]
 
 { #category : #accessing }
@@ -35,12 +35,12 @@ MrlInstanceVariableAccess >> beforeValue [
 				loadWhere:
 					[ :access_value | access_value access_id = self instance_variable_access_id ])
 				anyOne ].
-	^ beforeValue mrlvalue
+	^ beforeValue
 ]
 
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> beforeValueDataobject [
-	^ beforeValue dataobject
+	^ self beforeValue dataobject
 ]
 
 { #category : #accessing }

@@ -22,6 +22,6 @@ AnyValueSolver >> printValue: aString [
 { #category : #resolving }
 AnyValueSolver >> rightSideOn: stream [
 	^ stream
-		<< focus parameter_before_value;
+		<< focus parameter_before_value mrlValue;
 		crlf
 ]

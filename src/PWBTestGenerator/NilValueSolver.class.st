@@ -23,7 +23,7 @@ NilValueSolver >> printValue: aString [
 NilValueSolver >> rightSideOn: stream [
 	^ stream
 		<< 'SetNull("';
-		<< focus parameter_before_value asString;
+		<< focus parameter_before_value mrlValue asString;
 		<< '")';
 		crlf
 ]

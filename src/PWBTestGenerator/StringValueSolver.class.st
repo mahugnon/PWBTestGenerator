@@ -23,7 +23,7 @@ StringValueSolver >> printValue: aString [
 StringValueSolver >> rightSideOn: stream [
 	^ stream
 		<< '"';
-		<< focus parameter_before_value;
+		<< focus parameter_before_value mrlValue;
 		<< '"';
 		crlf
 ]

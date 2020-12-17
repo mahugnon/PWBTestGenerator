@@ -22,6 +22,6 @@ BooleanValueSolver >> printValue: aString [
 { #category : #resolving }
 BooleanValueSolver >> rightSideOn: stream [
 	^ stream
-		<< focus parameter_before_value;
+		<< focus parameter_before_value mrlValue;
 		crlf
 ]

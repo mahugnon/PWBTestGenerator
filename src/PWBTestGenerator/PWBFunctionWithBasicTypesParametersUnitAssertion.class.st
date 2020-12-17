@@ -9,7 +9,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScrip
 	| param |
 	stream
 		<< 'l_result = ';
-		<< 'l_';
+		<< 'l';
 		<< self behaviorParent;
 		nextPut: $.;
 		<< self behaviorName;

@@ -4,6 +4,11 @@ Class {
 	#category : #'PWBTestGenerator-TypeResolver'
 }
 
+{ #category : #printing }
+DatawindowValueSolver class >> acceptType: aTypeName [
+	^ false
+]
+
 { #category : #'as yet unclassified' }
 DatawindowValueSolver class >> resolve: aMrlParameter [
 	^ self new resolve: aMrlParameter

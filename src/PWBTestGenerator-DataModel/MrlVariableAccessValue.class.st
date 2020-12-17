@@ -31,7 +31,7 @@ MrlVariableAccessValue >> dataobject: anObject [
 
 { #category : #accessing }
 MrlVariableAccessValue >> mrlValue [
-	self shouldBeImplemented.
+	^ mrlvalue
 ]
 
 { #category : #accessing }

@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #accessing }
+MrlParameter_value >> mrlValue [
+	^ self parameter_value
+]
+
+{ #category : #accessing }
 MrlParameter_value >> parameter_dataobject [
 	^ parameter_dataobject
 ]

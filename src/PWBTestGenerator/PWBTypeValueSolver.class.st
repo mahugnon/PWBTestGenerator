@@ -21,12 +21,11 @@ PWBTypeValueSolver class >> acceptType: aTypeName [
 
 { #category : #'as yet unclassified' }
 PWBTypeValueSolver class >> printParameter: aMrlParameter on: stream [
-	^ aMrlParameter parameter_before_value
+	^ aMrlParameter parameter_before_value mrlValue
+		ifNil: [ NilValueSolver new printParameter: aMrlParameter on: stream ]
 		ifNotNil: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
 				printParameter: aMrlParameter
 				on: stream ]
-		ifNil:
-			[ NilValueSolver new printParameter: aMrlParameter on: stream ]
 ]
 
 { #category : #printing }

@@ -7,7 +7,7 @@ Class {
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
 	| param localVar |
-	self printParameterInitializationOn: stream.
+	self printParametersInitializationOn: stream.
 	localVar := 'l' , self behaviorParent.
 	stream
 		<< 'l_result = ';
@@ -41,14 +41,21 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
-	self printFunctionInvocationScriptOn: stream.
-	self printAccessAssertionOn: stream.
-	self printReturnAssertionOn: stream.
+	super printPWBScriptOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printParameterInitializationOn: stream [
+	self pwbParameters
+		do: [ :param | 
+			param isPWBDataWindow
+				ifFalse: [ PWBTypeValueSolver printParameter: param on: stream ] ].
+	^ stream
+]
+
+{ #category : #printing }
+PWBFunctionWithDataWindowParametersUnitAssertion >> printParametersInitializationOn: stream [
 	self pwbParameters
 		do: [ :param | 
 			param isPWBDataWindow

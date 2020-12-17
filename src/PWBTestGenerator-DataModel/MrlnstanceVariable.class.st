@@ -2,7 +2,6 @@ Class {
 	#name : #MrlnstanceVariable,
 	#superclass : #PWBAbstractModel,
 	#instVars : [
-		'instance_variable_dataobject',
 		'instance_variable_id',
 		'instance_variable_name',
 		'instance_variable_pwb_object',

@@ -20,9 +20,10 @@ PWBAbstractParametersUnitAssertion >> addAccess: aMrlAccess [
 PWBAbstractParametersUnitAssertion >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
 	| pwbData paramValue |
 	paramValue := aTag = 'before'
-		ifTrue: [ aDwParam beforeValue ]
-		ifFalse: [ aDwParam afterValue ].
-	pwbData := (CSVParser parseWithHeader: paramValue) anyOne.
+		ifTrue: [ aDwParam beforeValue mrlValue ]
+		ifFalse: [ aDwParam afterValue mrlValue ].
+	pwbData := (CSVParser parseWithHeader: paramValue)
+		ifNotEmpty: [ :data | data anyOne ].
 	pwbData
 		keysAndValuesDo: [ :key :value | 
 			aStream
@@ -71,7 +72,7 @@ PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
 PWBAbstractParametersUnitAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
 	^ stream
 		<< 'this.assert(';
-		<< aMrlInstanceVariableAccess afterValue;
+		<< aMrlInstanceVariableAccess afterValue mrlValue;
 		nextPut: $=;
 		<< aMrlInstanceVariableAccess pwbTestVariableName;
 		nextPut: $);
@@ -135,7 +136,7 @@ PWBAbstractParametersUnitAssertion >> dataControlAccess: acc assertionOn: stream
 		<< 'this.assert(f_get_datacontrol_content(';
 		<< acc pwbTestVariableName;
 		<< ') = "';
-		<< acc afterValue mrlValue;
+		<< (acc afterValue mrlValue copyReplaceAll: String cr with: '~r~n');
 		<< '")';
 		crlf.
 	^ stream
@@ -156,7 +157,7 @@ PWBAbstractParametersUnitAssertion >> dataControlAccess: acc initializationOn: a
 		addRows: acc pwbTestVariableName
 		tag: 'before'
 		on: aStream
-		dwParam: acc variable.
+		dwParam: acc.
 	^ aStream
 ]
 
@@ -181,17 +182,7 @@ PWBAbstractParametersUnitAssertion >> printAccesInitializationOn: aStream [
 		do: [ :acc | 
 			acc beforeValueDataobject
 				ifNil: [ self basicTypeAccess: acc initializationOn: aStream ]
-				ifNotNil: [ self dataControlAccess: acc initializationOn: aStream ].
-			aStream
-				<< acc pwbTestVariableName;
-				space;
-				nextPut: $=;
-				space;
-				<<
-					(PWBTypeValueSolver
-						printValue: acc beforeValue
-						ofType: acc variableTypeName);
-				crlf ]
+				ifNotNil: [ self dataControlAccess: acc initializationOn: aStream ] ]
 ]
 
 { #category : #printing }
@@ -201,6 +192,26 @@ PWBAbstractParametersUnitAssertion >> printAccessAssertionOn: stream [
 			acc beforeValueDataobject
 				ifNil: [ self basicTypeAccess: acc assertionOn: stream ]
 				ifNotNil: [ self dataControlAccess: acc assertionOn: stream ] ]
+]
+
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
+	self subclassResponsibility
+]
+
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> printPWBScriptOn: stream [
+	self printParametersInitializationOn: stream.
+	self printAccesInitializationOn: stream.
+	self printFunctionInvocationScriptOn: stream.
+	self printAccessAssertionOn: stream.
+	self printReturnAssertionOn: stream.
+	^ stream
+]
+
+{ #category : #printing }
+PWBAbstractParametersUnitAssertion >> printParametersInitializationOn: stream [
+	self subclassResponsibility
 ]
 
 { #category : #printing }
