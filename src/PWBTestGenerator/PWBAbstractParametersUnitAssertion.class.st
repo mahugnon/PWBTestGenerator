@@ -23,14 +23,14 @@ PWBAbstractParametersUnitAssertion >> addRows: dwName tag: aTag on: aStream dwPa
 	paramValue := aTag = 'before'
 		ifTrue: [ aDwParam beforeValue mrlvalue ]
 		ifFalse: [ aDwParam afterValue mrlvalue ].
-	pwbData := (CSVParser parseWithHeader: paramValue)
-		ifNotEmpty: [ :data | data anyOne ].
-	pwbData
+	pwbData := CSVParser parseWithHeader: paramValue.
+	pwbData ifEmpty: [ ^ aStream ].
+	aStream
+		<< dwName;
+		<< '.insertRow(0)';
+		crlf.
+	pwbData anyOne
 		keysAndValuesDo: [ :key :value | 
-			aStream
-				<< dwName;
-				<< '.insertRow(0)';
-				crlf.
 			value
 				ifNotNil: [ aStream
 						<< dwName;
@@ -217,7 +217,7 @@ PWBAbstractParametersUnitAssertion >> printParametersInitializationOn: stream [
 
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> printReturnAssertionOn: stream [
-	behaviorReturnValue mrlvalue
+	behaviorReturnValue mrlValue
 		ifNil: [ self assertNilOn: stream ]
 		ifNotNil: [ stream
 				<< 'this.assert(';

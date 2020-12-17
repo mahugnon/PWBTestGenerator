@@ -1,8 +1,118 @@
 Class {
 	#name : #PWBTestAssertionGenerationTest,
 	#superclass : #PWBAbstractTestGenerationTest,
+	#instVars : [
+		'access1'
+	],
 	#category : #'PWBTestGenerator-Tests'
 }
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> createAccesses [
+	access1 := MrlInstanceVariableAccess new.
+	access1
+		mooseModel: testModel;
+		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'before1');
+		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'after1').
+	access1
+		instance_variable_access_accessed:
+			(MrlnstanceVariable new
+				instance_variable_pwb_object: 'testObject';
+				instance_variable_name: 'testAttribute1')
+]
+
+{ #category : #'as yet unclassified' }
+PWBTestAssertionGenerationTest >> createTestVariables [
+	FamixPWBInstanceVariable new
+		mooseModel: testModel;
+		parentType: testObject;
+		name: 'testAttribute1';
+		attributeType: (FamixPWBBasicType new name: 'string')
+]
+
+{ #category : #running }
+PWBTestAssertionGenerationTest >> setUp [
+	super setUp.
+	self createTestVariables.
+	self createAccesses
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testAttributeAccessedIsBasicTypeAssertion [
+	| script |
+	script := String
+		streamContents: [ :stream | 
+			PWBFunctionWithBasicTypesParametersUnitAssertion new
+				functionUnderTest: testFunction;
+				addAccess: access1;
+				printAccessAssertionOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'this.assert(after1=ltestObject.testAttribute1)
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
+	| script |
+	self createAccesses.
+	script := String
+		streamContents: [ :stream | 
+			PWBFunctionWithBasicTypesParametersUnitAssertion new
+				functionUnderTest: testFunction;
+				basicTypeAccess: access1 initializationOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'ltestObject.testAttribute1 = "before1"
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testCreateDataControlAccessAssertionOn [
+	| script |
+	access1
+		afterValue:
+			(MrlVariableAccessAfterValue new
+				dataobject: 'dw_test';
+				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
+	script := String
+		streamContents: [ :stream | 
+			PWBAbstractParametersUnitAssertion new
+				dataControlAccess: access1
+				assertionOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'this.assert(ltestObject.testAttribute1.dataobject = "dw_test")
+this.assert(f_get_datacontrol_content(ltestObject.testAttribute1) = "DLQ_AOC,DLQ_DAC ~r~n 0,1 ~r~n ")
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testDataControlAccessInitializationOn [
+	| script |
+	access1
+		beforeValue:
+			(MrlVariableAccessAfterValue new
+				dataobject: 'dw_test';
+				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
+	script := String
+		streamContents: [ :stream | 
+			PWBAbstractParametersUnitAssertion new
+				dataControlAccess: access1
+				initializationOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'ltestObject.testAttribute1.reset()
+ltestObject.testAttribute1.dataobject = "dw_test"
+ltestObject.testAttribute1.insertRow(0)
+ltestObject.testAttribute1.setItem(ltestObject.testAttribute1.rowcount(),"DLQ_AOC",f_mrl_parse( "0",ltestObject.testAttribute1.object.DLQ_AOC.colType))
+ltestObject.testAttribute1.setItem(ltestObject.testAttribute1.rowcount(),"DLQ_DAC",f_mrl_parse( "1",ltestObject.testAttribute1.object.DLQ_DAC.colType))
+'
+]
 
 { #category : #tests }
 PWBTestAssertionGenerationTest >> testNonVisualObjetCreationScript [
