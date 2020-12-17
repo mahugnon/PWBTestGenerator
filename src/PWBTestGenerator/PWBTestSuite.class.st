@@ -96,7 +96,7 @@ PWBTestSuite >> fileDeclaredType [
 ]
 
 { #category : #tests }
-PWBTestSuite >> forword [
+PWBTestSuite >> forward [
 	^ String
 		streamContents: [ :stream | 
 			stream
@@ -160,20 +160,25 @@ PWBTestSuite >> onDestroy [
 PWBTestSuite >> printPWBScript: aFolder [
 	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
-		writeStreamDo: [ :stream | 
-			stream
-				<< self testFileHeader;
-				<< self forword;
-				<< self fileDeclaredType;
-				crlf.
-			testUnits
-				do: [ :units | 
-					units printPWBScriptOn: stream.
-					stream crlf ].
-			stream
-				<< self onCreate;
-				crlf;
-				<< self onDestroy ]
+		writeStreamDo:
+				[ :stream | self printPWBScriptOn: stream ]
+]
+
+{ #category : #printing }
+PWBTestSuite >> printPWBScriptOn: stream [
+	stream
+		<< self testFileHeader;
+		<< self forward;
+		<< self fileDeclaredType;
+		crlf.
+	testUnits
+		do: [ :units | 
+			units printPWBScriptOn: stream.
+			stream crlf ].
+	^ stream
+		<< self onCreate;
+		crlf;
+		<< self onDestroy
 ]
 
 { #category : #tests }
@@ -192,4 +197,9 @@ PWBTestSuite >> testFileHeader [
 				<< self name;
 				<< '.sru';
 				crlf ]
+]
+
+{ #category : #accessing }
+PWBTestSuite >> testUnits [
+	^ testUnits
 ]

@@ -7,29 +7,6 @@ Class {
 	#category : #'PWBTestGenerator-Tests'
 }
 
-{ #category : #tests }
-PWBTestAssertionGenerationTest >> createAccesses [
-	access1 := MrlInstanceVariableAccess new.
-	access1
-		mooseModel: testModel;
-		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'before1');
-		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'after1').
-	access1
-		instance_variable_access_accessed:
-			(MrlnstanceVariable new
-				instance_variable_pwb_object: 'testObject';
-				instance_variable_name: 'testAttribute1')
-]
-
-{ #category : #'as yet unclassified' }
-PWBTestAssertionGenerationTest >> createTestVariables [
-	FamixPWBInstanceVariable new
-		mooseModel: testModel;
-		parentType: testObject;
-		name: 'testAttribute1';
-		attributeType: (FamixPWBBasicType new name: 'string')
-]
-
 { #category : #running }
 PWBTestAssertionGenerationTest >> setUp [
 	super setUp.
