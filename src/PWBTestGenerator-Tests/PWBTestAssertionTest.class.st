@@ -3,62 +3,71 @@ Class {
 	#superclass : #PWBAbstractTestGenerationTest,
 	#instVars : [
 		'testAcc1',
-		'testAcc2'
+		'testAcc2',
+		'access1'
 	],
 	#category : #'PWBTestGenerator-Tests'
 }
 
 { #category : #tests }
+PWBTestAssertionTest >> createAccesses [
+	access1 := MrlInstanceVariableAccess new.
+	access1
+		mooseModel: testModel;
+		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'before1');
+		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'after1').
+	access1
+		instance_variable_access_accessed:
+			(MrlnstanceVariable new
+				instance_variable_pwb_object: 'testObject';
+				instance_variable_name: 'testAttribute1')
+]
+
+{ #category : #'as yet unclassified' }
+PWBTestAssertionTest >> createTestVariables [
+	FamixPWBInstanceVariable new
+		mooseModel: testModel;
+		parentType: testObject;
+		name: 'testAttribute1';
+		attributeType: (FamixPWBBasicType new name: 'string')
+]
+
+{ #category : #running }
+PWBTestAssertionTest >> setUp [
+	super setUp.
+	self createTestVariables.
+	self createAccesses
+]
+
+{ #category : #tests }
 PWBTestAssertionTest >> testAttributeAccessedIsBasicTypeAssertion [
-	| script mockAcc1 mockAcc2 |
-	mockAcc1 := Mock named: 'testAttribute1'.
-	mockAcc1 stub variableName willReturn: 'testAttribute1'.
-	mockAcc1 stub pwb_object willReturn: 'testObject'.
-	mockAcc1 stub variableTypeName willReturn: 'string'.
-	mockAcc1 stub afterValue willReturn: 'after2'.
-	mockAcc2 := Mock named: 'testAttribute2'.
-	mockAcc2 stub variableName willReturn: 'testAttribute2'.
-	mockAcc2 stub pwb_object willReturn: 'testObject'.
-	mockAcc2 stub variableTypeName willReturn: 'integer'.
-	mockAcc2 stub afterValue willReturn: 'after2'.
+	| script |
 	script := String
 		streamContents: [ :stream | 
 			PWBFunctionWithBasicTypesParametersUnitAssertion new
-				addAccess: mockAcc1;
-				addAccess: mockAcc2;
+				functionUnderTest: testFunction;
+				addAccess: access1;
 				printAccessAssertionOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'this.assert(after2=ltestObject.testAttribute1)
-this.assert(after2=ltestObject.testAttribute2)
+			'this.assert(after1=ltestObject.testAttribute1)
 '
 ]
 
 { #category : #tests }
 PWBTestAssertionTest >> testInitializeAccess [
-	| script mockAcc1 mockAcc2 |
-	mockAcc1 := Mock named: 'testAttribute1'.
-	mockAcc1 stub variableName willReturn: 'testAttribute1'.
-	mockAcc1 stub pwb_object willReturn: 'testObject'.
-	mockAcc1 stub variableTypeName willReturn: 'string'.
-	mockAcc1 stub beforeValue willReturn: 'before1'.
-	mockAcc2 := Mock named: 'testAttribute2'.
-	mockAcc2 stub variableName willReturn: 'testAttribute2'.
-	mockAcc2 stub pwb_object willReturn: 'testObject'.
-	mockAcc2 stub variableTypeName willReturn: 'integer'.
-	mockAcc2 stub beforeValue willReturn: 'before2'.
+	| script |
+	self createAccesses.
 	script := String
 		streamContents: [ :stream | 
 			PWBFunctionWithBasicTypesParametersUnitAssertion new
-				addAccess: mockAcc1;
-				addAccess: mockAcc2;
 				functionUnderTest: testFunction;
+				addAccess: access1;
 				printAccesInitializationOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
 			'ltestObject.testAttribute1 = "before1"
-ltestObject.testAttribute2 = before2
 '
 ]

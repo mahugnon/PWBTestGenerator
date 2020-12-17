@@ -22,12 +22,14 @@ luo_liq_cal = create uo_liq_cal
 PWBTestAssertionGenerationTest >> testPWBFunctionInvocation [
 	| script testParam1 testParam2 |
 	testParam1 := Mock named: 'testParam1'.
-	testParam1 stub parameter_before_value willReturn: 'hallo'.
+	testParam1 stub parameter_before_value willReturn: testParam1.
+	testParam1 stub mrlValue willReturn: 'hallo'.
 	testParam1 stub parameter_name willReturn: 'testParam1'.
 	testParam1 stub parameterType
 		willReturn: (FamixPWBBasicType new name: 'string').
 	testParam2 := Mock named: 'testParam2'.
-	testParam2 stub parameter_before_value willReturn: '3'.
+	testParam2 stub parameter_before_value willReturn: testParam2.
+	testParam2 stub mrlValue willReturn: '3'.
 	testParam2 stub parameter_name willReturn: 'testParam2'.
 	testParam2 stub parameterType
 		willReturn: (FamixPWBBasicType new name: 'integer').
@@ -45,7 +47,7 @@ PWBTestAssertionGenerationTest >> testPWBFunctionInvocation [
 		equals:
 			'lestParam2 = 3
 lestParam1 = "hallo"
-l_result = l_testObject.testFunction(lestParam2 ,lestParam1 )
+l_result = ltestObject.testFunction(lestParam2 ,lestParam1 )
 '
 ]
 
@@ -53,12 +55,14 @@ l_result = l_testObject.testFunction(lestParam2 ,lestParam1 )
 PWBTestAssertionGenerationTest >> testPWBInitializeInvocationVariables [
 	| script testParam1 testParam2 |
 	testParam1 := Mock named: 'testParam1'.
-	testParam1 stub parameter_before_value willReturn: 'hallo'.
+	testParam1 stub parameter_before_value willReturn: testParam1.
+	testParam1 stub mrlValue willReturn: 'hallo'.
 	testParam1 stub parameter_name willReturn: 'testParam1'.
 	testParam1 stub parameterType
 		willReturn: (FamixPWBBasicType new name: 'string').
 	testParam2 := Mock named: 'testParam2'.
-	testParam2 stub parameter_before_value willReturn: '3'.
+	testParam2 stub parameter_before_value willReturn: testParam2.
+	testParam2 stub mrlValue willReturn: '3'.
 	testParam2 stub parameter_name willReturn: 'testParam2'.
 	testParam2 stub parameterType
 		willReturn: (FamixPWBBasicType new name: 'integer').

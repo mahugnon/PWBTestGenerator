@@ -8,19 +8,24 @@ Class {
 		'instance_variable_access_timestamp',
 		'beforeValue',
 		'afterValue',
-		'variable'
+		'mooseModel'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> afterValue [
-	beforeValue
+	afterValue
 		ifNil: [ afterValue := (MrlVariableAccessAfterValue
 				loadWhere:
 					[ :access_value | access_value access_id = self instance_variable_access_id ])
 				anyOne ].
-	^ beforeValue
+	^ afterValue
+]
+
+{ #category : #accessing }
+MrlInstanceVariableAccess >> afterValue: aMrlVariableAccessAfterValue [ 
+	afterValue := aMrlVariableAccessAfterValue
 ]
 
 { #category : #'as yet unclassified' }
@@ -38,6 +43,11 @@ MrlInstanceVariableAccess >> beforeValue [
 	^ beforeValue
 ]
 
+{ #category : #accessing }
+MrlInstanceVariableAccess >> beforeValue: aMrlVariableAccessBeforeValue [ 
+	beforeValue := aMrlVariableAccessBeforeValue
+]
+
 { #category : #'as yet unclassified' }
 MrlInstanceVariableAccess >> beforeValueDataobject [
 	^ self beforeValue dataobject
@@ -45,12 +55,18 @@ MrlInstanceVariableAccess >> beforeValueDataobject [
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> instance_variable_access_accessed [
+	self loadInstance_variable_access_accessed.
 	^ instance_variable_access_accessed
 ]
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> instance_variable_access_accessed: anObject [
 	instance_variable_access_accessed := anObject
+]
+
+{ #category : #'as yet unclassified' }
+MrlInstanceVariableAccess >> instance_variable_access_accessedTypeName [
+	^ self instance_variable_access_accessed typeName
 ]
 
 { #category : #accessing }
@@ -85,16 +101,22 @@ MrlInstanceVariableAccess >> instance_variable_access_timestamp: anObject [
 
 { #category : #testing }
 MrlInstanceVariableAccess >> isBasic [
-	^ variable isBasic
+	^ instance_variable_access_accessed isBasic
 ]
 
 { #category : #'as yet unclassified' }
-MrlInstanceVariableAccess >> loadVariable [
-	variable
-		ifNil: [ variable := (MrlnstanceVariable
+MrlInstanceVariableAccess >> loadInstance_variable_access_accessed [
+	instance_variable_access_accessed
+		ifNil: [ instance_variable_access_accessed := (MrlnstanceVariable
 				loadWhere:
 					[ :var | var instance_variable_id = self instance_variable_access_accessed ])
-				anyOne ]
+				anyOne ].
+	instance_variable_access_accessed mooseModel: mooseModel
+]
+
+{ #category : #accessing }
+MrlInstanceVariableAccess >> mooseModel: anObject [
+	mooseModel := anObject
 ]
 
 { #category : #tests }
@@ -103,23 +125,12 @@ MrlInstanceVariableAccess >> pwbTestVariableName [
 		streamContents: [ :stream | 
 			stream
 				<< 'l';
-				<< self variable instance_variable_pwb_object;
+				<< self instance_variable_access_accessed instance_variable_pwb_object;
 				nextPut: $.;
 				<< (self variableName copyReplaceAll: 'this.' with: '') ]
 ]
 
-{ #category : #'as yet unclassified' }
-MrlInstanceVariableAccess >> variable [
-	self loadVariable.
-	^ variable
-]
-
 { #category : #accessing }
 MrlInstanceVariableAccess >> variableName [
-	^ self variable instance_variable_name
-]
-
-{ #category : #'as yet unclassified' }
-MrlInstanceVariableAccess >> variableTypeName [
-	^ variable typeName
+	^ self instance_variable_access_accessed instance_variable_name
 ]

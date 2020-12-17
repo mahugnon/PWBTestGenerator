@@ -13,6 +13,7 @@ Class {
 
 { #category : #adding }
 PWBAbstractParametersUnitAssertion >> addAccess: aMrlAccess [
+	aMrlAccess mooseModel: functionUnderTest mooseModel.
 	behaviorAccesses add: aMrlAccess
 ]
 
@@ -20,8 +21,8 @@ PWBAbstractParametersUnitAssertion >> addAccess: aMrlAccess [
 PWBAbstractParametersUnitAssertion >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
 	| pwbData paramValue |
 	paramValue := aTag = 'before'
-		ifTrue: [ aDwParam beforeValue mrlValue ]
-		ifFalse: [ aDwParam afterValue mrlValue ].
+		ifTrue: [ aDwParam beforeValue mrlvalue ]
+		ifFalse: [ aDwParam afterValue mrlvalue ].
 	pwbData := (CSVParser parseWithHeader: paramValue)
 		ifNotEmpty: [ :data | data anyOne ].
 	pwbData
@@ -72,7 +73,7 @@ PWBAbstractParametersUnitAssertion >> assertNilOn: stream [
 PWBAbstractParametersUnitAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
 	^ stream
 		<< 'this.assert(';
-		<< aMrlInstanceVariableAccess afterValue mrlValue;
+		<< aMrlInstanceVariableAccess afterValue mrlvalue;
 		nextPut: $=;
 		<< aMrlInstanceVariableAccess pwbTestVariableName;
 		nextPut: $);
@@ -88,8 +89,8 @@ PWBAbstractParametersUnitAssertion >> basicTypeAccess: acc initializationOn: aSt
 		space;
 		<<
 			(PWBTypeValueSolver
-				printValue: acc beforeValue
-				ofType: acc variableTypeName);
+				printValue: acc beforeValue mrlvalue
+				ofType: acc instance_variable_access_accessedTypeName);
 		crlf
 ]
 
@@ -128,15 +129,16 @@ PWBAbstractParametersUnitAssertion >> dataControlAccess: acc assertionOn: stream
 	stream
 		<< 'this.assert(';
 		<< acc pwbTestVariableName;
-		<< '.dataobject = ';
+		<< '.dataobject = "';
 		<< acc afterValueDataobject;
-		nextPut: $);
+		<< '")';
 		crlf.
+	1 halt.
 	stream
 		<< 'this.assert(f_get_datacontrol_content(';
 		<< acc pwbTestVariableName;
 		<< ') = "';
-		<< (acc afterValue mrlValue copyReplaceAll: String cr with: '~r~n');
+		<< (acc afterValue mrlvalue copyReplaceAll: Character cr with: '~r~n');
 		<< '")';
 		crlf.
 	^ stream
@@ -216,7 +218,7 @@ PWBAbstractParametersUnitAssertion >> printParametersInitializationOn: stream [
 
 { #category : #printing }
 PWBAbstractParametersUnitAssertion >> printReturnAssertionOn: stream [
-	behaviorReturnValue mrlValue
+	behaviorReturnValue mrlvalue
 		ifNil: [ self assertNilOn: stream ]
 		ifNotNil: [ stream
 				<< 'this.assert(';

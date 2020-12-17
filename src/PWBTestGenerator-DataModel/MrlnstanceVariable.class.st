@@ -7,7 +7,8 @@ Class {
 		'instance_variable_pwb_object',
 		'accesses',
 		'famixPWBAttribute',
-		'type'
+		'type',
+		'mooseModel'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
@@ -22,16 +23,6 @@ MrlnstanceVariable >> accesses [
 MrlnstanceVariable >> initialize [
 	super initialize.
 	accesses := OrderedCollection new
-]
-
-{ #category : #accessing }
-MrlnstanceVariable >> instance_variable_dataobject [
-	^ instance_variable_dataobject
-]
-
-{ #category : #accessing }
-MrlnstanceVariable >> instance_variable_dataobject: anObject [
-	instance_variable_dataobject := anObject
 ]
 
 { #category : #accessing }
@@ -80,7 +71,7 @@ MrlnstanceVariable >> linkToFamixAttributeInModel: aMooseModel [
 
 { #category : #initialization }
 MrlnstanceVariable >> linkToFamixPWBAttribute [
-	^ self linkToFamixAttributeInModel: MooseModel root first
+	^ self linkToFamixAttributeInModel: mooseModel
 ]
 
 { #category : #accessing }
@@ -88,6 +79,11 @@ MrlnstanceVariable >> loadAccesses [
 	^ accesses := MrlInstanceVariableAccess
 		loadWhere:
 			[ :access | access instance_variable_access_accessed = self instance_variable_id ]
+]
+
+{ #category : #accessing }
+MrlnstanceVariable >> mooseModel: anUndefinedObject [ 
+	mooseModel := anUndefinedObject
 ]
 
 { #category : #initialization }

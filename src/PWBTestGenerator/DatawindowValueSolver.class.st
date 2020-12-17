@@ -18,8 +18,8 @@ DatawindowValueSolver class >> resolve: aMrlParameter [
 DatawindowValueSolver >> addRows: dwName tag: aTag on: aStream [
 	| colones paramValue |
 	paramValue := aTag = 'before'
-		ifTrue: [ focus parameter_before_value ]
-		ifFalse: [ focus parameter_after_value ].
+		ifTrue: [ focus parameter_before_value mrlValue ]
+		ifFalse: [ focus parameter_after_value mrlValue ].
 	colones := (CSVParser parseWithHeader: paramValue) anyOne.
 	colones
 		keysAndValuesDo: [ :key :value | 
