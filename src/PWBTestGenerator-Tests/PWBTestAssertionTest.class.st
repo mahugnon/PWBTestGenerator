@@ -56,6 +56,27 @@ PWBTestAssertionTest >> testAttributeAccessedIsBasicTypeAssertion [
 ]
 
 { #category : #tests }
+PWBTestAssertionTest >> testCreateDataControlAccessAssertionOn [
+	| script |
+	access1
+		afterValue:
+			(MrlVariableAccessAfterValue new
+				dataobject: 'dw_test';
+				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
+	script := String
+		streamContents: [ :stream | 
+			PWBAbstractParametersUnitAssertion new
+				dataControlAccess: access1
+				assertionOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'this.assert(ltestObject.testAttribute1.dataobject = "dw_test")
+this.assert(f_get_datacontrol_content(ltestObject.testAttribute1) = "DLQ_AOC,DLQ_DAC ~r~n 0,1 ~r~n ")
+'
+]
+
+{ #category : #tests }
 PWBTestAssertionTest >> testInitializeAccess [
 	| script |
 	self createAccesses.

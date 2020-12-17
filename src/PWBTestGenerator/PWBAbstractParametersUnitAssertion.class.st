@@ -133,12 +133,11 @@ PWBAbstractParametersUnitAssertion >> dataControlAccess: acc assertionOn: stream
 		<< acc afterValueDataobject;
 		<< '")';
 		crlf.
-	1 halt.
 	stream
 		<< 'this.assert(f_get_datacontrol_content(';
 		<< acc pwbTestVariableName;
 		<< ') = "';
-		<< (acc afterValue mrlvalue copyReplaceAll: Character cr with: '~r~n');
+		<< (self replaceLineBreakWithPwbLinebreak: acc afterValue mrlvalue);
 		<< '")';
 		crlf.
 	^ stream
@@ -244,6 +243,15 @@ PWBAbstractParametersUnitAssertion >> pwbParameters [
 { #category : #accessing }
 PWBAbstractParametersUnitAssertion >> pwbParameters: anObject [
 	pwbParameters := anObject
+]
+
+{ #category : #'as yet unclassified' }
+PWBAbstractParametersUnitAssertion >> replaceLineBreakWithPwbLinebreak: aString [
+	| pwbLineBreakString |
+	pwbLineBreakString := ' ~r~n '.
+	^ (aString copyReplaceAll: String cr with: pwbLineBreakString)
+		copyReplaceAll: String lf
+		with: pwbLineBreakString
 ]
 
 { #category : #accessing }
