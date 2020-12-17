@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'testFunction',
 		'testModel',
-		'testObject'
+		'testObject',
+		'access1'
 	],
 	#category : #'PWBTestGenerator-Tests'
 }
