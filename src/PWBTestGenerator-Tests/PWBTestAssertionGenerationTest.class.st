@@ -168,7 +168,30 @@ lestParam1 = "hallo"
 ]
 
 { #category : #tests }
-PWBTestAssertionGenerationTest >> testPWBParametersInitialization [
+PWBTestAssertionGenerationTest >> testPWBInitializeNilInvocationVariable [
+	| script testParam1 |
+	testParam1 := Mock named: 'testParam1'.
+	testParam1 stub parameter_before_value willReturn: testParam1.
+	testParam1 stub mrlValue willReturn: nil.
+	testParam1 stub parameter_name willReturn: 'testParam1'.
+	testParam1 stub parameterType
+		willReturn: (FamixPWBBasicType new name: 'string').
+	script := String
+		streamContents: [ :stream | 
+			PWBFunctionWithBasicTypesParametersUnitAssertion new
+				functionUnderTest: testFunction;
+				pwbParameters:
+					{testParam1};
+				printParametersInitializationOn: stream ].
+	self
+		assert: (script copyReplaceAll: String crlf with: String cr)
+		equals:
+			'SetNull(lestParam1)
+'
+]
+
+{ #category : #tests }
+PWBTestAssertionGenerationTest >> testPWBParametersDeclaration [
 	| script |
 	FamixPWBParameter new
 		name: 'as_param1';
@@ -194,7 +217,7 @@ integer li_param2
 ]
 
 { #category : #tests }
-PWBTestAssertionGenerationTest >> testPWBReturnInitialization [
+PWBTestAssertionGenerationTest >> testPWBReturnDeclaration [
 	| script |
 	testFunction returnType: (FamixPWBBasicType new name: 'string').
 	script := String

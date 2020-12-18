@@ -14,6 +14,19 @@ NilValueSolver class >> acceptType: aTypeName [
 	^ false
 ]
 
+{ #category : #resolving }
+NilValueSolver >> printParameter: aMrlParameter on: stream [
+	^ stream
+		<< 'SetNull(';
+		<< 'l';
+		<<
+			(aMrlParameter parameter_name
+				copyFrom: 2
+				to: aMrlParameter parameter_name size);
+		<< ')';
+		crlf
+]
+
 { #category : #printing }
 NilValueSolver >> printValue: aString [
 	^ 'SetNull("' , aString asString , '")'
