@@ -163,3 +163,8 @@ PWBUnitTest >> testsData [
 	testsData ifNil: [ self loadTestData ].
 	^ testsData
 ]
+
+{ #category : #accessing }
+PWBUnitTest >> testsData: aCollection [ 
+	testsData := aCollection
+]

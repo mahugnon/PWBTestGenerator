@@ -111,6 +111,7 @@ MrlBehavior >> behavior_name: anObject [
 { #category : #'as yet unclassified' }
 MrlBehavior >> createAssertionsFromData [
 	| assertons |
+	self flag: #todo.
 	assertons := OrderedCollection new.
 	self mrlReturnValues ifEmpty: [ ^ assertons ].
 	self pwbParameters

@@ -90,7 +90,7 @@ PWBAbstractParametersUnitAssertion >> basicTypeAccess: acc initializationOn: aSt
 		<<
 			(PWBTypeValueSolver
 				printValue: acc beforeValue mrlvalue
-				ofType: acc instance_variable_access_accessedTypeName);
+				ofType: acc variableTypeName);
 		crlf
 ]
 

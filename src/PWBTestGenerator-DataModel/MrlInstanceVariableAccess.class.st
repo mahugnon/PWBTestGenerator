@@ -8,7 +8,8 @@ Class {
 		'instance_variable_access_timestamp',
 		'beforeValue',
 		'afterValue',
-		'mooseModel'
+		'mooseModel',
+		'variable'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
@@ -55,18 +56,12 @@ MrlInstanceVariableAccess >> beforeValueDataobject [
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> instance_variable_access_accessed [
-	self loadInstance_variable_access_accessed.
 	^ instance_variable_access_accessed
 ]
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> instance_variable_access_accessed: anObject [
 	instance_variable_access_accessed := anObject
-]
-
-{ #category : #'as yet unclassified' }
-MrlInstanceVariableAccess >> instance_variable_access_accessedTypeName [
-	^ self instance_variable_access_accessed typeName
 ]
 
 { #category : #accessing }
@@ -105,13 +100,13 @@ MrlInstanceVariableAccess >> isBasic [
 ]
 
 { #category : #'as yet unclassified' }
-MrlInstanceVariableAccess >> loadInstance_variable_access_accessed [
-	instance_variable_access_accessed
-		ifNil: [ instance_variable_access_accessed := (MrlnstanceVariable
+MrlInstanceVariableAccess >> loadVariable [
+	variable
+		ifNil: [ variable := (MrlnstanceVariable
 				loadWhere:
 					[ :var | var instance_variable_id = self instance_variable_access_accessed ])
 				anyOne ].
-	instance_variable_access_accessed mooseModel: mooseModel
+	variable mooseModel: mooseModel
 ]
 
 { #category : #accessing }
@@ -125,12 +120,28 @@ MrlInstanceVariableAccess >> pwbTestVariableName [
 		streamContents: [ :stream | 
 			stream
 				<< 'l';
-				<< self instance_variable_access_accessed instance_variable_pwb_object;
+				<< self variable instance_variable_pwb_object;
 				nextPut: $.;
 				<< (self variableName copyReplaceAll: 'this.' with: '') ]
 ]
 
 { #category : #accessing }
+MrlInstanceVariableAccess >> variable [
+	self loadVariable.
+	^ variable
+]
+
+{ #category : #accessing }
+MrlInstanceVariableAccess >> variable: aMrlnstanceVariable [ 
+	variable := aMrlnstanceVariable
+]
+
+{ #category : #accessing }
 MrlInstanceVariableAccess >> variableName [
-	^ self instance_variable_access_accessed instance_variable_name
+	^ self variable instance_variable_name
+]
+
+{ #category : #'as yet unclassified' }
+MrlInstanceVariableAccess >> variableTypeName [
+	^ self variable typeName
 ]

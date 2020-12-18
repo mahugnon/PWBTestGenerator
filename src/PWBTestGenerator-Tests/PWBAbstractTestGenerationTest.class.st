@@ -18,9 +18,9 @@ PWBAbstractTestGenerationTest >> createAccesses [
 		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'before1');
 		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'after1').
 	access1
-		instance_variable_access_accessed:
+		variable:
 			(MrlnstanceVariable new
-				instance_variable_pwb_object: 'testObject';
+				instance_variable_pwb_object: 'uo_testObject';
 				instance_variable_name: 'testAttribute1')
 ]
 
@@ -37,7 +37,7 @@ PWBAbstractTestGenerationTest >> createTestVariables [
 PWBAbstractTestGenerationTest >> setUp [
 	testModel := FamixPWBModel new.
 	testObject := FamixPWBUserObject new
-		name: 'testObject';
+		name: 'uo_testObject';
 		mooseModel: testModel.
 	testFunction := FamixPWBFunction new
 		name: 'testFunction';

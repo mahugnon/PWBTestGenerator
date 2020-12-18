@@ -23,7 +23,7 @@ PWBTestAssertionGenerationTest >> testAttributeAccessedIsBasicTypeAssertion [
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'this.assert(after1=ltestObject.testAttribute1)
+			'this.assert(after1=luo_testObject.testAttribute1)
 '
 ]
 
@@ -40,7 +40,7 @@ PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'ltestObject.testAttribute1 = "before1"
+			'luo_testObject.testAttribute1 = "before1"
 '
 ]
 
@@ -60,8 +60,8 @@ PWBTestAssertionGenerationTest >> testCreateDataControlAccessAssertionOn [
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'this.assert(ltestObject.testAttribute1.dataobject = "dw_test")
-this.assert(f_get_datacontrol_content(ltestObject.testAttribute1) = "DLQ_AOC,DLQ_DAC ~r~n 0,1 ~r~n ")
+			'this.assert(luo_testObject.testAttribute1.dataobject = "dw_test")
+this.assert(f_get_datacontrol_content(luo_testObject.testAttribute1) = "DLQ_AOC,DLQ_DAC ~r~n 0,1 ~r~n ")
 '
 ]
 
@@ -81,11 +81,11 @@ PWBTestAssertionGenerationTest >> testDataControlAccessInitializationOn [
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'ltestObject.testAttribute1.reset()
-ltestObject.testAttribute1.dataobject = "dw_test"
-ltestObject.testAttribute1.insertRow(0)
-ltestObject.testAttribute1.setItem(ltestObject.testAttribute1.rowcount(),"DLQ_AOC",f_mrl_parse( "0",ltestObject.testAttribute1.object.DLQ_AOC.colType))
-ltestObject.testAttribute1.setItem(ltestObject.testAttribute1.rowcount(),"DLQ_DAC",f_mrl_parse( "1",ltestObject.testAttribute1.object.DLQ_DAC.colType))
+			'luo_testObject.testAttribute1.reset()
+luo_testObject.testAttribute1.dataobject = "dw_test"
+luo_testObject.testAttribute1.insertRow(0)
+luo_testObject.testAttribute1.setItem(luo_testObject.testAttribute1.rowcount(),"DLQ_AOC",f_mrl_parse( "0",luo_testObject.testAttribute1.object.DLQ_AOC.colType))
+luo_testObject.testAttribute1.setItem(luo_testObject.testAttribute1.rowcount(),"DLQ_DAC",f_mrl_parse( "1",luo_testObject.testAttribute1.object.DLQ_DAC.colType))
 '
 ]
 
@@ -132,7 +132,7 @@ PWBTestAssertionGenerationTest >> testPWBFunctionInvocation [
 		equals:
 			'lestParam2 = 3
 lestParam1 = "hallo"
-l_result = ltestObject.testFunction(lestParam2 ,lestParam1 )
+l_result = luo_testObject.testFunction(lestParam2 ,lestParam1 )
 '
 ]
 
