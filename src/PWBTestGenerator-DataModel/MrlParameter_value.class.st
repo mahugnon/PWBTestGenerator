@@ -15,6 +15,11 @@ MrlParameter_value >> mrlValue [
 ]
 
 { #category : #accessing }
+MrlParameter_value >> mrlvalue [
+	^ parameter_value
+]
+
+{ #category : #accessing }
 MrlParameter_value >> parameter_dataobject [
 	^ parameter_dataobject
 ]
