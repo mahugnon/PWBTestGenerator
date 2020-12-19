@@ -23,7 +23,8 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 					space;
 					nextPut: $, ]
 			ifFalse: [ stream
-					<< param parameter_name;
+					<< 'l';
+					<< (param parameter_name copyFrom: 2 to: param parameter_name size);
 					space;
 					nextPut: $, ] ].
 	param := self pwbParameters last.
@@ -32,25 +33,17 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 				<< 'lw_PBUnitTest_window.dw_before';
 				nextPut: $) ]
 		ifFalse: [ stream
-				<< param parameter_name;
+				<< 'l';
+				<< (param parameter_name copyFrom: 2 to: param parameter_name size);
 				space;
 				nextPut: $) ].
-	^ stream
+	^ stream crlf
 ]
 
 { #category : #printing }
 PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	super printPWBScriptOn: stream.
-	^ stream
-]
-
-{ #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printParameterInitializationOn: stream [
-	self pwbParameters
-		do: [ :param | 
-			param isPWBDataWindow
-				ifFalse: [ PWBTypeValueSolver printParameter: param on: stream ] ].
 	^ stream
 ]
 

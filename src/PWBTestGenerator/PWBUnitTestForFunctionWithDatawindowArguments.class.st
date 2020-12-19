@@ -16,6 +16,8 @@ PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 		<< 'w_PBUnitTest_window lw_PBUnitTest_window';
 		crlf;
 		<< 'open(lw_PBUnitTest_window)';
+		crlf;
+		<< 'lw_PBUnitTest_window.hide()';
 		crlf
 ]
 
@@ -23,7 +25,6 @@ PWBUnitTestForFunctionWithDatawindowArguments >> newPWBTestWindowOn: aStream [
 PWBUnitTestForFunctionWithDatawindowArguments >> printPWBScriptOn: stream [
 	self createAssertionsFromData.
 	self beginOn: stream.
-	"self printAccessSetUpOn: stream."
 	self printPWBObjectCreationOn: stream.
 	self newPWBTestWindowOn: stream.
 	functionUnderTest returnType
@@ -42,7 +43,8 @@ PWBUnitTestForFunctionWithDatawindowArguments >> printParameterDeclarationOn: st
 				ifFalse: [ stream
 						<< param parameterType name;
 						space;
-						<< param name;
+						<< 'l';
+						<< (param name copyFrom: 2 to: param name size);
 						crlf ] ].
 	^ stream
 ]

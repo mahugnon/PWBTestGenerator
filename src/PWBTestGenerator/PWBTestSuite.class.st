@@ -17,13 +17,6 @@ PWBTestSuite class >> generateForModel: aFamixPWBModel in: aFolder [
 ]
 
 { #category : #tests }
-PWBTestSuite class >> testCaseForFunction: aFamixPWBFunction [
-	^ self new
-		behaviorUnderTest: aFamixPWBFunction;
-		printPWBDeclarationScript
-]
-
-{ #category : #tests }
 PWBTestSuite class >> testCaseForFunction: aFamixPWBFunction in: aFolder [
 	aFamixPWBFunction isPrivate
 		ifTrue: [ ^ self ].
