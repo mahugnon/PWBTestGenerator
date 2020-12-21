@@ -16,10 +16,9 @@ PWBTestAssertionGenerationTest >> testAttributeAccessedIsBasicTypeAssertion [
 	| script |
 	script := String
 		streamContents: [ :stream | 
-			PWBReturnBasedUnitAssertionWithBasicTypeParam new
-				behaviorUnderTest: testFunction;
-				addAccess: access1;
-				printAccessAssertionOn: stream ].
+			PWBAccessBasedAssertion new
+				behaviorAccesses: {access1};
+				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
@@ -33,10 +32,9 @@ PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
 	self createAccesses.
 	script := String
 		streamContents: [ :stream | 
-			PWBReturnBasedUnitAssertionWithBasicTypeParam new
-				functionUnderTest: testFunction;
-				addAccess: access1;
-				printAccesInitializationOn: stream ].
+			PWBTestCaseInitializer new
+				behaviorAccesses: {access1};
+				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
@@ -47,6 +45,7 @@ PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
 { #category : #tests }
 PWBTestAssertionGenerationTest >> testCreateDataControlAccessAssertionOn [
 	| script |
+	access1 beforeValue dataobject: 'dw_test'.
 	access1
 		afterValue:
 			(MrlVariableAccessAfterValue new
@@ -54,14 +53,13 @@ PWBTestAssertionGenerationTest >> testCreateDataControlAccessAssertionOn [
 				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
 	script := String
 		streamContents: [ :stream | 
-			PWBAbstractReturnBaseUnitAssertion new
-				dataControlAccess: access1
-				assertionOn: stream ].
+			(PWBAccessBasedAssertion assertionFor: {access1})
+				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
 			'this.assert(luo_testObject.testAttribute1.dataobject = "dw_test")
-this.assert(f_get_datacontrol_content(luo_testObject.testAttribute1) = "DLQ_AOC,DLQ_DAC ~r~n 0,1 ~r~n ")
+this.assert(f_get_datacontrol_content(luo_testObject.testAttribute1) = "DLQ_AOC,DLQ_DAC0,1")
 '
 ]
 

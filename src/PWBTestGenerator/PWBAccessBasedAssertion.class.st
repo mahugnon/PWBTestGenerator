@@ -52,28 +52,31 @@ PWBAccessBasedAssertion >> dataControlAccess: acc assertionOn: stream [
 	^ stream
 ]
 
+{ #category : #initialization }
+PWBAccessBasedAssertion >> initialize [
+	super initialize.
+	behaviorAccesses := OrderedCollection new
+]
+
 { #category : #testing }
 PWBAccessBasedAssertion >> isAccessBasedAssertion [
 	^ true
 ]
 
 { #category : #printing }
-PWBAccessBasedAssertion >> printAccessAssertionOn: stream [
+PWBAccessBasedAssertion >> printPWBScriptOn: stream [
 	behaviorAccesses
 		do: [ :acc | 
 			acc beforeValueDataobject
 				ifNil: [ self basicTypeAccess: acc assertionOn: stream ]
-				ifNotNil: [ self dataControlAccess: acc assertionOn: stream ] ]
-]
-
-{ #category : #printing }
-PWBAccessBasedAssertion >> printPWBScriptOn: stream [
-	self printAccessAssertionOn: stream.
+				ifNotNil: [ self dataControlAccess: acc assertionOn: stream ] ].
 	^ stream
 ]
 
 { #category : #'as yet unclassified' }
 PWBAccessBasedAssertion >> replaceLineBreakWithPwbLinebreak: aString [
+	"Remove cr the avoid PWB errors"
+
 	^ (aString copyReplaceAll: String cr with: '')
 		copyReplaceAll: String lf
 		with: ''

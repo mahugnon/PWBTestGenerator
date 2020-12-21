@@ -100,6 +100,13 @@ PWBTestCaseInitializer >> dataControlAccess: acc initializationOn: aStream [
 	^ aStream
 ]
 
+{ #category : #initialization }
+PWBTestCaseInitializer >> initialize [
+	super initialize.
+	pwbParameters := OrderedCollection new.
+	behaviorAccesses := OrderedCollection new
+]
+
 { #category : #testing }
 PWBTestCaseInitializer >> isTestCaseInitializer [
 	^ true

@@ -24,6 +24,12 @@ PWBBehaviorInvocation >> behaviorUnderTest: aFamixPWBBehavior [
 	behaviorUnderTest := aFamixPWBBehavior
 ]
 
+{ #category : #initialization }
+PWBBehaviorInvocation >> initialize [
+	super initialize.
+	pwbParameters := OrderedCollection new
+]
+
 { #category : #testing }
 PWBBehaviorInvocation >> isBehaviorInvocation [
 	^ true
