@@ -154,15 +154,44 @@ MrlBehavior >> behavior_name: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-MrlBehavior >> createTestGenerationTask [
-	self hasAssertions
-		ifFalse: [ ^ taskList ].
+MrlBehavior >> createTaskWithAccessStrategy [
+	| timeStamps |
+	timeStamps := self mrlInstanceVariablesAccesses
+		collectAsSet: #timeStamp.
+	timeStamps
+		do: [ :timestamp | 
+			self addTestCaseInitialize: #().
+			self addBehaviorInvocation: #().
+			self addReturnBaseAssertionFor: #() at: timestamp.
+			self addAccessBaseAssertion: timestamp ]
+]
+
+{ #category : #'as yet unclassified' }
+MrlBehavior >> createTaskWithParamStrategy [
 	self pwbParameters
 		keysAndValuesDo: [ :timestamp :parameters | 
 			self addTestCaseInitialize: parameters.
 			self addBehaviorInvocation: parameters.
 			self addReturnBaseAssertionFor: parameters at: timestamp.
-			self addAccessBaseAssertion: timestamp ].
+			self addAccessBaseAssertion: timestamp ]
+]
+
+{ #category : #'as yet unclassified' }
+MrlBehavior >> createTaskWithReturnStrategy [
+	| timeStamps |
+	timeStamps := self mrlReturnValues collectAsSet: #timestamp.
+	timeStamps
+		do: [ :timestamp | 
+			self addTestCaseInitialize: #().
+			self addBehaviorInvocation: #().
+			self addReturnBaseAssertionFor: #() at: timestamp ]
+]
+
+{ #category : #'as yet unclassified' }
+MrlBehavior >> createTestGenerationTask [
+	self hasAssertions
+		ifFalse: [ ^ taskList ].
+	TaskListStrategy apply: self.
 	^ taskList
 ]
 

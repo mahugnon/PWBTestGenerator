@@ -14,10 +14,3 @@ PWBReturnBasedUnitAssertionWithBasicTypeParam >> printPWBScriptOn: stream [
 	self printReturnAssertionOn: stream.
 	^ stream
 ]
-
-{ #category : #printing }
-PWBReturnBasedUnitAssertionWithBasicTypeParam >> printParametersInitializationOn: stream [
-	self pwbParameters
-		do:
-			[ :param | PWBVariableInitializer printParameter: param on: stream ]
-]

@@ -40,7 +40,7 @@ PWBMrlBehavior >> testCreateAssertionsFromDataIfAccessIsEmpty [
 PWBMrlBehavior >> testCreateAssertionsFromDataIfReturnValuesIsEmptyButAccessIsNot [
 	| timestamp |
 	timestamp := Date today asString.
-	testMrlBehavior addMrlReturnValue: MrlInstanceVariableAccess new.
+	testMrlBehavior addMrlReturnValue: MrlReturnValue new.
 	self assert: testMrlBehavior createTestGenerationTask size equals: 4
 ]
 
