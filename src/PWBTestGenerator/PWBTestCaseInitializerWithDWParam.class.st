@@ -1,32 +1,23 @@
 Class {
-	#name : #PWBReturnBasedUnitAssertionDataWindowParam,
-	#superclass : #PWBAbstractReturnBaseUnitAssertion,
+	#name : #PWBTestCaseInitializerWithDWParam,
+	#superclass : #PWBTestCaseInitializer,
 	#category : #'PWBTestGenerator-Assertions'
 }
 
-{ #category : #'as yet unclassified' }
-PWBReturnBasedUnitAssertionDataWindowParam class >> accept: aCollection [
+{ #category : #visiting }
+PWBTestCaseInitializerWithDWParam class >> accept: aCollection [
 	^ aCollection anySatisfy: #isPWBDataWindow
 ]
 
 { #category : #printing }
-PWBReturnBasedUnitAssertionDataWindowParam >> printPWBScriptOn: stream [
+PWBTestCaseInitializerWithDWParam >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	super printPWBScriptOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBReturnBasedUnitAssertionDataWindowParam >> printParametersInitializationOn: stream [
-	self pwbParameters
-		do: [ :param | 
-			param isPWBDataWindow
-				ifFalse: [ PWBVariableInitializer printParameter: param on: stream ] ].
-	^ stream
-]
-
-{ #category : #printing }
-PWBReturnBasedUnitAssertionDataWindowParam >> printWindowDwSetUpOn: stream [
+PWBTestCaseInitializerWithDWParam >> printWindowDwSetUpOn: stream [
 	| dwParam |
 	dwParam := self pwbParameters
 		detect: [ :param | param isPWBDataWindow ].
@@ -35,8 +26,8 @@ PWBReturnBasedUnitAssertionDataWindowParam >> printWindowDwSetUpOn: stream [
 		ifNotNil: [ self setValues: stream tag: 'after' dwParam: dwParam ]
 ]
 
-{ #category : #printing }
-PWBReturnBasedUnitAssertionDataWindowParam >> setValues: stream tag: aTag dwParam: aDWParam [
+{ #category : #initialization }
+PWBTestCaseInitializerWithDWParam >> setValues: stream tag: aTag dwParam: aDWParam [
 	| dwName |
 	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	stream

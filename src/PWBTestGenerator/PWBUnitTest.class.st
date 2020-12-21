@@ -54,8 +54,8 @@ PWBUnitTest >> beginOn: stream [
 ]
 
 { #category : #'as yet unclassified' }
-PWBUnitTest >> createAssertionsFromData [
-	assertions addAll: self testsData createAssertionsFromData
+PWBUnitTest >> createTestGenerationTask [
+	assertions addAll: self testsData createTestGenerationTask
 ]
 
 { #category : #accessing }

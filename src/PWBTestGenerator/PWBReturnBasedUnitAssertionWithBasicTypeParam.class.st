@@ -1,33 +1,12 @@
 Class {
 	#name : #PWBReturnBasedUnitAssertionWithBasicTypeParam,
-	#superclass : #PWBAbstractParametersUnitAssertion,
+	#superclass : #PWBAbstractReturnBaseUnitAssertion,
 	#category : #'PWBTestGenerator-Assertions'
 }
 
-{ #category : #printing }
-PWBReturnBasedUnitAssertionWithBasicTypeParam >> printFunctionInvocationScriptOn: stream [
-	| param |
-	stream
-		<< 'l_result = ';
-		<< 'l';
-		<< self behaviorParent;
-		nextPut: $.;
-		<< self behaviorName;
-		nextPut: $(.
-	1 to: self pwbParameters size - 1 do: [ :iter | 
-		param := self pwbParameters at: iter.
-		stream
-			<< 'l';
-			<< (param parameter_name copyFrom: 2 to: param parameter_name size);
-			space;
-			nextPut: $, ].
-	param := self pwbParameters last.
-	stream
-		<< 'l';
-		<< (param parameter_name copyFrom: 2 to: param parameter_name size);
-		space;
-		nextPut: $);
-		crlf
+{ #category : #'as yet unclassified' }
+PWBReturnBasedUnitAssertionWithBasicTypeParam class >> accept: aCollection [
+	^ aCollection allSatisfy: [ :e | e isPWBDataWindow not ]
 ]
 
 { #category : #printing }

@@ -1,24 +1,34 @@
 Class {
-	#name : #PWBAbstractBehaviorInvocation,
+	#name : #PWBAbstractReturnBaseUnitAssertion,
 	#superclass : #Object,
 	#instVars : [
 		'behaviorReturnValue',
 		'timestamp',
-		'functionUnderTest',
 		'pwbParameters',
-		'behaviorAccesses'
+		'behaviorAccesses',
+		'behaviorUnderTest'
 	],
-	#category : #'PWBTestGenerator-BehaviorInvocation'
+	#category : #'PWBTestGenerator-Assertions'
 }
 
+{ #category : #'as yet unclassified' }
+PWBAbstractReturnBaseUnitAssertion class >> accept: aCollection [
+	self subclassResponsibility
+]
+
+{ #category : #'as yet unclassified' }
+PWBAbstractReturnBaseUnitAssertion class >> assertionFor: aCollection [
+	^ self subclasses detect: [ :sub | sub accept: aCollection ]
+]
+
 { #category : #adding }
-PWBAbstractBehaviorInvocation >> addAccess: aMrlAccess [
-	aMrlAccess mooseModel: functionUnderTest mooseModel.
+PWBAbstractReturnBaseUnitAssertion >> addAccess: aMrlAccess [
+	aMrlAccess mooseModel: behaviorUnderTest mooseModel.
 	behaviorAccesses add: aMrlAccess
 ]
 
 { #category : #adding }
-PWBAbstractBehaviorInvocation >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
+PWBAbstractReturnBaseUnitAssertion >> addRows: dwName tag: aTag on: aStream dwParam: aDwParam [
 	| pwbData paramValue |
 	paramValue := aTag = 'before'
 		ifTrue: [ aDwParam beforeValue mrlvalue ]
@@ -56,7 +66,7 @@ PWBAbstractBehaviorInvocation >> addRows: dwName tag: aTag on: aStream dwParam: 
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> assertNilOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> assertNilOn: stream [
 	stream
 		<< 'this.assert(';
 		space;
@@ -70,7 +80,7 @@ PWBAbstractBehaviorInvocation >> assertNilOn: stream [
 ]
 
 { #category : #'as yet unclassified' }
-PWBAbstractBehaviorInvocation >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
 	^ stream
 		<< 'this.assert(';
 		<< aMrlInstanceVariableAccess afterValue mrlvalue;
@@ -81,7 +91,7 @@ PWBAbstractBehaviorInvocation >> basicTypeAccess: aMrlInstanceVariableAccess ass
 ]
 
 { #category : #api }
-PWBAbstractBehaviorInvocation >> basicTypeAccess: acc initializationOn: aStream [
+PWBAbstractReturnBaseUnitAssertion >> basicTypeAccess: acc initializationOn: aStream [
 	^ aStream
 		<< acc pwbTestVariableName;
 		space;
@@ -95,37 +105,37 @@ PWBAbstractBehaviorInvocation >> basicTypeAccess: acc initializationOn: aStream 
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorAccesses [
+PWBAbstractReturnBaseUnitAssertion >> behaviorAccesses [
 	^ behaviorAccesses
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorAccesses: anObject [
+PWBAbstractReturnBaseUnitAssertion >> behaviorAccesses: anObject [
 	behaviorAccesses := anObject
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorName [
-	^ functionUnderTest name
+PWBAbstractReturnBaseUnitAssertion >> behaviorName [
+	^ behaviorUnderTest name
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorParent [
-	^ functionUnderTest parentType name
+PWBAbstractReturnBaseUnitAssertion >> behaviorParent [
+	^ behaviorUnderTest parentType name
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorReturnValue [
+PWBAbstractReturnBaseUnitAssertion >> behaviorReturnValue [
 	^ behaviorReturnValue
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> behaviorReturnValue: anObject [
+PWBAbstractReturnBaseUnitAssertion >> behaviorReturnValue: anObject [
 	behaviorReturnValue := anObject
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> dataControlAccess: acc assertionOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> dataControlAccess: acc assertionOn: stream [
 	stream
 		<< 'this.assert(';
 		<< acc pwbTestVariableName;
@@ -144,7 +154,7 @@ PWBAbstractBehaviorInvocation >> dataControlAccess: acc assertionOn: stream [
 ]
 
 { #category : #api }
-PWBAbstractBehaviorInvocation >> dataControlAccess: acc initializationOn: aStream [
+PWBAbstractReturnBaseUnitAssertion >> dataControlAccess: acc initializationOn: aStream [
 	aStream
 		<< acc pwbTestVariableName;
 		<< '.reset()';
@@ -163,22 +173,22 @@ PWBAbstractBehaviorInvocation >> dataControlAccess: acc initializationOn: aStrea
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> functionUnderTest [
-	^ functionUnderTest
+PWBAbstractReturnBaseUnitAssertion >> functionUnderTest [
+	^ behaviorUnderTest
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> functionUnderTest: anObject [
-	functionUnderTest := anObject
+PWBAbstractReturnBaseUnitAssertion >> functionUnderTest: anObject [
+	behaviorUnderTest := anObject
 ]
 
 { #category : #initialization }
-PWBAbstractBehaviorInvocation >> initialize [
+PWBAbstractReturnBaseUnitAssertion >> initialize [
 	behaviorAccesses := OrderedCollection new
 ]
 
 { #category : #api }
-PWBAbstractBehaviorInvocation >> printAccesInitializationOn: aStream [
+PWBAbstractReturnBaseUnitAssertion >> printAccesInitializationOn: aStream [
 	behaviorAccesses
 		do: [ :acc | 
 			acc beforeValueDataobject
@@ -187,7 +197,7 @@ PWBAbstractBehaviorInvocation >> printAccesInitializationOn: aStream [
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> printAccessAssertionOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> printAccessAssertionOn: stream [
 	behaviorAccesses
 		do: [ :acc | 
 			acc beforeValueDataobject
@@ -196,25 +206,30 @@ PWBAbstractBehaviorInvocation >> printAccessAssertionOn: stream [
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> printFunctionInvocationScriptOn: stream [
-	self subclassResponsibility
+PWBAbstractReturnBaseUnitAssertion >> printFunctionInvocationScriptOn: stream [
+	^ PWBBehaviorInvocation new
+		behaviorUnderTest: behaviorUnderTest;
+		pwbParameters: self pwbParameters;
+		printPWBScriptOn: stream
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> printPWBScriptOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> printPWBScriptOn: stream [
 	self printParametersInitializationOn: stream.
 	self printAccesInitializationOn: stream.
 	self printFunctionInvocationScriptOn: stream.
+	self printAccessAssertionOn: stream.
+	self printReturnAssertionOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> printParametersInitializationOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> printParametersInitializationOn: stream [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-PWBAbstractBehaviorInvocation >> printReturnAssertionOn: stream [
+PWBAbstractReturnBaseUnitAssertion >> printReturnAssertionOn: stream [
 	behaviorReturnValue mrlValue
 		ifNil: [ self assertNilOn: stream ]
 		ifNotNil: [ stream
@@ -223,7 +238,7 @@ PWBAbstractBehaviorInvocation >> printReturnAssertionOn: stream [
 				<<
 					(PWBVariableInitializer
 						printValue: behaviorReturnValue mrlValue
-						ofType: functionUnderTest returnType name);
+						ofType: behaviorUnderTest returnType name);
 				space;
 				<< '=';
 				space;
@@ -234,17 +249,17 @@ PWBAbstractBehaviorInvocation >> printReturnAssertionOn: stream [
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> pwbParameters [
+PWBAbstractReturnBaseUnitAssertion >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> pwbParameters: anObject [
+PWBAbstractReturnBaseUnitAssertion >> pwbParameters: anObject [
 	pwbParameters := anObject
 ]
 
 { #category : #'as yet unclassified' }
-PWBAbstractBehaviorInvocation >> replaceLineBreakWithPwbLinebreak: aString [
+PWBAbstractReturnBaseUnitAssertion >> replaceLineBreakWithPwbLinebreak: aString [
 	| pwbLineBreakString |
 	pwbLineBreakString := ' ~r~n '.
 	^ (aString copyReplaceAll: String cr with: pwbLineBreakString)
@@ -253,11 +268,11 @@ PWBAbstractBehaviorInvocation >> replaceLineBreakWithPwbLinebreak: aString [
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> timestamp [
+PWBAbstractReturnBaseUnitAssertion >> timestamp [
 	^ timestamp
 ]
 
 { #category : #accessing }
-PWBAbstractBehaviorInvocation >> timestamp: aString [
+PWBAbstractReturnBaseUnitAssertion >> timestamp: aString [
 	timestamp := aString
 ]

@@ -18,7 +18,7 @@ PWBFunctionWithBasicTypeArgumentsUnitTest class >> acceptFunction: aFamixPWBFunc
 
 { #category : #printing }
 PWBFunctionWithBasicTypeArgumentsUnitTest >> printPWBScriptOn: stream [
-	self createAssertionsFromData.
+	self createTestGenerationTask.
 	self beginOn: stream.
 	self printPWBObjectCreationOn: stream.
 	functionUnderTest returnType

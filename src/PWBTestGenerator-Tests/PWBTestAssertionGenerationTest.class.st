@@ -54,7 +54,7 @@ PWBTestAssertionGenerationTest >> testCreateDataControlAccessAssertionOn [
 				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
 	script := String
 		streamContents: [ :stream | 
-			PWBAbstractParametersUnitAssertion new
+			PWBAbstractReturnBaseUnitAssertion new
 				dataControlAccess: access1
 				assertionOn: stream ].
 	self
@@ -75,7 +75,7 @@ PWBTestAssertionGenerationTest >> testDataControlAccessInitializationOn [
 				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
 	script := String
 		streamContents: [ :stream | 
-			PWBAbstractParametersUnitAssertion new
+			PWBAbstractReturnBaseUnitAssertion new
 				addAccess: access1;
 				printAccesInitializationOn: stream ].
 	self

@@ -25,5 +25,5 @@ PWBMrlBehavior >> testCreateAssertionsFromDataIfParametersIsEmpty [
 PWBMrlBehavior >> testCreateAssertionsFromDataIfReturnValuesIsEmptyButAccessIsNot [
 	testMrlBehavior
 		addMrlParameter: (MrlParameter new parameter_name: 'param1').
-	self assert: testMrlBehavior createAssertionsFromData size equals: 1
+	self assert: testMrlBehavior createTestGenerationTask size equals: 1
 ]

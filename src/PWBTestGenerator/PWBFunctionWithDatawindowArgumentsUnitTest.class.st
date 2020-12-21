@@ -23,7 +23,7 @@ PWBFunctionWithDatawindowArgumentsUnitTest >> newPWBTestWindowOn: aStream [
 
 { #category : #printing }
 PWBFunctionWithDatawindowArgumentsUnitTest >> printPWBScriptOn: stream [
-	self createAssertionsFromData.
+	self createTestGenerationTask.
 	self beginOn: stream.
 	self printPWBObjectCreationOn: stream.
 	self newPWBTestWindowOn: stream.
