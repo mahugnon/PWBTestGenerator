@@ -1,11 +1,11 @@
 Class {
-	#name : #PWBFunctionWithDataWindowParametersUnitAssertion,
+	#name : #PWBReturnBasedUnitAssertionDataWindowParam,
 	#superclass : #PWBAbstractParametersUnitAssertion,
 	#category : #'PWBTestGenerator-Assertions'
 }
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
+PWBReturnBasedUnitAssertionDataWindowParam >> printFunctionInvocationScriptOn: stream [
 	| param localVar |
 	self printParametersInitializationOn: stream.
 	localVar := 'l' , self behaviorParent.
@@ -41,23 +41,23 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printFunctionInvocationScrip
 ]
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printPWBScriptOn: stream [
+PWBReturnBasedUnitAssertionDataWindowParam >> printPWBScriptOn: stream [
 	self printWindowDwSetUpOn: stream.
 	super printPWBScriptOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printParametersInitializationOn: stream [
+PWBReturnBasedUnitAssertionDataWindowParam >> printParametersInitializationOn: stream [
 	self pwbParameters
 		do: [ :param | 
 			param isPWBDataWindow
-				ifFalse: [ PWBTypeValueSolver printParameter: param on: stream ] ].
+				ifFalse: [ PWBVariableInitializer printParameter: param on: stream ] ].
 	^ stream
 ]
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> printWindowDwSetUpOn: stream [
+PWBReturnBasedUnitAssertionDataWindowParam >> printWindowDwSetUpOn: stream [
 	| dwParam |
 	dwParam := self pwbParameters
 		detect: [ :param | param isPWBDataWindow ].
@@ -67,7 +67,7 @@ PWBFunctionWithDataWindowParametersUnitAssertion >> printWindowDwSetUpOn: stream
 ]
 
 { #category : #printing }
-PWBFunctionWithDataWindowParametersUnitAssertion >> setValues: stream tag: aTag dwParam: aDWParam [
+PWBReturnBasedUnitAssertionDataWindowParam >> setValues: stream tag: aTag dwParam: aDWParam [
 	| dwName |
 	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	stream

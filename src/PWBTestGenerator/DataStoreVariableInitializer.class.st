@@ -1,11 +1,11 @@
 Class {
-	#name : #DataStoreSolver,
-	#superclass : #PWBTypeValueSolver,
-	#category : #'PWBTestGenerator-TypeResolver'
+	#name : #DataStoreVariableInitializer,
+	#superclass : #PWBVariableInitializer,
+	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
 { #category : #'as yet unclassified' }
-DataStoreSolver class >> accept: aMrlParameter [
+DataStoreVariableInitializer class >> accept: aMrlParameter [
 	| paramName |
 	paramName := aMrlParameter parameterType name.
 	^ paramName asLowercase = 'datastore'
@@ -13,13 +13,13 @@ DataStoreSolver class >> accept: aMrlParameter [
 ]
 
 { #category : #printing }
-DataStoreSolver class >> acceptType: aTypeName [
+DataStoreVariableInitializer class >> acceptType: aTypeName [
 	^ aTypeName asLowercase = 'datastore'
 		or: [ aTypeName beginsWith: 'ds_' ]
 ]
 
 { #category : #resolving }
-DataStoreSolver >> addRowsWithTagOn: stream [
+DataStoreVariableInitializer >> addRowsWithTagOn: stream [
 	| colones paramValue |
 	paramValue := tag = 'before'
 		ifTrue: [ focus parameter_before_value ]
@@ -52,7 +52,7 @@ DataStoreSolver >> addRowsWithTagOn: stream [
 ]
 
 { #category : #resolving }
-DataStoreSolver >> createDataStoreOn: stream [
+DataStoreVariableInitializer >> createDataStoreOn: stream [
 	varName := 'l'
 		, (focus parameter_name copyFrom: 2 to: focus parameter_name size)
 		, '_' , tag.
@@ -66,7 +66,7 @@ DataStoreSolver >> createDataStoreOn: stream [
 ]
 
 { #category : #resolving }
-DataStoreSolver >> dataObjectOn: stream [
+DataStoreVariableInitializer >> dataObjectOn: stream [
 	^ stream
 		<< varName;
 		<< '.dataobject =';
@@ -77,7 +77,7 @@ DataStoreSolver >> dataObjectOn: stream [
 ]
 
 { #category : #resolving }
-DataStoreSolver >> printParameter: aMrlParameter on: stream [
+DataStoreVariableInitializer >> printParameter: aMrlParameter on: stream [
 	focus := aMrlParameter.
 	self resolveOn: stream withTag: 'before'.
 	focus parameter_after_value
@@ -85,12 +85,12 @@ DataStoreSolver >> printParameter: aMrlParameter on: stream [
 ]
 
 { #category : #printing }
-DataStoreSolver >> printValue: aString [
+DataStoreVariableInitializer >> printValue: aString [
 	
 ]
 
 { #category : #resolving }
-DataStoreSolver >> resolveOn: stream withTag: aTag [
+DataStoreVariableInitializer >> resolveOn: stream withTag: aTag [
 	tag := aTag.
 	self createDataStoreOn: stream.
 	self dataObjectOn: stream.
@@ -100,12 +100,12 @@ DataStoreSolver >> resolveOn: stream withTag: aTag [
 ]
 
 { #category : #resolving }
-DataStoreSolver >> rightSideOn: stream [
+DataStoreVariableInitializer >> rightSideOn: stream [
 	"do nothing"
 ]
 
 { #category : #resolving }
-DataStoreSolver >> rowOn: stream [
+DataStoreVariableInitializer >> rowOn: stream [
 	^ stream
 		<< varName;
 		<< '.insertRow(0)';
@@ -113,7 +113,7 @@ DataStoreSolver >> rowOn: stream [
 ]
 
 { #category : #resolving }
-DataStoreSolver >> transObjectOn: stream [
+DataStoreVariableInitializer >> transObjectOn: stream [
 	^ stream
 		<< varName;
 		<< '.setTrans(SQLCA)';

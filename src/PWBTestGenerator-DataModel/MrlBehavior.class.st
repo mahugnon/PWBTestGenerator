@@ -111,24 +111,23 @@ MrlBehavior >> behavior_name: anObject [
 { #category : #'as yet unclassified' }
 MrlBehavior >> createAssertionsFromData [
 	| assertons |
-	self flag: #todo.
 	assertons := OrderedCollection new.
 	self mrlReturnValues ifEmpty: [ ^ assertons ].
 	self pwbParameters
-		keysAndValuesDo: [ :key :value | 
-			(value anySatisfy: #isPWBDataWindow)
+		keysAndValuesDo: [ :timestamp :parameters | 
+			(timestamp anySatisfy: #isPWBDataWindow)
 				ifTrue: [ assertons
 						add:
 							(self
-								ensureCreateAssertion: PWBFunctionWithDataWindowParametersUnitAssertion
-								with: key
-								and: value) ]
+								ensureCreateAssertion: PWBReturnBasedUnitAssertionDataWindowParam
+								with: timestamp
+								and: parameters) ]
 				ifFalse: [ assertons
 						add:
 							(self
-								ensureCreateAssertion: PWBFunctionWithBasicTypesParametersUnitAssertion
-								with: key
-								and: value) ] ].
+								ensureCreateAssertion: PWBReturnBasedUnitAssertionWithBasicTypeParam
+								with: timestamp
+								and: parameters) ] ].
 	^ assertons
 ]
 

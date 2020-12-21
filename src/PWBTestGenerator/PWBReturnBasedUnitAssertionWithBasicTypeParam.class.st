@@ -1,11 +1,11 @@
 Class {
-	#name : #PWBFunctionWithBasicTypesParametersUnitAssertion,
+	#name : #PWBReturnBasedUnitAssertionWithBasicTypeParam,
 	#superclass : #PWBAbstractParametersUnitAssertion,
 	#category : #'PWBTestGenerator-Assertions'
 }
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScriptOn: stream [
+PWBReturnBasedUnitAssertionWithBasicTypeParam >> printFunctionInvocationScriptOn: stream [
 	| param |
 	stream
 		<< 'l_result = ';
@@ -31,7 +31,7 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printFunctionInvocationScrip
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printPWBScriptOn: stream [
+PWBReturnBasedUnitAssertionWithBasicTypeParam >> printPWBScriptOn: stream [
 	self printParametersInitializationOn: stream.
 	self printFunctionInvocationScriptOn: stream.
 	self printAccessAssertionOn: stream.
@@ -40,8 +40,8 @@ PWBFunctionWithBasicTypesParametersUnitAssertion >> printPWBScriptOn: stream [
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypesParametersUnitAssertion >> printParametersInitializationOn: stream [
+PWBReturnBasedUnitAssertionWithBasicTypeParam >> printParametersInitializationOn: stream [
 	self pwbParameters
 		do:
-			[ :param | PWBTypeValueSolver printParameter: param on: stream ]
+			[ :param | PWBVariableInitializer printParameter: param on: stream ]
 ]

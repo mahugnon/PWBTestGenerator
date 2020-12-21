@@ -127,10 +127,8 @@ PWBUnitTest >> owner: anObject [
 ]
 
 { #category : #printing }
-PWBUnitTest >> printAssersionsOn: stream [
-	assertions
-		do:
-			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ]
+PWBUnitTest >> printAssertionsOn: stream [
+	assertions do: [ :assert | assert printPWBScriptOn: stream ]
 ]
 
 { #category : #printing }
