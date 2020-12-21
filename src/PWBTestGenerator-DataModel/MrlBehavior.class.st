@@ -65,10 +65,8 @@ MrlBehavior >> addAccessBaseAssertion: aTimeStampString [
 	| accesses |
 	accesses := self mrlInstanceVariablesAccesses
 		select: [ :acc | acc instance_variable_access_timestamp = aTimeStampString ].
-	taskList
-		add:
-			((PWBAbstractReturnBaseUnitAssertion assertionFor: accesses) new
-				behaviorUnderTest: self behaviorUnderTest).
+	accesses ifEmpty: [ ^ taskList ].
+	taskList add: (PWBAccessBasedAssertion assertionFor: accesses).
 	^ taskList
 ]
 
@@ -109,6 +107,7 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection at: aTimeStampString [
 	return := self mrlReturnValues
 		detect: [ :returnValue | returnValue timestamp = aTimeStampString ]
 		ifNone: [  ].
+	return ifNil: [ ^ taskList ].
 	taskList
 		add:
 			((PWBAbstractReturnBaseUnitAssertion assertionFor: aCollection) new
@@ -157,19 +156,20 @@ MrlBehavior >> behavior_name: anObject [
 { #category : #'as yet unclassified' }
 MrlBehavior >> createTestGenerationTask [
 	self hasAssertions
-		ifFalse: [ ^ self ].
+		ifFalse: [ ^ taskList ].
 	self pwbParameters
 		keysAndValuesDo: [ :timestamp :parameters | 
 			self addTestCaseInitialize: parameters.
 			self addBehaviorInvocation: parameters.
 			self addReturnBaseAssertionFor: parameters at: timestamp.
-			self addAccessBaseAssertion: timestamp ]
+			self addAccessBaseAssertion: timestamp ].
+	^ taskList
 ]
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> hasAssertions [
-	self pwbParameters isEmpty
-		and: [ self mrlInstanceVariablesAccesses isEmpty ]
+	^ self mrlReturnValues isNotEmpty
+		or: [ self mrlInstanceVariablesAccesses isNotEmpty ]
 ]
 
 { #category : #initialization }
@@ -249,16 +249,6 @@ MrlBehavior >> pwb_object: anObject [
 { #category : #accessing }
 MrlBehavior >> returnType [
 	^ behaviorUnderTest returnType name
-]
-
-{ #category : #accessing }
-MrlBehavior >> sender [
-	^ sender
-]
-
-{ #category : #accessing }
-MrlBehavior >> sender: anObject [
-	sender := anObject
 ]
 
 { #category : #'as yet unclassified' }

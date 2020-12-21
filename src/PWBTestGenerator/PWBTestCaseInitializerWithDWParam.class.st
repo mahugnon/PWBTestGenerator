@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestCaseInitializerWithDWParam,
 	#superclass : #PWBTestCaseInitializer,
-	#category : #'PWBTestGenerator-Assertions'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #visiting }

@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBReturnBasedUnitAssertionDataWindowParam,
 	#superclass : #PWBAbstractReturnBaseUnitAssertion,
-	#category : #'PWBTestGenerator-Assertions'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }

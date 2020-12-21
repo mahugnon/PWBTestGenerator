@@ -2,13 +2,13 @@ Class {
 	#name : #PWBUnitTest,
 	#superclass : #Object,
 	#instVars : [
-		'functionUnderTest',
 		'name',
 		'assertions',
 		'owner',
 		'invocation',
 		'receiver',
-		'testsData'
+		'mrlBehavior',
+		'behaviorUnderTest'
 	],
 	#category : #'PWBTestGenerator-PWBTestCase'
 }
@@ -70,12 +70,12 @@ PWBUnitTest >> endOn: stream [
 
 { #category : #accessing }
 PWBUnitTest >> functionUnderTest [
-	^ functionUnderTest
+	^ behaviorUnderTest
 ]
 
 { #category : #accessing }
 PWBUnitTest >> functionUnderTest: anObject [
-	functionUnderTest := anObject
+	behaviorUnderTest := anObject
 ]
 
 { #category : #initialization }
@@ -96,17 +96,17 @@ PWBUnitTest >> invocation: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-PWBUnitTest >> loadTestData [
-	testsData := (MrlBehavior
+PWBUnitTest >> loadMrlBehavior [
+	mrlBehavior := (MrlBehavior
 		loadWithMrlParameterAndMrlReturnValuesWhere: [ :function | 
-			function behavior_name = functionUnderTest name
-				AND: [ function pwb_object = functionUnderTest parentType name ] ])
-		anyOne behaviorUnderTest: functionUnderTest
+			function behavior_name = behaviorUnderTest name
+				AND: [ function pwb_object = behaviorUnderTest parentType name ] ])
+		anyOne behaviorUnderTest: behaviorUnderTest
 ]
 
 { #category : #accessing }
 PWBUnitTest >> name [
-	name ifNil: [ name := 'test_' , functionUnderTest name ].
+	name ifNil: [ name := 'test_' , behaviorUnderTest name ].
 	^ name
 ]
 
@@ -150,7 +150,7 @@ PWBUnitTest >> printPWBScriptOn: stream [
 { #category : #printing }
 PWBUnitTest >> printReturnValueDeclarationOn: stream [
 	^ stream
-		<< functionUnderTest returnType name;
+		<< behaviorUnderTest returnType name;
 		space;
 		<< 'l_result';
 		crlf
@@ -158,11 +158,11 @@ PWBUnitTest >> printReturnValueDeclarationOn: stream [
 
 { #category : #accessing }
 PWBUnitTest >> testsData [
-	testsData ifNil: [ self loadTestData ].
-	^ testsData
+	mrlBehavior ifNil: [ self loadMrlBehavior ].
+	^ mrlBehavior
 ]
 
 { #category : #accessing }
 PWBUnitTest >> testsData: aCollection [ 
-	testsData := aCollection
+	mrlBehavior := aCollection
 ]

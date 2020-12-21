@@ -7,10 +7,6 @@ Class {
 	#category : #'PWBTestGenerator-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-PWBMrlBehavior >> createAssertionsFromDataIfAccessIsEmpty [
-]
-
 { #category : #running }
 PWBMrlBehavior >> setUp [
 	super setUp.
@@ -18,12 +14,37 @@ PWBMrlBehavior >> setUp [
 ]
 
 { #category : #'as yet unclassified' }
-PWBMrlBehavior >> testCreateAssertionsFromDataIfParametersIsEmpty [
+PWBMrlBehavior >> testCreateAssertionsFromDataIfAccessIsEmpty [
+	| testParam timestamp |
+	timestamp := Date today asString.
+	testParam := FamixPWBParameter new
+		name: 'param1';
+		parameterType: (FamixPWBBasicType new name: 'string');
+		mooseModel: testModel;
+		behavioral: testFunction.
+	testMrlBehavior
+		addMrlReturnValue:
+			(MrlReturnValue new
+				timestamp: timestamp;
+				mrlValue: '6').
+	testMrlBehavior
+		addMrlParameter:
+			(MrlParameter new
+				parameter_name: 'param1';
+				timestamp: timestamp;
+				originalParameter: testParam).
+	self assert: testMrlBehavior createTestGenerationTask size equals: 3
 ]
 
 { #category : #'as yet unclassified' }
 PWBMrlBehavior >> testCreateAssertionsFromDataIfReturnValuesIsEmptyButAccessIsNot [
-	testMrlBehavior
-		addMrlParameter: (MrlParameter new parameter_name: 'param1').
-	self assert: testMrlBehavior createTestGenerationTask size equals: 1
+	| timestamp |
+	timestamp := Date today asString.
+	testMrlBehavior addMrlReturnValue: MrlInstanceVariableAccess new.
+	self assert: testMrlBehavior createTestGenerationTask size equals: 4
+]
+
+{ #category : #'as yet unclassified' }
+PWBMrlBehavior >> testCreateTaskIfParametersIsEmptyAndAccessAswell [
+	self assert: testMrlBehavior createTestGenerationTask isEmpty
 ]

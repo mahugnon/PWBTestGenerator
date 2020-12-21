@@ -1,11 +1,11 @@
 Class {
 	#name : #PWBTestCaseInitializer,
-	#superclass : #Object,
+	#superclass : #PWBTestGeneratorTask,
 	#instVars : [
 		'behaviorAccesses',
 		'pwbParameters'
 	],
-	#category : #'PWBTestGenerator-Assertions'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #visiting }
@@ -71,6 +71,16 @@ PWBTestCaseInitializer >> basicTypeAccess: acc initializationOn: aStream [
 		crlf
 ]
 
+{ #category : #accessing }
+PWBTestCaseInitializer >> behaviorAccesses [
+	^ behaviorAccesses
+]
+
+{ #category : #accessing }
+PWBTestCaseInitializer >> behaviorAccesses: anObject [
+	behaviorAccesses := anObject
+]
+
 { #category : #api }
 PWBTestCaseInitializer >> dataControlAccess: acc initializationOn: aStream [
 	aStream
@@ -117,4 +127,9 @@ PWBTestCaseInitializer >> printParametersInitializationOn: stream [
 { #category : #accessing }
 PWBTestCaseInitializer >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition
+]
+
+{ #category : #accessing }
+PWBTestCaseInitializer >> pwbParameters: anObject [
+	pwbParameters := anObject
 ]

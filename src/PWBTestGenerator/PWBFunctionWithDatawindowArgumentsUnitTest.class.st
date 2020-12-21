@@ -27,7 +27,7 @@ PWBFunctionWithDatawindowArgumentsUnitTest >> printPWBScriptOn: stream [
 	self beginOn: stream.
 	self printPWBObjectCreationOn: stream.
 	self newPWBTestWindowOn: stream.
-	functionUnderTest returnType
+	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParameterDeclarationOn: stream.
 	self printAssertionsOn: stream.

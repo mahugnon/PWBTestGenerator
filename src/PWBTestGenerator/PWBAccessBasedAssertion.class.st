@@ -1,10 +1,10 @@
 Class {
 	#name : #PWBAccessBasedAssertion,
-	#superclass : #Object,
+	#superclass : #PWBTestGeneratorTask,
 	#instVars : [
 		'behaviorAccesses'
 	],
-	#category : #'PWBTestGenerator-Assertions'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }

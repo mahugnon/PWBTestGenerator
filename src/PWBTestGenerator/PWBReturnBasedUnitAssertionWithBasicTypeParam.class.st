@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBReturnBasedUnitAssertionWithBasicTypeParam,
 	#superclass : #PWBAbstractReturnBaseUnitAssertion,
-	#category : #'PWBTestGenerator-Assertions'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }
@@ -11,9 +11,6 @@ PWBReturnBasedUnitAssertionWithBasicTypeParam class >> accept: aCollection [
 
 { #category : #printing }
 PWBReturnBasedUnitAssertionWithBasicTypeParam >> printPWBScriptOn: stream [
-	self printParametersInitializationOn: stream.
-	self printFunctionInvocationScriptOn: stream.
-	self printAccessAssertionOn: stream.
 	self printReturnAssertionOn: stream.
 	^ stream
 ]
