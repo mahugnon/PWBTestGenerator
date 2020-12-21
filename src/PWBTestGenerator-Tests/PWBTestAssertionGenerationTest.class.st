@@ -17,7 +17,7 @@ PWBTestAssertionGenerationTest >> testAttributeAccessedIsBasicTypeAssertion [
 	script := String
 		streamContents: [ :stream | 
 			PWBReturnBasedUnitAssertionWithBasicTypeParam new
-				functionUnderTest: testFunction;
+				behaviorUnderTest: testFunction;
 				addAccess: access1;
 				printAccessAssertionOn: stream ].
 	self

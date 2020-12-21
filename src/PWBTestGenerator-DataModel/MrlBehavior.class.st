@@ -91,6 +91,11 @@ MrlBehavior >> addBehaviorInvocation: parameters [
 	^ taskList
 ]
 
+{ #category : #'as yet unclassified' }
+MrlBehavior >> addMrlInstanceVariablesAccess: aMrlInstanceVariablesAccess [
+	mrlInstanceVariablesAccesses add: aMrlInstanceVariablesAccess
+]
+
 { #category : #adding }
 MrlBehavior >> addMrlParameter: aMrlParameter [
 	mrlParameters add: aMrlParameter
@@ -157,7 +162,7 @@ MrlBehavior >> behavior_name: anObject [
 MrlBehavior >> createTaskWithAccessStrategy [
 	| timeStamps |
 	timeStamps := self mrlInstanceVariablesAccesses
-		collectAsSet: #timeStamp.
+		collectAsSet: #instance_variable_access_timestamp.
 	timeStamps
 		do: [ :timestamp | 
 			self addTestCaseInitialize: #().

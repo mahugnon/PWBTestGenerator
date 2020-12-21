@@ -92,6 +92,11 @@ PWBAbstractReturnBaseUnitAssertion >> behaviorUnderTest: anObject [
 	behaviorUnderTest := anObject
 ]
 
+{ #category : #testing }
+PWBAbstractReturnBaseUnitAssertion >> isReturnBasedAssertion [
+	^ true
+]
+
 { #category : #printing }
 PWBAbstractReturnBaseUnitAssertion >> printPWBScriptOn: stream [
 	self printReturnAssertionOn: stream.

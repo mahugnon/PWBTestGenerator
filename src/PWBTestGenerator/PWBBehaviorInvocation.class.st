@@ -24,6 +24,11 @@ PWBBehaviorInvocation >> behaviorUnderTest: aFamixPWBBehavior [
 	behaviorUnderTest := aFamixPWBBehavior
 ]
 
+{ #category : #testing }
+PWBBehaviorInvocation >> isBehaviorInvocation [
+	^ true
+]
+
 { #category : #printing }
 PWBBehaviorInvocation >> printPWBScriptOn: stream [
 	| param localVar |

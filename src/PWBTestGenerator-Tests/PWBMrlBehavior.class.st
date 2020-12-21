@@ -38,10 +38,19 @@ PWBMrlBehavior >> testCreateAssertionsFromDataIfAccessIsEmpty [
 
 { #category : #'as yet unclassified' }
 PWBMrlBehavior >> testCreateAssertionsFromDataIfReturnValuesIsEmptyButAccessIsNot [
-	| timestamp |
-	timestamp := Date today asString.
+	testMrlBehavior
+		addMrlInstanceVariablesAccess: MrlInstanceVariableAccess new.
+	self assert: testMrlBehavior createTestGenerationTask size equals: 3
+]
+
+{ #category : #'as yet unclassified' }
+PWBMrlBehavior >> testCreateAssertionsFromDataNoParamNoAccess [
+	| task taskList |
 	testMrlBehavior addMrlReturnValue: MrlReturnValue new.
-	self assert: testMrlBehavior createTestGenerationTask size equals: 4
+	taskList := testMrlBehavior createTestGenerationTask.
+	task := taskList detect: [ :e | e isReturnBasedAssertion ].
+	self assert: taskList size equals: 3.
+	self assert: task isNotNil
 ]
 
 { #category : #'as yet unclassified' }

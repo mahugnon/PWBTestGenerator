@@ -100,6 +100,11 @@ PWBTestCaseInitializer >> dataControlAccess: acc initializationOn: aStream [
 	^ aStream
 ]
 
+{ #category : #testing }
+PWBTestCaseInitializer >> isTestCaseInitializer [
+	^ true
+]
+
 { #category : #printing }
 PWBTestCaseInitializer >> printAccesInitializationOn: aStream [
 	behaviorAccesses

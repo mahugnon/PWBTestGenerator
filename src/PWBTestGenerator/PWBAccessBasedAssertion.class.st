@@ -52,6 +52,11 @@ PWBAccessBasedAssertion >> dataControlAccess: acc assertionOn: stream [
 	^ stream
 ]
 
+{ #category : #testing }
+PWBAccessBasedAssertion >> isAccessBasedAssertion [
+	^ true
+]
+
 { #category : #printing }
 PWBAccessBasedAssertion >> printAccessAssertionOn: stream [
 	behaviorAccesses
