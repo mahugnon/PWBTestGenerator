@@ -17,7 +17,7 @@ PWBAbstractReturnBaseUnitAssertion class >> accept: aCollection [
 
 { #category : #'as yet unclassified' }
 PWBAbstractReturnBaseUnitAssertion class >> assertionFor: aCollection [
-	^ self subclasses detect: [ :sub | sub accept: aCollection ]
+	^ self new pwbParameters: aCollection
 ]
 
 { #category : #adding }

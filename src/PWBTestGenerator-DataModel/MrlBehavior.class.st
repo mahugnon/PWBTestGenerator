@@ -115,7 +115,7 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection at: aTimeStampString [
 	return ifNil: [ ^ taskList ].
 	taskList
 		add:
-			((PWBAbstractReturnBaseUnitAssertion assertionFor: aCollection) new
+			((PWBAbstractReturnBaseUnitAssertion assertionFor: aCollection)
 				behaviorUnderTest: self behaviorUnderTest;
 				behaviorReturnValue: return).
 	^ taskList

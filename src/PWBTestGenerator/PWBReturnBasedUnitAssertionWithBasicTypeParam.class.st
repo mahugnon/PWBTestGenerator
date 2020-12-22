@@ -8,9 +8,3 @@ Class {
 PWBReturnBasedUnitAssertionWithBasicTypeParam class >> accept: aCollection [
 	^ aCollection allSatisfy: [ :e | e isPWBDataWindow not ]
 ]
-
-{ #category : #printing }
-PWBReturnBasedUnitAssertionWithBasicTypeParam >> printPWBScriptOn: stream [
-	self printReturnAssertionOn: stream.
-	^ stream
-]

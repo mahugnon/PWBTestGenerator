@@ -39,12 +39,17 @@ PWBBehaviorInvocation >> isBehaviorInvocation [
 PWBBehaviorInvocation >> printPWBScriptOn: stream [
 	| param localVar |
 	localVar := 'l' , self behaviorParent.
+	behaviorUnderTest isSubRoutine
+		ifFalse: [ stream << 'l_result = ' ].
 	stream
-		<< 'l_result = ';
 		<< localVar;
 		nextPut: $.;
 		<< self behaviorName;
 		nextPut: $(.
+	self pwbParameters
+		ifEmpty: [ ^ stream
+				nextPut: $);
+				crlf ].
 	1 to: self pwbParameters size - 1 do: [ :iter | 
 		param := self pwbParameters at: iter.
 		param isPWBDataWindow
