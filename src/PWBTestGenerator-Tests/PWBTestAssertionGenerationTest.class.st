@@ -176,20 +176,15 @@ lestParam2_before.setItem(lestParam2_before.rowcount(),"DLQ_DAC",f_mrl_parse( "0
 
 { #category : #tests }
 PWBTestAssertionGenerationTest >> testPWBInitializeNilInvocationVariable [
-	| script testParam1 |
-	testParam1 := Mock named: 'testParam1'.
-	testParam1 stub parameter_before_value willReturn: testParam1.
-	testParam1 stub mrlValue willReturn: nil.
-	testParam1 stub parameter_name willReturn: 'testParam1'.
-	testParam1 stub parameterType
-		willReturn: (FamixPWBBasicType new name: 'string').
+	| script localParam |
+	localParam := MrlParameter new
+		parameter_name: 'testParam1';
+		parameter_before_value: (MrlParameter_before_value new parameter_value: nil);
+		originalParameter: testParam1.
 	script := String
 		streamContents: [ :stream | 
-			PWBReturnBasedUnitAssertionWithBasicTypeParam new
-				functionUnderTest: testFunction;
-				pwbParameters:
-					{testParam1};
-				printParametersInitializationOn: stream ].
+			(PWBTestCaseInitializer params: {localParam} accesses: #())
+				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
@@ -280,7 +275,7 @@ PWBTestAssertionGenerationTest >> testReturnAssertionScript [
 	testFunction returnType: (FamixPWBBasicType new name: 'integer').
 	utility := PWBReturnBasedUnitAssertionWithBasicTypeParam new
 		behaviorReturnValue: (MrlReturnValue new mrlValue: '3');
-		functionUnderTest: testFunction.
+		behaviorUnderTest: testFunction.
 	result := String
 		streamContents: [ :stream | utility printReturnAssertionOn: stream ].
 	self
