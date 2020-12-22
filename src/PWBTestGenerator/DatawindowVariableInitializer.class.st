@@ -4,6 +4,14 @@ Class {
 	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
+{ #category : #'as yet unclassified' }
+DatawindowVariableInitializer class >> accept: aMrlParameter [
+	| paramTypeName |
+	paramTypeName := aMrlParameter parameterType name.
+	^ paramTypeName asLowercase = 'datawindow'
+		or: [ aMrlParameter parameter_name beginsWith: 'dw_' ]
+]
+
 { #category : #printing }
 DatawindowVariableInitializer class >> acceptType: aTypeName [
 	^ false
@@ -53,10 +61,20 @@ DatawindowVariableInitializer >> printParameter: aPWBParameter on: stream [
 	^ self scriptOn: stream
 ]
 
+{ #category : #printing }
+DatawindowVariableInitializer >> printValue: aString [
+	"do nothing"
+]
+
 { #category : #resolving }
 DatawindowVariableInitializer >> resolve: aPWBParameter [
 	focus := aPWBParameter.
 	^ String streamContents: [ :stream | self scriptOn: stream ]
+]
+
+{ #category : #resolving }
+DatawindowVariableInitializer >> rightSideOn: stream [
+	"do nothing"
 ]
 
 { #category : #resolving }

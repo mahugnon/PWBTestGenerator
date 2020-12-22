@@ -6,10 +6,10 @@ Class {
 
 { #category : #'as yet unclassified' }
 DataStoreVariableInitializer class >> accept: aMrlParameter [
-	| paramName |
-	paramName := aMrlParameter parameterType name.
-	^ paramName asLowercase = 'datastore'
-		or: [ paramName beginsWith: 'ds_' ]
+	| paramTypeName |
+	paramTypeName := aMrlParameter parameterType name.
+	^ paramTypeName asLowercase = 'datastore'
+		or: [ aMrlParameter parameter_name beginsWith: 'ds_' ]
 ]
 
 { #category : #printing }
