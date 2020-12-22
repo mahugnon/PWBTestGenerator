@@ -1,21 +1,21 @@
 Class {
-	#name : #NilValueSolver,
-	#superclass : #PWBTypeValueSolver,
-	#category : #'PWBTestGenerator-TypeResolver'
+	#name : #NilVariableInitializer,
+	#superclass : #PWBVariableInitializer,
+	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
 { #category : #printing }
-NilValueSolver class >> accept: aMrlParameter [
+NilVariableInitializer class >> accept: aMrlParameter [
 	^ false
 ]
 
 { #category : #printing }
-NilValueSolver class >> acceptType: aTypeName [
+NilVariableInitializer class >> acceptType: aTypeName [
 	^ false
 ]
 
 { #category : #resolving }
-NilValueSolver >> printParameter: aMrlParameter on: stream [
+NilVariableInitializer >> printParameter: aMrlParameter on: stream [
 	^ stream
 		<< 'SetNull(';
 		<< 'l';
@@ -28,12 +28,12 @@ NilValueSolver >> printParameter: aMrlParameter on: stream [
 ]
 
 { #category : #printing }
-NilValueSolver >> printValue: aString [
+NilVariableInitializer >> printValue: aString [
 	^ 'SetNull("' , aString asString , '")'
 ]
 
 { #category : #resolving }
-NilValueSolver >> rightSideOn: stream [
+NilVariableInitializer >> rightSideOn: stream [
 	^ stream
 		<< 'SetNull("';
 		<< focus parameter_before_value mrlValue asString;

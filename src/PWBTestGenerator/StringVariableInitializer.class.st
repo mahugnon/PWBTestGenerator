@@ -1,26 +1,26 @@
 Class {
-	#name : #StringValueSolver,
-	#superclass : #PWBTypeValueSolver,
-	#category : #'PWBTestGenerator-TypeResolver'
+	#name : #StringVariableInitializer,
+	#superclass : #PWBVariableInitializer,
+	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
 { #category : #'as yet unclassified' }
-StringValueSolver class >> accept: aMrlParameter [
+StringVariableInitializer class >> accept: aMrlParameter [
 	^ aMrlParameter parameterType name asLowercase = 'string'
 ]
 
 { #category : #printing }
-StringValueSolver class >> acceptType: aTypeName [
+StringVariableInitializer class >> acceptType: aTypeName [
 	^ aTypeName asLowercase = 'string'
 ]
 
 { #category : #printing }
-StringValueSolver >> printValue: aString [
+StringVariableInitializer >> printValue: aString [
 	^ '"' , aString , '"'
 ]
 
 { #category : #resolving }
-StringValueSolver >> rightSideOn: stream [
+StringVariableInitializer >> rightSideOn: stream [
 	^ stream
 		<< '"';
 		<< focus parameter_before_value mrlValue;

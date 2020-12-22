@@ -2,13 +2,13 @@ Class {
 	#name : #PWBUnitTest,
 	#superclass : #Object,
 	#instVars : [
-		'functionUnderTest',
 		'name',
 		'assertions',
 		'owner',
 		'invocation',
 		'receiver',
-		'testsData'
+		'mrlBehavior',
+		'behaviorUnderTest'
 	],
 	#category : #'PWBTestGenerator-PWBTestCase'
 }
@@ -27,7 +27,7 @@ PWBUnitTest class >> acceptFunction: aFamixPWBFunction [
 PWBUnitTest class >> unitTestForFunction: aFamixPWBFunction [
 	^ (self allSubclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
-		functionUnderTest: aFamixPWBFunction
+		behaviorUnderTest: aFamixPWBFunction
 ]
 
 { #category : #adding }
@@ -53,9 +53,20 @@ PWBUnitTest >> beginOn: stream [
 		crlf
 ]
 
+{ #category : #accessing }
+PWBUnitTest >> behaviorUnderTest [
+	^ behaviorUnderTest
+]
+
+{ #category : #accessing }
+PWBUnitTest >> behaviorUnderTest: anObject [
+	behaviorUnderTest := anObject
+]
+
 { #category : #'as yet unclassified' }
-PWBUnitTest >> createAssertionsFromData [
-	assertions addAll: self testsData createAssertionsFromData
+PWBUnitTest >> createTestGenerationTask [
+	assertions := self mrlBehavior createTestGenerationTask
+		sortAscending: #priority
 ]
 
 { #category : #accessing }
@@ -66,16 +77,6 @@ PWBUnitTest >> endOn: stream [
 		<< 'end event';
 		crlf;
 		crlf
-]
-
-{ #category : #accessing }
-PWBUnitTest >> functionUnderTest [
-	^ functionUnderTest
-]
-
-{ #category : #accessing }
-PWBUnitTest >> functionUnderTest: anObject [
-	functionUnderTest := anObject
 ]
 
 { #category : #initialization }
@@ -96,17 +97,28 @@ PWBUnitTest >> invocation: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-PWBUnitTest >> loadTestData [
-	testsData := (MrlBehavior
+PWBUnitTest >> loadMrlBehavior [
+	mrlBehavior := (MrlBehavior
 		loadWithMrlParameterAndMrlReturnValuesWhere: [ :function | 
-			function behavior_name = functionUnderTest name
-				AND: [ function pwb_object = functionUnderTest parentType name ] ])
-		anyOne behaviorUnderTest: functionUnderTest
+			function behavior_name = behaviorUnderTest name
+				AND: [ function pwb_object = behaviorUnderTest parentType name ] ])
+		anyOne behaviorUnderTest: behaviorUnderTest
+]
+
+{ #category : #accessing }
+PWBUnitTest >> mrlBehavior [
+	mrlBehavior ifNil: [ self loadMrlBehavior ].
+	^ mrlBehavior
+]
+
+{ #category : #accessing }
+PWBUnitTest >> mrlBehavior: aCollection [ 
+	mrlBehavior := aCollection
 ]
 
 { #category : #accessing }
 PWBUnitTest >> name [
-	name ifNil: [ name := 'test_' , functionUnderTest name ].
+	name ifNil: [ name := 'test_' , behaviorUnderTest name ].
 	^ name
 ]
 
@@ -127,44 +139,30 @@ PWBUnitTest >> owner: anObject [
 ]
 
 { #category : #printing }
-PWBUnitTest >> printAssersionsOn: stream [
-	assertions
-		do:
-			[ :assert | "self printInstanceVariableAccessAt: assert timestamp on: stream." assert printPWBScriptOn: stream ]
+PWBUnitTest >> printAssertionsOn: stream [
+	assertions do: [ :assert | assert printPWBScriptOn: stream ]
 ]
 
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
 	^ PWBTestObjectCreator
-		createAndInitialize: self testsData pwb_object
+		createAndInitialize: self mrlBehavior pwb_object
 		on: aStream
 ]
 
 { #category : #printing }
 PWBUnitTest >> printPWBScriptOn: stream [
+	self createTestGenerationTask.
 	self beginOn: stream.
-	assertions
-		do: [ :assert | assert printPWBScriptOn: stream ].
-	self endOn: stream.
+	self printPWBObjectCreationOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
 PWBUnitTest >> printReturnValueDeclarationOn: stream [
 	^ stream
-		<< functionUnderTest returnType name;
+		<< behaviorUnderTest returnType name;
 		space;
 		<< 'l_result';
 		crlf
-]
-
-{ #category : #accessing }
-PWBUnitTest >> testsData [
-	testsData ifNil: [ self loadTestData ].
-	^ testsData
-]
-
-{ #category : #accessing }
-PWBUnitTest >> testsData: aCollection [ 
-	testsData := aCollection
 ]

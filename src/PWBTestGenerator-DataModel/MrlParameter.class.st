@@ -18,6 +18,11 @@ Class {
 }
 
 { #category : #accessing }
+MrlParameter >> afterValue [
+	^ self parameter_after_value
+]
+
+{ #category : #accessing }
 MrlParameter >> beforeValue [
 	^ self parameter_before_value
 ]
@@ -106,8 +111,6 @@ MrlParameter >> parameterTypeName [
 { #category : #accessing }
 MrlParameter >> parameter_after_value [
 	^ parameter_after_value
-		ifNotNil: [ parameter_after_value parameter_value ]
-		ifNil: [ nil ]
 ]
 
 { #category : #accessing }
@@ -123,16 +126,6 @@ MrlParameter >> parameter_before_value [
 { #category : #accessing }
 MrlParameter >> parameter_before_value: anObject [
 	parameter_before_value := anObject
-]
-
-{ #category : #accessing }
-MrlParameter >> parameter_dataobject [
-	^ parameter_dataobject
-]
-
-{ #category : #accessing }
-MrlParameter >> parameter_dataobject: anObject [
-	parameter_dataobject := anObject
 ]
 
 { #category : #'as yet unclassified' }

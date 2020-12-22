@@ -1,21 +1,29 @@
 Class {
-	#name : #DatawindowValueSolver,
-	#superclass : #PWBTypeValueSolver,
-	#category : #'PWBTestGenerator-TypeResolver'
+	#name : #DatawindowVariableInitializer,
+	#superclass : #PWBVariableInitializer,
+	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
+{ #category : #'as yet unclassified' }
+DatawindowVariableInitializer class >> accept: aMrlParameter [
+	| paramTypeName |
+	paramTypeName := aMrlParameter parameterType name.
+	^ paramTypeName asLowercase = 'datawindow'
+		or: [ aMrlParameter parameter_name beginsWith: 'dw_' ]
+]
+
 { #category : #printing }
-DatawindowValueSolver class >> acceptType: aTypeName [
+DatawindowVariableInitializer class >> acceptType: aTypeName [
 	^ false
 ]
 
 { #category : #'as yet unclassified' }
-DatawindowValueSolver class >> resolve: aMrlParameter [
+DatawindowVariableInitializer class >> resolve: aMrlParameter [
 	^ self new resolve: aMrlParameter
 ]
 
 { #category : #initialization }
-DatawindowValueSolver >> addRows: dwName tag: aTag on: aStream [
+DatawindowVariableInitializer >> addRows: dwName tag: aTag on: aStream [
 	| colones paramValue |
 	paramValue := aTag = 'before'
 		ifTrue: [ focus parameter_before_value mrlValue ]
@@ -48,26 +56,36 @@ DatawindowValueSolver >> addRows: dwName tag: aTag on: aStream [
 ]
 
 { #category : #resolving }
-DatawindowValueSolver >> printParameter: aPWBParameter on: stream [
+DatawindowVariableInitializer >> printParameter: aPWBParameter on: stream [
 	focus := aPWBParameter.
 	^ self scriptOn: stream
 ]
 
+{ #category : #printing }
+DatawindowVariableInitializer >> printValue: aString [
+	"do nothing"
+]
+
 { #category : #resolving }
-DatawindowValueSolver >> resolve: aPWBParameter [
+DatawindowVariableInitializer >> resolve: aPWBParameter [
 	focus := aPWBParameter.
 	^ String streamContents: [ :stream | self scriptOn: stream ]
 ]
 
 { #category : #resolving }
-DatawindowValueSolver >> scriptOn: aStream [
+DatawindowVariableInitializer >> rightSideOn: stream [
+	"do nothing"
+]
+
+{ #category : #resolving }
+DatawindowVariableInitializer >> scriptOn: aStream [
 	self setValues: aStream tag: 'before'.
 	focus parameter_after_value
 		ifNotNil: [ self setValues: aStream tag: 'after' ]
 ]
 
 { #category : #initialization }
-DatawindowValueSolver >> setValues: aStream tag: aTag [
+DatawindowVariableInitializer >> setValues: aStream tag: aTag [
 	| dwName |
 	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	aStream

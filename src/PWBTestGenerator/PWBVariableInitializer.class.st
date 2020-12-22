@@ -1,43 +1,43 @@
 Class {
-	#name : #PWBTypeValueSolver,
+	#name : #PWBVariableInitializer,
 	#superclass : #Object,
 	#instVars : [
 		'focus',
 		'varName',
 		'tag'
 	],
-	#category : #'PWBTestGenerator-TypeResolver'
+	#category : #'PWBTestGenerator-VariableInitializers'
 }
 
 { #category : #'as yet unclassified' }
-PWBTypeValueSolver class >> accept: aTypeName [
+PWBVariableInitializer class >> accept: aTypeName [
 	^ self subclassResponsibility
 ]
 
 { #category : #printing }
-PWBTypeValueSolver class >> acceptType: aTypeName [
+PWBVariableInitializer class >> acceptType: aTypeName [
 	self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
-PWBTypeValueSolver class >> printParameter: aMrlParameter on: stream [
+PWBVariableInitializer class >> printParameter: aMrlParameter on: stream [
 	^ aMrlParameter parameter_before_value mrlValue
-		ifNil: [ NilValueSolver new printParameter: aMrlParameter on: stream ]
+		ifNil: [ NilVariableInitializer new printParameter: aMrlParameter on: stream ]
 		ifNotNil: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
 				printParameter: aMrlParameter
 				on: stream ]
 ]
 
 { #category : #printing }
-PWBTypeValueSolver class >> printValue: aValue ofType: aTypeName [
+PWBVariableInitializer class >> printValue: aValue ofType: aTypeName [
 	^ aValue
 		ifNotNil: [ (self subclasses detect: [ :sub | sub acceptType: aTypeName ]) new
 				printValue: aValue ]
-		ifNil: [ NilValueSolver new printValue: aValue ]
+		ifNil: [ NilVariableInitializer new printValue: aValue ]
 ]
 
 { #category : #resolving }
-PWBTypeValueSolver >> leftSideOn: stream [
+PWBVariableInitializer >> leftSideOn: stream [
 	varName := 'l'
 		, (focus parameter_name copyFrom: 2 to: focus parameter_name size).
 	^ stream
@@ -48,7 +48,7 @@ PWBTypeValueSolver >> leftSideOn: stream [
 ]
 
 { #category : #resolving }
-PWBTypeValueSolver >> printParameter: aMrlParameter on: stream [
+PWBVariableInitializer >> printParameter: aMrlParameter on: stream [
 	focus := aMrlParameter.
 	self leftSideOn: stream.
 	self rightSideOn: stream.
@@ -56,11 +56,11 @@ PWBTypeValueSolver >> printParameter: aMrlParameter on: stream [
 ]
 
 { #category : #printing }
-PWBTypeValueSolver >> printValue: aString [
+PWBVariableInitializer >> printValue: aString [
 	self subclassResponsibility
 ]
 
 { #category : #resolving }
-PWBTypeValueSolver >> rightSideOn: stream [
+PWBVariableInitializer >> rightSideOn: stream [
 	self subclassResponsibility
 ]
