@@ -9,7 +9,8 @@ SmalltalkCISpec {
   ],
   #testing : {
     #coverage : {
-      #packages : [ 'PWBTestGenerator*' ]
+      #packages : [ 'PWBTestGenerator*' ],
+      #format : #lcov
     }
   }
   }
