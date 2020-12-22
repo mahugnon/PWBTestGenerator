@@ -79,3 +79,8 @@ PWBAbstractModel class >> setUpP3Driver [
 		at: #NativePostgresDriver
 		ifAbsent: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
 ]
+
+{ #category : #accessing }
+PWBAbstractModel >> isPWBDataWindow [
+	^ false
+]

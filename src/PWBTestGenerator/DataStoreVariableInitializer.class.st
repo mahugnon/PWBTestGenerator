@@ -22,8 +22,8 @@ DataStoreVariableInitializer class >> acceptType: aTypeName [
 DataStoreVariableInitializer >> addRowsWithTagOn: stream [
 	| colones paramValue |
 	paramValue := tag = 'before'
-		ifTrue: [ focus parameter_before_value ]
-		ifFalse: [ focus parameter_after_value ].
+		ifTrue: [ focus parameter_before_value mrlValue ]
+		ifFalse: [ focus parameter_after_value mrlValue ].
 	colones := (CSVParser parseWithHeader: paramValue) anyOne.
 	colones
 		keysAndValuesDo: [ :key :value | 
@@ -71,7 +71,7 @@ DataStoreVariableInitializer >> dataObjectOn: stream [
 		<< varName;
 		<< '.dataobject =';
 		<< '"';
-		<< focus parameter_dataobject;
+		<< (focus parameter_dataobjectForTag: tag);
 		<< '"';
 		crlf
 ]

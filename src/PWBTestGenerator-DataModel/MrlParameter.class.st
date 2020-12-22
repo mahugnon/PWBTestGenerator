@@ -125,16 +125,6 @@ MrlParameter >> parameter_before_value: anObject [
 	parameter_before_value := anObject
 ]
 
-{ #category : #accessing }
-MrlParameter >> parameter_dataobject [
-	^ parameter_dataobject
-]
-
-{ #category : #accessing }
-MrlParameter >> parameter_dataobject: anObject [
-	parameter_dataobject := anObject
-]
-
 { #category : #'as yet unclassified' }
 MrlParameter >> parameter_dataobjectForTag: aTag [
 	^ aTag = 'before'

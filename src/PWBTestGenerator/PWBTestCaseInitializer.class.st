@@ -14,9 +14,10 @@ PWBTestCaseInitializer class >> accept: aCollection [
 ]
 
 { #category : #tests }
-PWBTestCaseInitializer class >> testCaseInitializerFor: aCollection [
-	^ (self subclasses detect: [ :sub | sub accept: aCollection ]) new
-		pwbParameters: aCollection
+PWBTestCaseInitializer class >> params: aCollection1 accesses: aCollection2 [
+	^ (self subclasses detect: [ :sub | sub accept: aCollection1 ]) new
+		pwbParameters: aCollection1;
+		behaviorAccesses: aCollection2
 ]
 
 { #category : #adding }

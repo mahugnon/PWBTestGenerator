@@ -124,7 +124,7 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection at: aTimeStampString [
 { #category : #'as yet unclassified' }
 MrlBehavior >> addTestCaseInitialize: aCollection [
 	taskList
-		add: (PWBTestCaseInitializer testCaseInitializerFor: aCollection)
+		add: (PWBTestCaseInitializer params: aCollection accesses: aAccess)
 ]
 
 { #category : #accessing }
