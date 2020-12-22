@@ -123,6 +123,11 @@ PWBAbstractReturnBaseUnitAssertion >> printReturnAssertionOn: stream [
 	^ stream
 ]
 
+{ #category : #accessing }
+PWBAbstractReturnBaseUnitAssertion >> priority [
+	^ 50
+]
+
 { #category : #'as yet unclassified' }
 PWBAbstractReturnBaseUnitAssertion >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition

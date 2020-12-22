@@ -16,7 +16,7 @@ PWBTestCaseGenerationTest >> createTestData [
 	testFunctionData
 		addMrlReturnValue: (MrlReturnValue new mrlValue: '1');
 		behaviorUnderTest: testFunction.
-	testSuite testUnits anyOne testsData: testFunctionData
+	testSuite testUnits anyOne mrlBehavior: testFunctionData
 ]
 
 { #category : #tests }

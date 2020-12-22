@@ -73,6 +73,11 @@ PWBAccessBasedAssertion >> printPWBScriptOn: stream [
 	^ stream
 ]
 
+{ #category : #accessing }
+PWBAccessBasedAssertion >> priority [
+	^ 30
+]
+
 { #category : #'as yet unclassified' }
 PWBAccessBasedAssertion >> replaceLineBreakWithPwbLinebreak: aString [
 	"Remove cr the avoid PWB errors"

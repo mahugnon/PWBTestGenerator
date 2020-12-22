@@ -138,6 +138,11 @@ PWBTestCaseInitializer >> printParametersInitializationOn: stream [
 ]
 
 { #category : #accessing }
+PWBTestCaseInitializer >> priority [
+	^ 10
+]
+
+{ #category : #accessing }
 PWBTestCaseInitializer >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition
 ]

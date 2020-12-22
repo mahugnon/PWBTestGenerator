@@ -23,3 +23,8 @@ PWBTestGeneratorTask >> isReturnBasedAssertion [
 PWBTestGeneratorTask >> isTestCaseInitializer [
 	^ false
 ]
+
+{ #category : #accessing }
+PWBTestGeneratorTask >> priority [
+	self subclassResponsibility
+]

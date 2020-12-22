@@ -23,9 +23,7 @@ PWBFunctionWithDatawindowArgumentsUnitTest >> newPWBTestWindowOn: aStream [
 
 { #category : #printing }
 PWBFunctionWithDatawindowArgumentsUnitTest >> printPWBScriptOn: stream [
-	self createTestGenerationTask.
-	self beginOn: stream.
-	self printPWBObjectCreationOn: stream.
+	super printPWBScriptOn: stream.
 	self newPWBTestWindowOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
@@ -37,7 +35,7 @@ PWBFunctionWithDatawindowArgumentsUnitTest >> printPWBScriptOn: stream [
 
 { #category : #printing }
 PWBFunctionWithDatawindowArgumentsUnitTest >> printParameterDeclarationOn: stream [
-	self functionUnderTest parameters
+	self behaviorUnderTest parameters
 		do: [ :param | 
 			param isPWBDataWindow
 				ifFalse: [ stream

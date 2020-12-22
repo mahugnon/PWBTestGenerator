@@ -27,7 +27,7 @@ PWBUnitTest class >> acceptFunction: aFamixPWBFunction [
 PWBUnitTest class >> unitTestForFunction: aFamixPWBFunction [
 	^ (self allSubclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
-		functionUnderTest: aFamixPWBFunction
+		behaviorUnderTest: aFamixPWBFunction
 ]
 
 { #category : #adding }
@@ -53,9 +53,20 @@ PWBUnitTest >> beginOn: stream [
 		crlf
 ]
 
+{ #category : #accessing }
+PWBUnitTest >> behaviorUnderTest [
+	^ behaviorUnderTest
+]
+
+{ #category : #accessing }
+PWBUnitTest >> behaviorUnderTest: anObject [
+	behaviorUnderTest := anObject
+]
+
 { #category : #'as yet unclassified' }
 PWBUnitTest >> createTestGenerationTask [
-	assertions addAll: self testsData createTestGenerationTask
+	assertions := self mrlBehavior createTestGenerationTask
+		sortAscending: #priority
 ]
 
 { #category : #accessing }
@@ -66,16 +77,6 @@ PWBUnitTest >> endOn: stream [
 		<< 'end event';
 		crlf;
 		crlf
-]
-
-{ #category : #accessing }
-PWBUnitTest >> functionUnderTest [
-	^ behaviorUnderTest
-]
-
-{ #category : #accessing }
-PWBUnitTest >> functionUnderTest: anObject [
-	behaviorUnderTest := anObject
 ]
 
 { #category : #initialization }
@@ -102,6 +103,17 @@ PWBUnitTest >> loadMrlBehavior [
 			function behavior_name = behaviorUnderTest name
 				AND: [ function pwb_object = behaviorUnderTest parentType name ] ])
 		anyOne behaviorUnderTest: behaviorUnderTest
+]
+
+{ #category : #accessing }
+PWBUnitTest >> mrlBehavior [
+	mrlBehavior ifNil: [ self loadMrlBehavior ].
+	^ mrlBehavior
+]
+
+{ #category : #accessing }
+PWBUnitTest >> mrlBehavior: aCollection [ 
+	mrlBehavior := aCollection
 ]
 
 { #category : #accessing }
@@ -134,16 +146,15 @@ PWBUnitTest >> printAssertionsOn: stream [
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
 	^ PWBTestObjectCreator
-		createAndInitialize: self testsData pwb_object
+		createAndInitialize: self mrlBehavior pwb_object
 		on: aStream
 ]
 
 { #category : #printing }
 PWBUnitTest >> printPWBScriptOn: stream [
+	self createTestGenerationTask.
 	self beginOn: stream.
-	assertions
-		do: [ :assert | assert printPWBScriptOn: stream ].
-	self endOn: stream.
+	self printPWBObjectCreationOn: stream.
 	^ stream
 ]
 
@@ -154,15 +165,4 @@ PWBUnitTest >> printReturnValueDeclarationOn: stream [
 		space;
 		<< 'l_result';
 		crlf
-]
-
-{ #category : #accessing }
-PWBUnitTest >> testsData [
-	mrlBehavior ifNil: [ self loadMrlBehavior ].
-	^ mrlBehavior
-]
-
-{ #category : #accessing }
-PWBUnitTest >> testsData: aCollection [ 
-	mrlBehavior := aCollection
 ]

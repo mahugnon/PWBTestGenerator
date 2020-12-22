@@ -18,9 +18,7 @@ PWBFunctionWithBasicTypeArgumentsUnitTest class >> acceptFunction: aFamixPWBFunc
 
 { #category : #printing }
 PWBFunctionWithBasicTypeArgumentsUnitTest >> printPWBScriptOn: stream [
-	self createTestGenerationTask.
-	self beginOn: stream.
-	self printPWBObjectCreationOn: stream.
+	super printPWBScriptOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParametersDeclarationOn: stream.
@@ -31,7 +29,7 @@ PWBFunctionWithBasicTypeArgumentsUnitTest >> printPWBScriptOn: stream [
 
 { #category : #printing }
 PWBFunctionWithBasicTypeArgumentsUnitTest >> printParametersDeclarationOn: stream [
-	self functionUnderTest parameters
+	self behaviorUnderTest parameters
 		do: [ :param | 
 			stream
 				<< param parameterType name;

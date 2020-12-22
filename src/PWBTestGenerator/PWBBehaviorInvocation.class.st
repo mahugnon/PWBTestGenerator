@@ -71,6 +71,11 @@ PWBBehaviorInvocation >> printPWBScriptOn: stream [
 ]
 
 { #category : #accessing }
+PWBBehaviorInvocation >> priority [
+	^ 20
+]
+
+{ #category : #accessing }
 PWBBehaviorInvocation >> pwbParameters [
 	^ pwbParameters sortAscending: #startPosition
 ]

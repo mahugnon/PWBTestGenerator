@@ -70,7 +70,6 @@ PWBTestAssertionGenerationTest >> testBehaviorInvocationWithDWParam [
 	dwTestData := 'DLQ_AOC,DLQ_DAC
 1,0'.
 	param := MrlParameter new
-		parameter_dataobject: 'dw_dlq';
 		parameter_name: 'param1';
 		originalParameter: testParam;
 		parameter_before_value: (MrlParameter_before_value new parameter_value: dwTestData).
@@ -243,7 +242,7 @@ PWBTestAssertionGenerationTest >> testPWBParametersDeclaration [
 	script := String
 		streamContents: [ :stream | 
 			PWBFunctionWithBasicTypeArgumentsUnitTest new
-				functionUnderTest: testFunction;
+				behaviorUnderTest: testFunction;
 				printParametersDeclarationOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
@@ -260,7 +259,7 @@ PWBTestAssertionGenerationTest >> testPWBReturnDeclaration [
 	script := String
 		streamContents: [ :stream | 
 			PWBFunctionWithBasicTypeArgumentsUnitTest new
-				functionUnderTest: testFunction;
+				behaviorUnderTest: testFunction;
 				printReturnValueDeclarationOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
