@@ -150,7 +150,8 @@ PWBTestSuite >> onDestroy [
 
 { #category : #printing }
 PWBTestSuite >> printPWBScript: aFolder [
-	pwbunitTestClass hasAssertions ifFail: [ ^ self ].
+	pwbunitTestClass hasAssertions
+		ifFalse: [ ^ self ].
 	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | self printPWBScriptOn: stream ]

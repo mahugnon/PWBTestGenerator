@@ -79,7 +79,7 @@ PWBUnitTest >> generationTasks [
 
 { #category : #testing }
 PWBUnitTest >> hasAssertions [
-	^ mrlBehavior hasAssertions
+	^ self mrlBehavior hasAssertions
 ]
 
 { #category : #initialization }

@@ -663,6 +663,16 @@ PWBTestCaseGenerationTest >> testSetBehaviorUnderTest [
 ]
 
 { #category : #tests }
+PWBTestCaseGenerationTest >> testTaskSorting [
+	| t1 t2 t3 |
+	t1 := PWBAccessBasedAssertion new time: '1'.
+	t2 := PWBReturnBasedUnitAssertionDataWindowParam new time: '1'.
+	t3 := PWBAccessBasedAssertion new time: '2'.
+	self assert: (t2 shouldExecuteBefore: t3).
+	self assert: (t1 shouldExecuteBefore: t2)
+]
+
+{ #category : #tests }
 PWBTestCaseGenerationTest >> testTestCaseName [
 	testSuite behaviorUnderTest: testFunction.
 	self assert: testSuite testCaseName equals: 'test_testFunction'

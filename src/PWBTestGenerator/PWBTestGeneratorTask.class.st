@@ -34,8 +34,9 @@ PWBTestGeneratorTask >> priority [
 
 { #category : #asserting }
 PWBTestGeneratorTask >> shouldExecuteBefore: aPWBTestGeneratorTask [
-	^ self time <= aPWBTestGeneratorTask time
-		and: [ self priority < aPWBTestGeneratorTask priority ]
+	^ self time < aPWBTestGeneratorTask time
+		or: [ self time = aPWBTestGeneratorTask time
+				and: [ self priority < aPWBTestGeneratorTask priority ] ]
 ]
 
 { #category : #accessing }
