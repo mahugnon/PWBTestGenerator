@@ -2,7 +2,6 @@ Class {
 	#name : #PWBBehaviorInvocation,
 	#superclass : #PWBTestGeneratorTask,
 	#instVars : [
-		'timestamp',
 		'behaviorUnderTest',
 		'pwbParameters'
 	],

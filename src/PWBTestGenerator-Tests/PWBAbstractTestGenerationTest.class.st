@@ -15,6 +15,7 @@ PWBAbstractTestGenerationTest >> createAccesses [
 	access1 := MrlInstanceVariableAccess new.
 	access1
 		mooseModel: testModel;
+		instance_variable_access_timestamp: '6';
 		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'before1');
 		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'after1').
 	access1

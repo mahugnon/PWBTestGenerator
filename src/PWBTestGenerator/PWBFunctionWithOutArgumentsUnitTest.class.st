@@ -19,7 +19,7 @@ PWBFunctionWithOutArgumentsUnitTest >> printPWBScriptOn: stream [
 	super printPWBScriptOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
-	self printAssertionsOn: stream.
+	self executeGenerationTasks: stream.
 	self endOn: stream.
 	^ stream
 ]
