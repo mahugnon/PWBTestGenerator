@@ -91,7 +91,7 @@ MrlBehavior >> addBehaviorInvocation: parameters [
 		add:
 			(PWBBehaviorInvocation new
 				behaviorUnderTest: self behaviorUnderTest;
-				timestamp: currentTimestamp;
+				time: currentTimestamp;
 				pwbParameters: parameters;
 				yourself).
 	^ taskList
@@ -123,7 +123,7 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection [
 		add:
 			((PWBAbstractReturnBaseUnitAssertion assertionFor: aCollection)
 				behaviorUnderTest: self behaviorUnderTest;
-				timestamp: currentTimestamp;
+				time: currentTimestamp;
 				behaviorReturnValue: return).
 	^ taskList
 ]
@@ -135,7 +135,8 @@ MrlBehavior >> addTestCaseInitialize: aCollection [
 			((PWBTestCaseInitializer
 				params: aCollection
 				accesses: self mrlInstanceVariablesAccesses)
-				timestamp: currentTimestamp)
+				time: currentTimestamp;
+				yourself)
 ]
 
 { #category : #accessing }

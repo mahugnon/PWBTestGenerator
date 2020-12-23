@@ -45,7 +45,7 @@ PWBTestCaseGenerationTest >> createTestFunctionData [
 		addMrlReturnValue:
 			(MrlReturnValue new
 				mrlValue: '1';
-				timestamp: '12');
+				timestamp: '6');
 		behaviorUnderTest: testFunction.
 	testSuite pwbunitTestClass mrlBehavior: testFunctionData
 ]
@@ -151,6 +151,7 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithBasicTypeArguments 
 	testFunctionData
 		addMrlParameter:
 			(MrlParameter new
+				timestamp: '6';
 				originalParameter: param1;
 				parameter_name: 'param1';
 				parameter_after_value: (MrlParameter_after_value new parameter_value: 'after');
@@ -159,7 +160,8 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithBasicTypeArguments 
 		streamContents: [ :stream | testSuite printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String lf with: String cr)
-		equals: '$PBExportHeader$test_testFunction_case.sru
+		equals:
+			'$PBExportHeader$test_testFunction_case.sru
 
 forward
 
@@ -231,6 +233,7 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithBasicTypeArgumentsW
 		addMrlInstanceVariablesAccess: access1;
 		addMrlParameter:
 			(MrlParameter new
+				timestamp: '6';
 				originalParameter: param1;
 				parameter_name: 'param1';
 				parameter_after_value: (MrlParameter_after_value new parameter_value: 'after');
@@ -239,7 +242,8 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithBasicTypeArgumentsW
 		streamContents: [ :stream | testSuite printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String lf with: String cr)
-		equals: '$PBExportHeader$test_testFunction_case.sru
+		equals:
+			'$PBExportHeader$test_testFunction_case.sru
 
 forward
 
@@ -314,6 +318,7 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithDataStoreArgument [
 	testFunctionData
 		addMrlParameter:
 			(MrlParameter new
+				timestamp: '6';
 				originalParameter: param1;
 				parameter_name: 'ds_param1';
 				parameter_after_value:
@@ -423,6 +428,7 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithDataWindowArguments
 	testFunctionData
 		addMrlParameter:
 			(MrlParameter new
+				timestamp: '6';
 				originalParameter: param1;
 				parameter_name: 'dw_param1';
 				parameter_after_value:
@@ -437,7 +443,8 @@ PWBTestCaseGenerationTest >> testPrintPWBScripForFunctionWithDataWindowArguments
 		streamContents: [ :stream | testSuite printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String lf with: String cr)
-		equals: '$PBExportHeader$test_testFunction_case.sru
+		equals:
+			'$PBExportHeader$test_testFunction_case.sru
 
 forward
 

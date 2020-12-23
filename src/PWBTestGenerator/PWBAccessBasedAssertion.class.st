@@ -16,7 +16,7 @@ PWBAccessBasedAssertion class >> assertionFor: aCollection [
 PWBAccessBasedAssertion class >> assertionFor: aCollection timestamp: aString [
 	^ self new
 		behaviorAccesses: aCollection;
-		timestamp: aString;
+		time: aString;
 		yourself
 ]
 

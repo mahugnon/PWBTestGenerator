@@ -3,12 +3,12 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'assertions',
 		'owner',
 		'invocation',
 		'receiver',
 		'mrlBehavior',
-		'behaviorUnderTest'
+		'behaviorUnderTest',
+		'generationTasks'
 	],
 	#category : #'PWBTestGenerator-PWBTestCase'
 }
@@ -28,18 +28,6 @@ PWBUnitTest class >> unitTestForFunction: aFamixPWBFunction [
 	^ (self allSubclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
 		behaviorUnderTest: aFamixPWBFunction
-]
-
-{ #category : #adding }
-PWBUnitTest >> addAssertion: aMrlPWBUnitTestAssertion [
-	self assertions
-		detect: [ :assertion | assertion = aMrlPWBUnitTestAssertion ]
-		ifNone: [ assertions add: aMrlPWBUnitTestAssertion ]
-]
-
-{ #category : #accessing }
-PWBUnitTest >> assertions [
-	^ assertions
 ]
 
 { #category : #accessing }
@@ -65,7 +53,7 @@ PWBUnitTest >> behaviorUnderTest: anObject [
 
 { #category : #'as yet unclassified' }
 PWBUnitTest >> createTestGenerationTask [
-	assertions := self mrlBehavior createTestGenerationTask
+	generationTasks := self mrlBehavior createTestGenerationTask
 		sorted: [ :t1 :t2 | t1 shouldExecuteBefore: t2 ]
 ]
 
@@ -79,6 +67,16 @@ PWBUnitTest >> endOn: stream [
 		crlf
 ]
 
+{ #category : #printing }
+PWBUnitTest >> executeGenerationTasks: stream [
+	generationTasks do: [ :assert | assert printPWBScriptOn: stream ]
+]
+
+{ #category : #accessing }
+PWBUnitTest >> generationTasks [
+	^ generationTasks
+]
+
 { #category : #testing }
 PWBUnitTest >> hasAssertions [
 	^ mrlBehavior hasAssertions
@@ -86,7 +84,7 @@ PWBUnitTest >> hasAssertions [
 
 { #category : #initialization }
 PWBUnitTest >> initialize [
-	assertions := Set new
+	generationTasks := Set new
 ]
 
 { #category : #accessing }
@@ -141,11 +139,6 @@ PWBUnitTest >> owner [
 PWBUnitTest >> owner: anObject [
 	owner := anObject.
 	owner addType: self
-]
-
-{ #category : #printing }
-PWBUnitTest >> printAssertionsOn: stream [
-	assertions do: [ :assert | assert printPWBScriptOn: stream ]
 ]
 
 { #category : #printing }

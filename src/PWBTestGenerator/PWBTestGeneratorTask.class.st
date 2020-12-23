@@ -2,7 +2,7 @@ Class {
 	#name : #PWBTestGeneratorTask,
 	#superclass : #Object,
 	#instVars : [
-		'timestamp'
+		'time'
 	],
 	#category : #'PWBTestGenerator-Task'
 }
@@ -34,16 +34,16 @@ PWBTestGeneratorTask >> priority [
 
 { #category : #asserting }
 PWBTestGeneratorTask >> shouldExecuteBefore: aPWBTestGeneratorTask [
-	^ self timestamp <= aPWBTestGeneratorTask timestamp
+	^ self time <= aPWBTestGeneratorTask time
 		and: [ self priority < aPWBTestGeneratorTask priority ]
 ]
 
-{ #category : #asserting }
-PWBTestGeneratorTask >> timestamp [
-	^ timestamp
+{ #category : #accessing }
+PWBTestGeneratorTask >> time [
+	^ time
 ]
 
-{ #category : #asserting }
-PWBTestGeneratorTask >> timestamp: aString [
-	timestamp := aString
+{ #category : #accessing }
+PWBTestGeneratorTask >> time: anObject [
+	time := anObject
 ]
