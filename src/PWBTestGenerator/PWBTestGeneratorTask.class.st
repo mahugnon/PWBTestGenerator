@@ -1,6 +1,9 @@
 Class {
 	#name : #PWBTestGeneratorTask,
 	#superclass : #Object,
+	#instVars : [
+		'timestamp'
+	],
 	#category : #'PWBTestGenerator-Task'
 }
 
@@ -27,4 +30,20 @@ PWBTestGeneratorTask >> isTestCaseInitializer [
 { #category : #accessing }
 PWBTestGeneratorTask >> priority [
 	self subclassResponsibility
+]
+
+{ #category : #asserting }
+PWBTestGeneratorTask >> shouldExecuteBefore: aPWBTestGeneratorTask [
+	^ self timestamp <= aPWBTestGeneratorTask timestamp
+		and: [ self priority < aPWBTestGeneratorTask priority ]
+]
+
+{ #category : #asserting }
+PWBTestGeneratorTask >> timestamp [
+	^ timestamp
+]
+
+{ #category : #asserting }
+PWBTestGeneratorTask >> timestamp: aString [
+	timestamp := aString
 ]

@@ -66,7 +66,7 @@ PWBUnitTest >> behaviorUnderTest: anObject [
 { #category : #'as yet unclassified' }
 PWBUnitTest >> createTestGenerationTask [
 	assertions := self mrlBehavior createTestGenerationTask
-		sortAscending: #priority
+		sorted: [ :t1 :t2 | t1 shouldExecuteBefore: t2 ]
 ]
 
 { #category : #accessing }
@@ -77,6 +77,11 @@ PWBUnitTest >> endOn: stream [
 		<< 'end event';
 		crlf;
 		crlf
+]
+
+{ #category : #testing }
+PWBUnitTest >> hasAssertions [
+	^ mrlBehavior hasAssertions
 ]
 
 { #category : #initialization }

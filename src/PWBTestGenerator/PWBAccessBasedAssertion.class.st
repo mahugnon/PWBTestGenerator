@@ -13,6 +13,14 @@ PWBAccessBasedAssertion class >> assertionFor: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
+PWBAccessBasedAssertion class >> assertionFor: aCollection timestamp: aString [
+	^ self new
+		behaviorAccesses: aCollection;
+		timestamp: aString;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 PWBAccessBasedAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
 	^ stream
 		<< 'this.assert(';

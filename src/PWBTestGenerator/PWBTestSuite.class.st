@@ -2,9 +2,9 @@ Class {
 	#name : #PWBTestSuite,
 	#superclass : #Object,
 	#instVars : [
-		'testUnits',
 		'behaviorUnderTest',
-		'globalTypes'
+		'globalTypes',
+		'pwbunitTestClass'
 	],
 	#category : #'PWBTestGenerator-PWBTestSuite'
 }
@@ -42,11 +42,6 @@ PWBTestSuite class >> updateData: aBuilder [
 				ifNotNil: [ self generateForModel: MooseModel root first in: folder ] ]
 ]
 
-{ #category : #adding }
-PWBTestSuite >> addUnitTest: aUnitTest [
-	testUnits add: aUnitTest
-]
-
 { #category : #accessing }
 PWBTestSuite >> behaviorUnderTest [
 	^ behaviorUnderTest
@@ -55,8 +50,8 @@ PWBTestSuite >> behaviorUnderTest [
 { #category : #accessing }
 PWBTestSuite >> behaviorUnderTest: anObject [
 	behaviorUnderTest := anObject.
-	self
-		addUnitTest: (PWBUnitTest unitTestForFunction: behaviorUnderTest)
+	pwbunitTestClass := PWBUnitTest
+		unitTestForFunction: behaviorUnderTest
 ]
 
 { #category : #tests }
@@ -108,10 +103,14 @@ PWBTestSuite >> forward [
 				crlf ]
 ]
 
-{ #category : #printing }
-PWBTestSuite >> initialize [
-	super initialize.
-	testUnits := OrderedCollection new
+{ #category : #accessing }
+PWBTestSuite >> globalTypes [
+	^ globalTypes
+]
+
+{ #category : #accessing }
+PWBTestSuite >> globalTypes: anObject [
+	globalTypes := anObject
 ]
 
 { #category : #tests }
@@ -151,10 +150,10 @@ PWBTestSuite >> onDestroy [
 
 { #category : #printing }
 PWBTestSuite >> printPWBScript: aFolder [
+	pwbunitTestClass hasAssertions ifFail: [ ^ self ].
 	^ (aFolder asFileReference / (self name , '.sru'))
 		ensureCreateFile;
-		writeStreamDo:
-				[ :stream | self printPWBScriptOn: stream ]
+		writeStreamDo: [ :stream | self printPWBScriptOn: stream ]
 ]
 
 { #category : #printing }
@@ -164,14 +163,22 @@ PWBTestSuite >> printPWBScriptOn: stream [
 		<< self forward;
 		<< self fileDeclaredType;
 		crlf.
-	testUnits
-		do: [ :units | 
-			units printPWBScriptOn: stream.
-			stream crlf ].
+	pwbunitTestClass printPWBScriptOn: stream.
+	stream crlf.
 	^ stream
 		<< self onCreate;
 		crlf;
 		<< self onDestroy
+]
+
+{ #category : #accessing }
+PWBTestSuite >> pwbunitTestClass [
+	^ pwbunitTestClass
+]
+
+{ #category : #accessing }
+PWBTestSuite >> pwbunitTestClass: anObject [
+	pwbunitTestClass := anObject
 ]
 
 { #category : #tests }
@@ -190,9 +197,4 @@ PWBTestSuite >> testFileHeader [
 				<< self name;
 				<< '.sru';
 				crlf ]
-]
-
-{ #category : #accessing }
-PWBTestSuite >> testUnits [
-	^ testUnits
 ]

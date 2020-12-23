@@ -10,7 +10,7 @@ Class {
 
 { #category : #tests }
 PWBTestCaseGenerationTest >> createSubroutineData [
-	| param1 testSubroutine testSubroutineData |
+	| param1 testSubroutine testSubroutineData mrlParam |
 	testSubroutine := FamixPWBSubRoutine new
 		name: 'testSubroutine';
 		parentType: testObject;
@@ -24,15 +24,16 @@ PWBTestCaseGenerationTest >> createSubroutineData [
 		behavior_name: 'testSubroutine';
 		pwb_object: 'uo_testObject';
 		behaviorUnderTest: testSubroutine.
-	testSuite testUnits anyOne mrlBehavior: testSubroutineData.
+	testSuite pwbunitTestClass mrlBehavior: testSubroutineData.
+	mrlParam := MrlParameter new
+		originalParameter: param1;
+		parameter_name: 'param1';
+		timestamp: '6';
+		parameter_after_value: (MrlParameter_after_value new parameter_value: 'after');
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'before').
 	testSubroutineData
 		addMrlInstanceVariablesAccess: access1;
-		addMrlParameter:
-			(MrlParameter new
-				originalParameter: param1;
-				parameter_name: 'param1';
-				parameter_after_value: (MrlParameter_after_value new parameter_value: 'after');
-				parameter_before_value: (MrlParameter_before_value new parameter_value: 'before'))
+		addMrlParameter: mrlParam
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,9 +42,12 @@ PWBTestCaseGenerationTest >> createTestFunctionData [
 		behavior_name: 'testFunction';
 		pwb_object: 'uo_testObject'.
 	testFunctionData
-		addMrlReturnValue: (MrlReturnValue new mrlValue: '1');
+		addMrlReturnValue:
+			(MrlReturnValue new
+				mrlValue: '1';
+				timestamp: '12');
 		behaviorUnderTest: testFunction.
-	testSuite testUnits anyOne mrlBehavior: testFunctionData
+	testSuite pwbunitTestClass mrlBehavior: testFunctionData
 ]
 
 { #category : #tests }
@@ -648,7 +652,7 @@ end on'
 { #category : #tests }
 PWBTestCaseGenerationTest >> testSetBehaviorUnderTest [
 	testSuite behaviorUnderTest: testFunction.
-	self assert: testSuite testUnits isNotEmpty
+	self assert: testSuite pwbunitTestClass isNotNil
 ]
 
 { #category : #tests }
