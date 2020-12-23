@@ -3,8 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/rp7h5bpu5kjstbih?svg=true)](https://ci.appveyor.com/project/mahugnon/pwbtestgenerator) 
 [![Build Status](https://ci.inria.fr/pharo-contribution/job/PWBTestGenerator/badge/icon)](https://ci.inria.fr/pharo-contribution/job/PWBTestGenerator/)
 ![PWBTestsGenerator health](https://github.com/mahugnon/PWBTestGenerator/workflows/PWBTestsGenerator%20health/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/mahugnon/PWBTestGenerator/badge.svg)](https://coveralls.io/github/mahugnon/PWBTestGenerator)
-
+[![Coverage Status](https://coveralls.io/repos/github/mahugnon/PWBTestGenerator/badge.svg?branch=main)](https://coveralls.io/github/mahugnon/PWBTestGenerator?branch=main)
 Load 
 
 ```Smalltalk
