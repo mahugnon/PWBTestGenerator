@@ -75,8 +75,7 @@ PWBTestAssertionGenerationTest >> testBehaviorInvocationWithDWParam [
 		parameter_before_value: (MrlParameter_before_value new parameter_value: dwTestData).
 	script := String
 		streamContents: [ :stream | 
-			PWBBehaviorInvocation new
-				behaviorUnderTest: testFunction;
+			(PWBBehaviorInvocation behaviorUnderTest: testFunction)
 				pwbParameters: {param};
 				printPWBScriptOn: stream ].
 	self
@@ -131,16 +130,31 @@ luo_testObject.testAttribute1.setItem(luo_testObject.testAttribute1.rowcount(),"
 ]
 
 { #category : #tests }
-PWBTestAssertionGenerationTest >> testNonVisualObjetCreationScript [
-	| script |
+PWBTestAssertionGenerationTest >> testGlobalFunctionWithDWParam [
+	| dwTestData script param testParam |
+	testFunction
+		name: 'f_myglobal';
+		accessModifier: 'global'.
+	testParam := FamixPWBParameter new
+		name: 'param1';
+		parameterType: (FamixPWBCustomType named: 'datawindow');
+		mooseModel: testModel;
+		behavioral: testFunction.
+	dwTestData := 'DLQ_AOC,DLQ_DAC
+1,0'.
+	param := MrlParameter new
+		parameter_name: 'param1';
+		originalParameter: testParam;
+		parameter_before_value: (MrlParameter_before_value new parameter_value: dwTestData).
 	script := String
-		streamContents:
-			[ :stream | PWBTestObjectCreator createAndInitialize: 'uo_liq_cal' on: stream ].
+		streamContents: [ :stream | 
+			(PWBBehaviorInvocation behaviorUnderTest: testFunction)
+				pwbParameters: {param};
+				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
-			'uo_liq_cal luo_liq_cal
-luo_liq_cal = create uo_liq_cal
+			'l_result = f_myglobal(lw_PBUnitTest_window.dw_before)
 '
 ]
 
@@ -312,22 +326,5 @@ lw_PBUnitTest_window.dw_before.setTrans(SQLCA)
 lw_PBUnitTest_window.dw_before.insertRow(0)
 lw_PBUnitTest_window.dw_before.setItem(lw_PBUnitTest_window.dw_before.rowcount(),"DLQ_AOC",f_mrl_parse( "1",lw_PBUnitTest_window.dw_before.object.DLQ_AOC.colType))
 lw_PBUnitTest_window.dw_before.setItem(lw_PBUnitTest_window.dw_before.rowcount(),"DLQ_DAC",f_mrl_parse( "0",lw_PBUnitTest_window.dw_before.object.DLQ_DAC.colType))
-'
-]
-
-{ #category : #tests }
-PWBTestAssertionGenerationTest >> testVisualObjetCreationScript [
-	| script |
-	script := String
-		streamContents: [ :stream | 
-			PWBTestObjectCreator
-				createAndInitialize: 'w_saisie_liquidation'
-				on: stream ].
-	self
-		assert: (script copyReplaceAll: String crlf with: String cr)
-		equals:
-			'w_saisie_liquidation lw_saisie_liquidation
-open(lw_saisie_liquidation)
-lw_saisie_liquidation.hide()
 '
 ]

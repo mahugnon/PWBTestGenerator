@@ -10,7 +10,7 @@ Class {
 { #category : #running }
 PWBMrlBehavior >> setUp [
 	super setUp.
-	testMrlBehavior := MrlBehavior new
+	testMrlBehavior := MrlBehavior new behaviorUnderTest: testFunction
 ]
 
 { #category : #'as yet unclassified' }

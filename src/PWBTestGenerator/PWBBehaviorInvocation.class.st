@@ -8,6 +8,17 @@ Class {
 	#category : #'PWBTestGenerator-Task'
 }
 
+{ #category : #visiting }
+PWBBehaviorInvocation class >> accept: aFamixPWBBehavior [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+PWBBehaviorInvocation class >> behaviorUnderTest: aFamixPWBBehavior [
+	^ (self subclasses detect: [ :sub | sub accept: aFamixPWBBehavior ])
+		new behaviorUnderTest: aFamixPWBBehavior
+]
+
 { #category : #accessing }
 PWBBehaviorInvocation >> behaviorName [
 	^ behaviorUnderTest name
@@ -23,26 +34,10 @@ PWBBehaviorInvocation >> behaviorUnderTest: aFamixPWBBehavior [
 	behaviorUnderTest := aFamixPWBBehavior
 ]
 
-{ #category : #initialization }
-PWBBehaviorInvocation >> initialize [
-	super initialize.
-	pwbParameters := OrderedCollection new
-]
-
-{ #category : #testing }
-PWBBehaviorInvocation >> isBehaviorInvocation [
-	^ true
-]
-
 { #category : #printing }
-PWBBehaviorInvocation >> printPWBScriptOn: stream [
-	| param localVar |
-	localVar := 'l' , self behaviorParent.
-	behaviorUnderTest isSubRoutine
-		ifFalse: [ stream << 'l_result = ' ].
+PWBBehaviorInvocation >> behaviorWithParamsOn: stream [
+	| param |
 	stream
-		<< localVar;
-		nextPut: $.;
 		<< self behaviorName;
 		nextPut: $(.
 	self pwbParameters
@@ -72,6 +67,22 @@ PWBBehaviorInvocation >> printPWBScriptOn: stream [
 				space;
 				nextPut: $) ].
 	^ stream crlf
+]
+
+{ #category : #initialization }
+PWBBehaviorInvocation >> initialize [
+	super initialize.
+	pwbParameters := OrderedCollection new
+]
+
+{ #category : #testing }
+PWBBehaviorInvocation >> isBehaviorInvocation [
+	^ true
+]
+
+{ #category : #printing }
+PWBBehaviorInvocation >> printPWBScriptOn: stream [
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

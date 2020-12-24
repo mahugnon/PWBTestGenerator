@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestVisualObjectCreator,
-	#superclass : #PWBTestObjectCreator,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#superclass : #PWBCreateTestObjectTask,
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }

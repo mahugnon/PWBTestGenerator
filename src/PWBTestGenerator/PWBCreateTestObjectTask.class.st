@@ -1,26 +1,26 @@
 Class {
-	#name : #PWBTestObjectCreator,
-	#superclass : #Object,
+	#name : #PWBCreateTestObjectTask,
+	#superclass : #PWBTestGeneratorTask,
 	#instVars : [
 		'varName'
 	],
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator class >> accept: aString [
+PWBCreateTestObjectTask class >> accept: aString [
 	^ self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator class >> createAndInitialize: aString on: aStream [
+PWBCreateTestObjectTask class >> createAndInitialize: aString on: aStream [
 	^ (self subclasses detect: [ :sub | sub accept: aString ]) new
 		createAndInitialize: aString
 		on: aStream
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator >> create: aString On: aStream [
+PWBCreateTestObjectTask >> create: aString On: aStream [
 	^ aStream
 		<< aString;
 		space;
@@ -29,12 +29,12 @@ PWBTestObjectCreator >> create: aString On: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestObjectCreator >> createAndInitialize: aString on: aStream [
+PWBCreateTestObjectTask >> createAndInitialize: aString on: aStream [
 	varName := 'l' , aString.
 	^ self initialize: aString on: (self create: aString On: aStream)
 ]
 
 { #category : #initialization }
-PWBTestObjectCreator >> initialize: aString on: aStream [
+PWBCreateTestObjectTask >> initialize: aString on: aStream [
 	self subclassResponsibility
 ]

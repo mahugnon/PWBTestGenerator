@@ -1,12 +1,12 @@
 Class {
 	#name : #PWBTestNonVisualObjectCreator,
-	#superclass : #PWBTestObjectCreator,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#superclass : #PWBCreateTestObjectTask,
+	#category : #'PWBTestGenerator-Task'
 }
 
 { #category : #'as yet unclassified' }
 PWBTestNonVisualObjectCreator class >> accept: aString [
-	^ {'uo_' . 'f_'}
+	^ {'uo_'}
 		anySatisfy: [ :each | aString asLowercase beginsWith: each ]
 ]
 

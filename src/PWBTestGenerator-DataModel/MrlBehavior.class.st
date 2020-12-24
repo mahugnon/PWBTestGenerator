@@ -87,13 +87,13 @@ MrlBehavior >> addAllMrlReturnValues: aCollection [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> addBehaviorInvocation: parameters [
-	taskList
-		add:
-			(PWBBehaviorInvocation new
-				behaviorUnderTest: self behaviorUnderTest;
-				time: currentTimestamp;
-				pwbParameters: parameters;
-				yourself).
+	| task |
+	task := (PWBBehaviorInvocation
+		behaviorUnderTest: self behaviorUnderTest)
+		time: currentTimestamp;
+		pwbParameters: parameters;
+		yourself.
+	taskList add: task.
 	^ taskList
 ]
 
