@@ -117,7 +117,6 @@ PWBTestMethod >> printPWBObjectCreationOn: aStream [
 PWBTestMethod >> printPWBScriptOn: stream [
 	self createSteps.
 	self beginOn: stream.
-	self printPWBObjectCreationOn: stream.
 	^ stream
 ]
 

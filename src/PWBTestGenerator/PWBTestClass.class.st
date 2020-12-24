@@ -37,6 +37,7 @@ PWBTestClass >> createDefautSteps [
 			((PWBDeclaredTypeStep setUpStepFor: pwbObject name)
 				testMethodsNames: self testMethodsNames).
 	steps add: (PWBOnCreateStep setUpStepFor: pwbObject name).
+	steps add: (PWBTypeVariablesStep setUpStepFor: pwbObject name).
 	steps add: (PWBOnDestroyStep setUpStepFor: pwbObject name)
 ]
 
@@ -48,7 +49,8 @@ PWBTestClass >> createSetUp [
 { #category : #'as yet unclassified' }
 PWBTestClass >> createSteps [
 	self testMethods do: #createSteps.
-	self createDefautSteps
+	self createDefautSteps.
+	self createSetUp
 ]
 
 { #category : #'as yet unclassified' }
@@ -72,11 +74,12 @@ PWBTestClass >> pwbObject: anObject [
 	pwbObject := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PWBTestClass >> pwbObject: aPwbObject generateTestIn: aFolder [
 	pwbObject := aPwbObject.
-	testMethods := self testableBehaviors
-		collect: [ :famixBehavior | PWBTestMethod unitTestForFunction: famixBehavior ].
+	testMethods := (self testableBehaviors
+		collect: [ :famixBehavior | PWBTestMethod unitTestForFunction: famixBehavior ])
+		select: [ :m | m hasAssertions ].
 	self createSteps.
 	self runStepsOn: aFolder
 ]
@@ -87,7 +90,7 @@ PWBTestClass >> runStepsOn: aFolder [
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
 			self beginSteps do: [ :step | step printPWBScriptOn: stream ].
-			self testMethods do: [ :m | m runStepsOn: stream ].
+			self testMethods do: [ :m | m printPWBScriptOn: stream ].
 			self endSteps do: [ :step | step printPWBScriptOn: stream ] ]
 ]
 

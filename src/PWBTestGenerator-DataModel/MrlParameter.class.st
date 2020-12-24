@@ -65,12 +65,10 @@ MrlParameter >> line_number: anObject [
 
 { #category : #accessing }
 MrlParameter >> loadMrlParameter_after_value [
-	parameter_after_value := MrlParameter_after_value
+	parameter_after_value := (MrlParameter_after_value
 		loadWhere:
 			[ :mrlParameter_value | mrlParameter_value parameter_id = self parameter_id ]
-		limit: 1.
-	parameter_after_value := parameter_after_value
-		ifNotEmpty: [ parameter_after_value anyOne ]
+		limit: 1) ifNotEmpty: [ :value | value anyOne ] ifEmpty: [  ]
 ]
 
 { #category : #accessing }
@@ -78,7 +76,8 @@ MrlParameter >> loadMrlParameter_before_value [
 	parameter_before_value := (MrlParameter_before_value
 		loadWhere:
 			[ :mrlParameter_value | mrlParameter_value parameter_id = self parameter_id ])
-		anyOne
+		ifNotEmpty: [ :value | value anyOne ]
+		ifEmpty: [  ]
 ]
 
 { #category : #'as yet unclassified' }
