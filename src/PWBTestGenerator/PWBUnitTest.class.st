@@ -143,7 +143,7 @@ PWBUnitTest >> owner: anObject [
 
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
-	^ PWBTestObjectCreator
+	^ PWBCreateTestObjectTask
 		createAndInitialize: self mrlBehavior pwb_object
 		on: aStream
 ]

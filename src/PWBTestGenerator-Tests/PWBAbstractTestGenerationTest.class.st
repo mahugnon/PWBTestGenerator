@@ -43,6 +43,7 @@ PWBAbstractTestGenerationTest >> setUp [
 	testFunction := FamixPWBFunction new
 		name: 'testFunction';
 		parentType: testObject;
+		accessModifier: 'public';
 		mooseModel: testModel.
 	PharoDatabaseAccessor DefaultDriver isNil
 		ifNil: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]

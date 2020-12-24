@@ -70,7 +70,6 @@ MrlParameter >> loadMrlParameter_after_value [
 			[ :mrlParameter_value | mrlParameter_value parameter_id = self parameter_id ]
 		limit: 1.
 	parameter_after_value := parameter_after_value
-		ifEmpty: [ NilParameterValue new ]
 		ifNotEmpty: [ parameter_after_value anyOne ]
 ]
 
