@@ -1,35 +1,35 @@
 Class {
-	#name : #PWBFunctionWithBasicTypeArgumentsUnitTest,
-	#superclass : #PWBUnitTest,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#name : #PWBBehaviorWithBasicTypeArgumentsTestMethod,
+	#superclass : #PWBTestMethod,
+	#category : #'PWBTestGenerator-PWBTestSuite'
 }
 
 { #category : #visiting }
-PWBFunctionWithBasicTypeArgumentsUnitTest class >> accept: aFamixPWBInvocation [
+PWBBehaviorWithBasicTypeArgumentsTestMethod class >> accept: aFamixPWBInvocation [
 	^ aFamixPWBInvocation candidates anyOne parameters
 		allSatisfy: [ :param | param isBasic ]
 ]
 
 { #category : #visiting }
-PWBFunctionWithBasicTypeArgumentsUnitTest class >> acceptFunction: aFamixPWBFunction [
+PWBBehaviorWithBasicTypeArgumentsTestMethod class >> acceptFunction: aFamixPWBFunction [
 	^ aFamixPWBFunction parameters isNotEmpty
 		and: [ aFamixPWBFunction parameters allSatisfy: #isBasic ]
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypeArgumentsUnitTest >> printPWBScriptOn: stream [
+PWBBehaviorWithBasicTypeArgumentsTestMethod >> printPWBScriptOn: stream [
 	self flag: #todo.	"All step should be task with priority"
 	super printPWBScriptOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParametersDeclarationOn: stream.
-	self executeGenerationTasks: stream.
+	self runStepsOn: stream.
 	self endOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBFunctionWithBasicTypeArgumentsUnitTest >> printParametersDeclarationOn: stream [
+PWBBehaviorWithBasicTypeArgumentsTestMethod >> printParametersDeclarationOn: stream [
 	self behaviorUnderTest parameters
 		do: [ :param | 
 			stream

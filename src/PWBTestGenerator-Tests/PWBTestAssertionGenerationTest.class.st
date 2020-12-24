@@ -49,7 +49,7 @@ PWBTestAssertionGenerationTest >> testBasicTypeInitializeAccess [
 	self createAccesses.
 	script := String
 		streamContents: [ :stream | 
-			PWBTestCaseInitializer new
+			PWBTestMethodInitializer new
 				behaviorAccesses: {access1};
 				printPWBScriptOn: stream ].
 	self
@@ -116,7 +116,7 @@ PWBTestAssertionGenerationTest >> testDataControlAccessInitializationOn [
 				mrlvalue: 'DLQ_AOC,DLQ_DAC' , String cr , '0,1' , String lf).
 	script := String
 		streamContents: [ :stream | 
-			(PWBTestCaseInitializer params: #() accesses: {access1})
+			(PWBTestMethodInitializer params: #() accesses: {access1})
 				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
@@ -173,7 +173,7 @@ PWBTestAssertionGenerationTest >> testPWBInitializeDataStoreParam [
 				parameter_value: dwTestData).
 	script := String
 		streamContents: [ :stream | 
-			(PWBTestCaseInitializer params: {localTestParam1} accesses: #())
+			(PWBTestMethodInitializer params: {localTestParam1} accesses: #())
 				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
@@ -196,7 +196,7 @@ PWBTestAssertionGenerationTest >> testPWBInitializeNilInvocationVariable [
 		originalParameter: testParam1.
 	script := String
 		streamContents: [ :stream | 
-			(PWBTestCaseInitializer params: {localParam} accesses: #())
+			(PWBTestMethodInitializer params: {localParam} accesses: #())
 				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
@@ -223,7 +223,7 @@ PWBTestAssertionGenerationTest >> testPWBInitializeParams [
 				parameter_value: dwTestData).
 	script := String
 		streamContents: [ :stream | 
-			(PWBTestCaseInitializer
+			(PWBTestMethodInitializer
 				params:
 					{localTestParam1.
 					localTestParam2}
@@ -255,7 +255,7 @@ PWBTestAssertionGenerationTest >> testPWBParametersDeclaration [
 		behavioral: testFunction.
 	script := String
 		streamContents: [ :stream | 
-			PWBFunctionWithBasicTypeArgumentsUnitTest new
+			PWBBehaviorWithBasicTypeArgumentsTestMethod new
 				behaviorUnderTest: testFunction;
 				printParametersDeclarationOn: stream ].
 	self
@@ -272,7 +272,7 @@ PWBTestAssertionGenerationTest >> testPWBReturnDeclaration [
 	testFunction returnType: (FamixPWBBasicType new name: 'string').
 	script := String
 		streamContents: [ :stream | 
-			PWBFunctionWithBasicTypeArgumentsUnitTest new
+			PWBBehaviorWithBasicTypeArgumentsTestMethod new
 				behaviorUnderTest: testFunction;
 				printReturnValueDeclarationOn: stream ].
 	self
@@ -316,7 +316,7 @@ PWBTestAssertionGenerationTest >> testSetUpDataWindowParameter [
 				parameter_dataobject: 'dw_dlq').
 	script := String
 		streamContents: [ :stream | 
-			(PWBTestCaseInitializer params: {param} accesses: #())
+			(PWBTestMethodInitializer params: {param} accesses: #())
 				printPWBScriptOn: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)

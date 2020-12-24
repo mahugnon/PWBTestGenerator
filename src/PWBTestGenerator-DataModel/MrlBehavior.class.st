@@ -132,7 +132,7 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection [
 MrlBehavior >> addTestCaseInitialize: aCollection [
 	taskList
 		add:
-			((PWBTestCaseInitializer
+			((PWBTestMethodInitializer
 				params: aCollection
 				accesses: self mrlInstanceVariablesAccesses)
 				time: currentTimestamp;
@@ -171,6 +171,14 @@ MrlBehavior >> behavior_name: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+MrlBehavior >> createSteps [
+	self hasAssertions
+		ifFalse: [ ^ taskList ].
+	TaskListStrategy apply: self.
+	^ taskList
+]
+
+{ #category : #'as yet unclassified' }
 MrlBehavior >> createTaskWithAccessStrategy [
 	| timeStamps |
 	timeStamps := self mrlInstanceVariablesAccesses
@@ -205,14 +213,6 @@ MrlBehavior >> createTaskWithReturnStrategy [
 			self addTestCaseInitialize: #().
 			self addBehaviorInvocation: #().
 			self addReturnBaseAssertionFor: #() ]
-]
-
-{ #category : #'as yet unclassified' }
-MrlBehavior >> createTestGenerationTask [
-	self hasAssertions
-		ifFalse: [ ^ taskList ].
-	TaskListStrategy apply: self.
-	^ taskList
 ]
 
 { #category : #'as yet unclassified' }

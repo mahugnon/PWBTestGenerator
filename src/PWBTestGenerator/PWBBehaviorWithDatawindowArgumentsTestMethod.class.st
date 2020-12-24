@@ -1,17 +1,17 @@
 Class {
-	#name : #PWBFunctionWithDatawindowArgumentsUnitTest,
-	#superclass : #PWBUnitTest,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#name : #PWBBehaviorWithDatawindowArgumentsTestMethod,
+	#superclass : #PWBTestMethod,
+	#category : #'PWBTestGenerator-PWBTestSuite'
 }
 
 { #category : #visiting }
-PWBFunctionWithDatawindowArgumentsUnitTest class >> acceptFunction: aFamixPWBFunction [
+PWBBehaviorWithDatawindowArgumentsTestMethod class >> acceptFunction: aFamixPWBFunction [
 	^ aFamixPWBFunction parameters isNotEmpty
 		and: [ aFamixPWBFunction parameters anySatisfy: #isPWBDataWindow ]
 ]
 
 { #category : #'instance creation' }
-PWBFunctionWithDatawindowArgumentsUnitTest >> newPWBTestWindowOn: aStream [
+PWBBehaviorWithDatawindowArgumentsTestMethod >> newPWBTestWindowOn: aStream [
 	aStream
 		<< 'w_PBUnitTest_window lw_PBUnitTest_window';
 		crlf;
@@ -22,19 +22,19 @@ PWBFunctionWithDatawindowArgumentsUnitTest >> newPWBTestWindowOn: aStream [
 ]
 
 { #category : #printing }
-PWBFunctionWithDatawindowArgumentsUnitTest >> printPWBScriptOn: stream [
+PWBBehaviorWithDatawindowArgumentsTestMethod >> printPWBScriptOn: stream [
 	super printPWBScriptOn: stream.
 	self newPWBTestWindowOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParameterDeclarationOn: stream.
-	self executeGenerationTasks: stream.
+	self runStepsOn: stream.
 	self endOn: stream.
 	^ stream
 ]
 
 { #category : #printing }
-PWBFunctionWithDatawindowArgumentsUnitTest >> printParameterDeclarationOn: stream [
+PWBBehaviorWithDatawindowArgumentsTestMethod >> printParameterDeclarationOn: stream [
 	self behaviorUnderTest parameters
 		do: [ :param | 
 			param isPWBDataWindow

@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'behaviorUnderTest',
-		'globalTypes',
 		'pwbunitTestClass'
 	],
 	#category : #'PWBTestGenerator-PWBTestSuite'
@@ -50,7 +49,7 @@ PWBTestSuite >> behaviorUnderTest [
 { #category : #accessing }
 PWBTestSuite >> behaviorUnderTest: anObject [
 	behaviorUnderTest := anObject.
-	pwbunitTestClass := PWBUnitTest
+	pwbunitTestClass := PWBTestMethod
 		unitTestForFunction: behaviorUnderTest
 ]
 
@@ -101,16 +100,6 @@ PWBTestSuite >> forward [
 				crlf;
 				<< 'end forward';
 				crlf ]
-]
-
-{ #category : #accessing }
-PWBTestSuite >> globalTypes [
-	^ globalTypes
-]
-
-{ #category : #accessing }
-PWBTestSuite >> globalTypes: anObject [
-	globalTypes := anObject
 ]
 
 { #category : #tests }
