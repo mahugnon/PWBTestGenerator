@@ -19,7 +19,7 @@ PWBBehaviorWithBasicTypeArgumentsTestMethod class >> acceptFunction: aFamixPWBFu
 { #category : #printing }
 PWBBehaviorWithBasicTypeArgumentsTestMethod >> printPWBScriptOn: stream [
 	self flag: #todo.	"All step should be task with priority"
-	super printPWBScriptOn: stream.
+	self beginOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self printParametersDeclarationOn: stream.

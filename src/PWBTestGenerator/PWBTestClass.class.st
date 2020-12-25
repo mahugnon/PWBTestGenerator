@@ -89,9 +89,15 @@ PWBTestClass >> runStepsOn: aFolder [
 	(aFolder asFileReference / (self pwbObject name , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
-			self beginSteps do: [ :step | step printPWBScriptOn: stream ].
-			self testMethods do: [ :m | m printPWBScriptOn: stream ].
-			self endSteps do: [ :step | step printPWBScriptOn: stream ] ]
+			self beginSteps
+				do: [ :step | step printPWBScriptOn: stream ]
+				displayingProgress: [ :each | each jobName ].
+			self testMethods
+				do: [ :m | m printPWBScriptOn: stream ]
+				displayingProgress: [ :each | each jobName ].
+			self endSteps
+				do: [ :step | step printPWBScriptOn: stream ]
+				displayingProgress: [ :each | each jobName ] ]
 ]
 
 { #category : #accessing }

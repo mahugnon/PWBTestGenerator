@@ -82,6 +82,11 @@ PWBTestMethod >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+PWBTestMethod >> jobName [
+	^ 'PWB Tests for ' , behaviorUnderTest name
+]
+
+{ #category : #'as yet unclassified' }
 PWBTestMethod >> loadMrlBehavior [
 	mrlBehavior := (MrlBehavior
 		loadWithMrlParameterAndMrlReturnValuesWhere: [ :function | 
@@ -107,17 +112,8 @@ PWBTestMethod >> name [
 ]
 
 { #category : #printing }
-PWBTestMethod >> printPWBObjectCreationOn: aStream [
-	^ PWBCreateTestObjectTask
-		createAndInitialize: self mrlBehavior pwb_object
-		on: aStream
-]
-
-{ #category : #printing }
 PWBTestMethod >> printPWBScriptOn: stream [
-	self createSteps.
-	self beginOn: stream.
-	^ stream
+	self subclassResponsibility
 ]
 
 { #category : #printing }
