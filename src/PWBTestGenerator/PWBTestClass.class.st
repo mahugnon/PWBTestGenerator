@@ -80,6 +80,7 @@ PWBTestClass >> pwbObject: aPwbObject generateTestIn: aFolder [
 	testMethods := (self testableBehaviors
 		collect: [ :famixBehavior | PWBTestMethod unitTestForFunction: famixBehavior ])
 		select: [ :m | m hasAssertions ].
+	testMethods ifEmpty: [ ^ self ].
 	self createSteps.
 	self runStepsOn: aFolder
 ]
