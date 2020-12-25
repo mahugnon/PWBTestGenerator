@@ -127,9 +127,7 @@ PWBTestMethod >> printReturnValueDeclarationOn: stream [
 
 { #category : #printing }
 PWBTestMethod >> runStepsOn: stream [
-	self beginOn: stream.
-	steps do: [ :assert | assert printPWBScriptOn: stream ].
-	self endOn: stream
+	steps do: [ :assert | assert printPWBScriptOn: stream ]
 ]
 
 { #category : #accessing }
