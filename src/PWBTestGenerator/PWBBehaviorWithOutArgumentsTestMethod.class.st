@@ -16,7 +16,7 @@ PWBBehaviorWithOutArgumentsTestMethod class >> acceptFunction: aFamixPWBFunction
 
 { #category : #printing }
 PWBBehaviorWithOutArgumentsTestMethod >> printPWBScriptOn: stream [
-	super printPWBScriptOn: stream.
+	self beginOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
 	self runStepsOn: stream.

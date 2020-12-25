@@ -23,7 +23,7 @@ PWBBehaviorWithDatawindowArgumentsTestMethod >> newPWBTestWindowOn: aStream [
 
 { #category : #printing }
 PWBBehaviorWithDatawindowArgumentsTestMethod >> printPWBScriptOn: stream [
-	super printPWBScriptOn: stream.
+	self beginOn: stream.
 	self newPWBTestWindowOn: stream.
 	behaviorUnderTest returnType
 		ifNotNil: [ self printReturnValueDeclarationOn: stream ].
