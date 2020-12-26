@@ -96,6 +96,11 @@ PWBAbstractReturnBaseUnitAssertion >> isReturnBasedAssertion [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+PWBAbstractReturnBaseUnitAssertion >> jobName [
+	^ behaviorUnderTest name , ' return assertion'
+]
+
 { #category : #printing }
 PWBAbstractReturnBaseUnitAssertion >> printPWBScriptOn: stream [
 	self printReturnAssertionOn: stream.

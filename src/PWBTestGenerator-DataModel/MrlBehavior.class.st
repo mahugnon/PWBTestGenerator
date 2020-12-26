@@ -89,8 +89,7 @@ MrlBehavior >> addAllMrlReturnValues: aCollection [
 MrlBehavior >> addBehaviorInvocation: parameters [
 	taskList
 		add:
-			(PWBBehaviorInvocation new
-				behaviorUnderTest: self behaviorUnderTest;
+			((PWBBehaviorInvocation behaviorUnderTest: self behaviorUnderTest)
 				time: currentTimestamp;
 				pwbParameters: parameters;
 				yourself).
@@ -237,10 +236,11 @@ MrlBehavior >> isPrivate [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> loadMrlInstanceVariablesAccesses [
-	mrlInstanceVariablesAccesses := MrlInstanceVariableAccess
+	mrlInstanceVariablesAccesses := (MrlInstanceVariableAccess
 		loadWhere: [ :mrlInstanceVariablesAccess | 
 			mrlInstanceVariablesAccess instance_variable_access_accessor
-				= self behavior_id ]
+				= self behavior_id ])
+		do: [ :each | each mooseModel: behaviorUnderTest mooseModel ]
 ]
 
 { #category : #'as yet unclassified' }

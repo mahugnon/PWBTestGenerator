@@ -111,7 +111,8 @@ MrlInstanceVariableAccess >> loadVariable [
 
 { #category : #accessing }
 MrlInstanceVariableAccess >> mooseModel: anObject [
-	mooseModel := anObject
+	mooseModel := anObject.
+	self variable mooseModel: anObject
 ]
 
 { #category : #tests }

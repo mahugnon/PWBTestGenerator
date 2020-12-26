@@ -30,6 +30,8 @@ PWBTestObjectCreator >> create: aString On: aStream [
 
 { #category : #'as yet unclassified' }
 PWBTestObjectCreator >> createAndInitialize: aString on: aStream [
+	(aString beginsWith: 'f_')
+		ifTrue: [ ^ aStream ].
 	varName := 'l' , aString.
 	^ self initialize: aString on: (self create: aString On: aStream)
 ]

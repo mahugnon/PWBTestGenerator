@@ -20,3 +20,15 @@ PWBTestVisualObjectCreator >> initialize: aString on: aStream [
 		<< '.hide()';
 		crlf
 ]
+
+{ #category : #initialization }
+PWBTestVisualObjectCreator >> initializeOn: aStream [
+	^ aStream
+		<< 'open(';
+		<< varName;
+		<< ')';
+		crlf;
+		<< varName;
+		<< '.hide()';
+		crlf
+]

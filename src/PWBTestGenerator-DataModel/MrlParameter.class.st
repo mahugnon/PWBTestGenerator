@@ -111,6 +111,8 @@ MrlParameter >> parameterTypeName [
 { #category : #accessing }
 MrlParameter >> parameter_after_value [
 	^ parameter_after_value
+		ifNotNil: [ parameter_after_value parameter_value ]
+		ifNil: [ nil ]
 ]
 
 { #category : #accessing }

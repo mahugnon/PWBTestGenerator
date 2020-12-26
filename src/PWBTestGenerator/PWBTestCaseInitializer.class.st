@@ -117,9 +117,9 @@ PWBTestCaseInitializer >> isTestCaseInitializer [
 PWBTestCaseInitializer >> printAccesInitializationOn: aStream [
 	behaviorAccesses
 		do: [ :acc | 
-			acc beforeValueDataobject
-				ifNil: [ self basicTypeAccess: acc initializationOn: aStream ]
-				ifNotNil: [ self dataControlAccess: acc initializationOn: aStream ] ]
+			acc beforeValueDataobject isEmptyOrNil
+				ifTrue: [ self basicTypeAccess: acc initializationOn: aStream ]
+				ifFalse: [ self dataControlAccess: acc initializationOn: aStream ] ]
 ]
 
 { #category : #printing }

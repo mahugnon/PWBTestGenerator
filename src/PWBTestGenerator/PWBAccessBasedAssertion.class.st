@@ -71,6 +71,11 @@ PWBAccessBasedAssertion >> isAccessBasedAssertion [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+PWBAccessBasedAssertion >> jobName [
+	^ 'accesses assertion'
+]
+
 { #category : #printing }
 PWBAccessBasedAssertion >> printPWBScriptOn: stream [
 	behaviorAccesses
