@@ -146,7 +146,8 @@ MrlBehavior >> behaviorUnderTest [
 { #category : #accessing }
 MrlBehavior >> behaviorUnderTest: anObject [
 	behaviorUnderTest := anObject.
-	self setOriginalParameters
+	self setOriginalParameters.
+	self setInstanceVariableAccesModel
 ]
 
 { #category : #accessing }
@@ -236,11 +237,10 @@ MrlBehavior >> isPrivate [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> loadMrlInstanceVariablesAccesses [
-	mrlInstanceVariablesAccesses := (MrlInstanceVariableAccess
+	mrlInstanceVariablesAccesses := MrlInstanceVariableAccess
 		loadWhere: [ :mrlInstanceVariablesAccess | 
 			mrlInstanceVariablesAccess instance_variable_access_accessor
-				= self behavior_id ])
-		do: [ :each | each mooseModel: behaviorUnderTest mooseModel ]
+				= self behavior_id ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -268,8 +268,6 @@ MrlBehavior >> loadParametersAccessesReturn [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> mrlInstanceVariablesAccesses [
-	mrlInstanceVariablesAccesses
-		ifEmpty: [ self loadMrlInstanceVariablesAccesses ].
 	^ mrlInstanceVariablesAccesses
 ]
 
@@ -281,7 +279,6 @@ MrlBehavior >> mrlReturnValues [
 
 { #category : #accessing }
 MrlBehavior >> pwbParameters [
-	mrlParameters ifEmpty: [ self loadMrlParameters ].
 	^ (mrlParameters groupedBy: #timestamp) asOrderedDictionary
 ]
 
@@ -298,6 +295,12 @@ MrlBehavior >> pwb_object: anObject [
 { #category : #accessing }
 MrlBehavior >> returnType [
 	^ behaviorUnderTest returnType name
+]
+
+{ #category : #api }
+MrlBehavior >> setInstanceVariableAccesModel [
+	self mrlInstanceVariablesAccesses
+		do: [ :each | each mooseModel: behaviorUnderTest mooseModel ]
 ]
 
 { #category : #'as yet unclassified' }
