@@ -80,9 +80,9 @@ PWBAccessBasedAssertion >> jobName [
 PWBAccessBasedAssertion >> printPWBScriptOn: stream [
 	behaviorAccesses
 		do: [ :acc | 
-			acc beforeValueDataobject
-				ifNil: [ self basicTypeAccess: acc assertionOn: stream ]
-				ifNotNil: [ self dataControlAccess: acc assertionOn: stream ] ].
+			acc beforeValueDataobject isEmptyOrNil
+				ifTrue: [ self basicTypeAccess: acc assertionOn: stream ]
+				ifFalse: [ self dataControlAccess: acc assertionOn: stream ] ].
 	^ stream
 ]
 
