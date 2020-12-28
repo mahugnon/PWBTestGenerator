@@ -24,8 +24,12 @@ PWBAccessBasedAssertion class >> assertionFor: aCollection timestamp: aString [
 PWBAccessBasedAssertion >> basicTypeAccess: aMrlInstanceVariableAccess assertionOn: stream [
 	^ stream
 		<< 'this.assert(';
-		<< aMrlInstanceVariableAccess afterValue mrlvalue;
-		nextPut: $=;
+		<<
+			(PWBVariableInitializer
+				printValue: aMrlInstanceVariableAccess afterValue mrlvalue
+				ofType: aMrlInstanceVariableAccess variableTypeName);
+		space;
+		<< '=';
 		<< aMrlInstanceVariableAccess pwbTestVariableName;
 		nextPut: $);
 		crlf

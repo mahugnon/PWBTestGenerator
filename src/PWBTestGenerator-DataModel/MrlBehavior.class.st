@@ -67,6 +67,7 @@ MrlBehavior >> addAccessBaseAssertion [
 	accesses := self mrlInstanceVariablesAccesses
 		select: [ :acc | acc instance_variable_access_timestamp = currentTimestamp ].
 	accesses ifEmpty: [ ^ taskList ].
+	1 haltIf: [ self behavior_name endsWith: 'title' ].
 	taskList
 		add:
 			(PWBAccessBasedAssertion
