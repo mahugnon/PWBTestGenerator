@@ -1,6 +1,6 @@
 Class {
 	#name : #PWBTestDatawindowInstanceVariableCreator,
-	#superclass : #PWBTestBasicTypeInstanceVariableCreator,
+	#superclass : #PWBTestInstanceVariableCreator,
 	#category : #'PWBTestGenerator-PWBTestCase'
 }
 

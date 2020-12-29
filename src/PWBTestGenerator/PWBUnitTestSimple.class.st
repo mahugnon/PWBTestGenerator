@@ -116,6 +116,37 @@ PWBUnitTestSimple >> printPWBScriptTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
+PWBUnitTestSimple >> return: return on: stream [
+	return mrlValue
+		ifNil: [ stream
+				<< 'this.assert(';
+				space;
+				<< 'IsNull(';
+				space;
+				<< 'l_result';
+				space;
+				nextPut: $);
+				nextPut: $);
+				crlf ]
+		ifNotNil: [ stream
+				<< 'this.assert(';
+				space;
+				<<
+					(PWBVariableInitializer
+						printValue: return mrlValue
+						ofType: return returnType name);
+				space;
+				<< '=';
+				space;
+				<< 'l_result';
+				nextPut: $);
+				crlf ]
+]
+
+{ #category : #printing }
 PWBUnitTestSimple >> returnAssertTimestamp: timestamp on: stream [
-	self flag: #todo
+	mrlBehavior mrlReturnValues
+		do: [ :return | 
+			return timestamp = timestamp
+				ifTrue: [ self return: return on: stream ] ]
 ]
