@@ -21,9 +21,11 @@ PWBVariableInitializer class >> acceptType: aTypeName [
 
 { #category : #'as yet unclassified' }
 PWBVariableInitializer class >> printParameter: aMrlParameter on: stream [
-	^ aMrlParameter parameter_before_value mrlValue
-		ifNil: [ NilVariableInitializer new printParameter: aMrlParameter on: stream ]
-		ifNotNil: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
+	^ (aMrlParameter parameter_before_value isNil
+		or: [ aMrlParameter parameter_before_value mrlValue isNil ])
+		ifTrue:
+			[ NilVariableInitializer new printParameter: aMrlParameter on: stream ]
+		ifFalse: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
 				printParameter: aMrlParameter
 				on: stream ]
 ]

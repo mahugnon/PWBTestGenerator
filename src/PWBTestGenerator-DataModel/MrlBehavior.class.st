@@ -67,7 +67,6 @@ MrlBehavior >> addAccessBaseAssertion [
 	accesses := self mrlInstanceVariablesAccesses
 		select: [ :acc | acc instance_variable_access_timestamp = currentTimestamp ].
 	accesses ifEmpty: [ ^ taskList ].
-	1 haltIf: [ self behavior_name endsWith: 'title' ].
 	taskList
 		add:
 			(PWBAccessBasedAssertion
@@ -130,11 +129,12 @@ MrlBehavior >> addReturnBaseAssertionFor: aCollection [
 
 { #category : #'as yet unclassified' }
 MrlBehavior >> addTestCaseInitialize: aCollection [
+	| accesses |
+	accesses := self mrlInstanceVariablesAccesses
+		select: [ :acc | acc instance_variable_access_timestamp = currentTimestamp ].
 	taskList
 		add:
-			((PWBTestCaseInitializer
-				params: aCollection
-				accesses: self mrlInstanceVariablesAccesses)
+			((PWBTestCaseInitializer params: aCollection accesses: accesses)
 				time: currentTimestamp;
 				yourself)
 ]
@@ -273,6 +273,11 @@ MrlBehavior >> mrlInstanceVariablesAccesses [
 ]
 
 { #category : #accessing }
+MrlBehavior >> mrlParameters [
+	^ mrlParameters
+]
+
+{ #category : #accessing }
 MrlBehavior >> mrlReturnValues [
 	mrlReturnValues ifEmpty: [ self loadMrlReturnValues ].
 	^ mrlReturnValues
@@ -316,6 +321,8 @@ MrlBehavior >> setOriginalParameters [
 
 { #category : #accessing }
 MrlBehavior >> timestamps [
-	timestamps ifNil: [ timestamps := self pwbParameters keys ].
+	timestamps
+		ifNil: [ timestamps := mrlParameters , mrlInstanceVariablesAccesses
+				, mrlReturnValues collectAsSet: #timestamp ].
 	^ timestamps
 ]

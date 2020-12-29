@@ -5,7 +5,6 @@ Class {
 		'name',
 		'owner',
 		'invocation',
-		'receiver',
 		'mrlBehavior',
 		'behaviorUnderTest',
 		'generationTasks'
@@ -144,7 +143,7 @@ PWBUnitTest >> owner: anObject [
 { #category : #printing }
 PWBUnitTest >> printPWBObjectCreationOn: aStream [
 	^ PWBTestObjectCreator
-		createAndInitialize: self mrlBehavior pwb_object
+		objectNamed: self mrlBehavior pwb_object
 		on: aStream
 ]
 

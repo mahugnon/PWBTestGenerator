@@ -126,6 +126,11 @@ MrlInstanceVariableAccess >> pwbTestVariableName [
 				<< (self variableName copyReplaceAll: 'this.' with: '') ]
 ]
 
+{ #category : #'accessing structure variables' }
+MrlInstanceVariableAccess >> timestamp [
+	^ instance_variable_access_timestamp
+]
+
 { #category : #accessing }
 MrlInstanceVariableAccess >> variable [
 	self loadVariable.

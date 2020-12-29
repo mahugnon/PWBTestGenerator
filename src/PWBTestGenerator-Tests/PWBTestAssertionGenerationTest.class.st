@@ -135,7 +135,7 @@ PWBTestAssertionGenerationTest >> testNonVisualObjetCreationScript [
 	| script |
 	script := String
 		streamContents:
-			[ :stream | PWBTestObjectCreator createAndInitialize: 'uo_liq_cal' on: stream ].
+			[ :stream | PWBTestObjectCreator objectNamed: 'uo_liq_cal' on: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)
 		equals:
@@ -321,7 +321,7 @@ PWBTestAssertionGenerationTest >> testVisualObjetCreationScript [
 	script := String
 		streamContents: [ :stream | 
 			PWBTestObjectCreator
-				createAndInitialize: 'w_saisie_liquidation'
+				objectNamed: 'w_saisie_liquidation'
 				on: stream ].
 	self
 		assert: (script copyReplaceAll: String crlf with: String cr)

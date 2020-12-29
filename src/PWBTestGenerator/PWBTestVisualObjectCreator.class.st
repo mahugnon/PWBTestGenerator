@@ -10,20 +10,14 @@ PWBTestVisualObjectCreator class >> accept: aString [
 ]
 
 { #category : #initialization }
-PWBTestVisualObjectCreator >> initialize: aString on: aStream [
-	^ aStream
-		<< 'open(';
+PWBTestVisualObjectCreator >> objectNamed: anObjectName on: aStream [
+	| varName |
+	varName := 'l' , anObjectName.
+	aStream
+		<< anObjectName;
+		space;
 		<< varName;
-		<< ')';
 		crlf;
-		<< varName;
-		<< '.hide()';
-		crlf
-]
-
-{ #category : #initialization }
-PWBTestVisualObjectCreator >> initializeOn: aStream [
-	^ aStream
 		<< 'open(';
 		<< varName;
 		<< ')';

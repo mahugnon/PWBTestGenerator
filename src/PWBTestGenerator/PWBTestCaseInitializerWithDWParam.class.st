@@ -11,7 +11,7 @@ PWBTestCaseInitializerWithDWParam class >> accept: aCollection [
 
 { #category : #printing }
 PWBTestCaseInitializerWithDWParam >> printPWBScriptOn: stream [
-	self printWindowDwSetUpOn: stream.
+	"self printWindowDwSetUpOn: stream."
 	super printPWBScriptOn: stream.
 	^ stream
 ]
@@ -19,6 +19,7 @@ PWBTestCaseInitializerWithDWParam >> printPWBScriptOn: stream [
 { #category : #printing }
 PWBTestCaseInitializerWithDWParam >> printWindowDwSetUpOn: stream [
 	| dwParam |
+	self deprecated: 'is implemented elsewhere'.
 	dwParam := self pwbParameters
 		detect: [ :param | param isPWBDataWindow ].
 	self setValues: stream tag: 'before' dwParam: dwParam.
@@ -29,6 +30,7 @@ PWBTestCaseInitializerWithDWParam >> printWindowDwSetUpOn: stream [
 { #category : #initialization }
 PWBTestCaseInitializerWithDWParam >> setValues: stream tag: aTag dwParam: aDWParam [
 	| dwName |
+	self deprecated: 'is implemented elsewhere'.
 	dwName := 'lw_PBUnitTest_window.dw_' , aTag.
 	stream
 		<< dwName;
