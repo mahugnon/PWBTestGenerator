@@ -1,7 +1,7 @@
 Class {
 	#name : #DataStoreVariableInitializer,
 	#superclass : #PWBVariableInitializer,
-	#category : #'PWBTestGenerator-VariableInitializers'
+	#category : #'PWBTestGenerator-VariableUtilities'
 }
 
 { #category : #'as yet unclassified' }

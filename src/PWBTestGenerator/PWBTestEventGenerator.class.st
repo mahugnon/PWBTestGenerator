@@ -1,5 +1,5 @@
 Class {
-	#name : #PWBUnitTestSimple,
+	#name : #PWBTestEventGenerator,
 	#superclass : #Object,
 	#instVars : [
 		'mrlBehavior'
@@ -8,34 +8,34 @@ Class {
 }
 
 { #category : #visiting }
-PWBUnitTestSimple class >> accept: aFamixPWBInvocation [
+PWBTestEventGenerator class >> accept: aFamixPWBInvocation [
 	^ self subclassResponsibility
 ]
 
 { #category : #visiting }
-PWBUnitTestSimple class >> acceptFunction: aFamixPWBFunction [
+PWBTestEventGenerator class >> acceptFunction: aFamixPWBFunction [
 	^ self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
-PWBUnitTestSimple class >> unitTestForFunction: aFamixPWBFunction [
+PWBTestEventGenerator class >> unitTestForFunction: aFamixPWBFunction [
 	^ (self allSubclasses
 		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
 		behaviorUnderTest: aFamixPWBFunction
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> behaviorInvocationTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> behaviorInvocationTimestamp: timestamp on: stream [
 	PWBTestBehaviorCreator behaviorInvocation: mrlBehavior on: stream
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> footerEventOn: stream [
+PWBTestEventGenerator >> footerEventOn: stream [
 	stream  << 'end event'
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> headerEventOn: stream [
+PWBTestEventGenerator >> headerEventOn: stream [
 	^ stream
 		<< 'event';
 		space;
@@ -47,7 +47,7 @@ PWBUnitTestSimple >> headerEventOn: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> instanceVariableAssertTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> instanceVariableAssertTimestamp: timestamp on: stream [
 	mrlBehavior mrlInstanceVariablesAccesses
 		do: [ :acc | 
 			acc timestamp = timestamp
@@ -55,7 +55,7 @@ PWBUnitTestSimple >> instanceVariableAssertTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> instanceVariableInitializationTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> instanceVariableInitializationTimestamp: timestamp on: stream [
 	mrlBehavior mrlInstanceVariablesAccesses
 		do: [ :acc | 
 			acc timestamp = timestamp
@@ -63,24 +63,24 @@ PWBUnitTestSimple >> instanceVariableInitializationTimestamp: timestamp on: stre
 ]
 
 { #category : #accessors }
-PWBUnitTestSimple >> mrlBehavior: aMrlBehavior [ 
+PWBTestEventGenerator >> mrlBehavior: aMrlBehavior [ 
 	mrlBehavior := aMrlBehavior
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> ownerObjectOn: stream [
+PWBTestEventGenerator >> ownerObjectOn: stream [
 	PWBTestObjectCreator
 		objectNamed: mrlBehavior pwb_object
 		on: stream
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> parameterAssertTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> parameterAssertTimestamp: timestamp on: stream [
 self flag: #todo
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> parameterDeclarationOn: stream [
+PWBTestEventGenerator >> parameterDeclarationOn: stream [
 	mrlBehavior behaviorUnderTest parameters
 		do: [ :param | 
 			param isPWBDataWindow
@@ -95,7 +95,7 @@ PWBUnitTestSimple >> parameterDeclarationOn: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> parameterInitializationTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> parameterInitializationTimestamp: timestamp on: stream [
 	mrlBehavior mrlParameters
 		do: [ :param | 
 			param timestamp = timestamp
@@ -103,7 +103,7 @@ PWBUnitTestSimple >> parameterInitializationTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> printPWBScriptOn: stream [
+PWBTestEventGenerator >> printPWBScriptOn: stream [
 	self headerEventOn: stream.
 	self ownerObjectOn: stream.
 	self parameterDeclarationOn: stream.
@@ -115,7 +115,7 @@ PWBUnitTestSimple >> printPWBScriptOn: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> printPWBScriptTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> printPWBScriptTimestamp: timestamp on: stream [
 	self instanceVariableInitializationTimestamp: timestamp on: stream.
 	self parameterInitializationTimestamp: timestamp on: stream.
 	self behaviorInvocationTimestamp: timestamp on: stream.
@@ -125,7 +125,7 @@ PWBUnitTestSimple >> printPWBScriptTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> return: return on: stream [
+PWBTestEventGenerator >> return: return on: stream [
 	return mrlValue
 		ifNil: [ stream
 				<< 'this.assert(';
@@ -153,7 +153,7 @@ PWBUnitTestSimple >> return: return on: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> returnAssertTimestamp: timestamp on: stream [
+PWBTestEventGenerator >> returnAssertTimestamp: timestamp on: stream [
 	mrlBehavior mrlReturnValues
 		do: [ :return | 
 			return timestamp = timestamp
@@ -161,7 +161,7 @@ PWBUnitTestSimple >> returnAssertTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
-PWBUnitTestSimple >> returnDeclarationOn: stream [
+PWBTestEventGenerator >> returnDeclarationOn: stream [
 	stream
 		<< mrlBehavior returnType;
 		space;

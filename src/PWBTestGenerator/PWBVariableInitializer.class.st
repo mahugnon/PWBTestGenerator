@@ -6,7 +6,7 @@ Class {
 		'varName',
 		'tag'
 	],
-	#category : #'PWBTestGenerator-VariableInitializers'
+	#category : #'PWBTestGenerator-VariableUtilities'
 }
 
 { #category : #'as yet unclassified' }
