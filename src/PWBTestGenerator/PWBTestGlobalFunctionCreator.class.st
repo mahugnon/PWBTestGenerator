@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestGlobalFunctionCreator,
 	#superclass : #PWBTestBehaviorCreator,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #'as yet unclassified' }

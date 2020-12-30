@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestParameterCreator,
 	#superclass : #Object,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #visiting }

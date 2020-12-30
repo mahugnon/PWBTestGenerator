@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestSubroutineCreator,
 	#superclass : #PWBTestBehaviorCreator,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #'as yet unclassified' }

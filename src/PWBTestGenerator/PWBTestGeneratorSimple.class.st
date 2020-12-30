@@ -1,21 +1,21 @@
 Class {
-	#name : #PWBTestSuiteSimple,
+	#name : #PWBTestGeneratorSimple,
 	#superclass : #Object,
 	#instVars : [
 		'mrlBehavior'
 	],
-	#category : #'PWBTestGenerator-PWBTestSuite'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #'as yet unclassified' }
-PWBTestSuiteSimple class >> generateForModel: aFamixPWBModel in: aFolder [
+PWBTestGeneratorSimple class >> generateForModel: aFamixPWBModel in: aFolder [
 	aFamixPWBModel getBusinessRuleFunctions values flatten
 		do:
 			[ :aFamixPWBFunction | self testCaseForFunction: aFamixPWBFunction in: aFolder ]
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple class >> testCaseForFunction: aFamixPWBBehavior in: aFolder [
+PWBTestGeneratorSimple class >> testCaseForFunction: aFamixPWBBehavior in: aFolder [
 	| mrlBehavior |
 	aFamixPWBBehavior isPrivate
 		ifTrue: [ ^ self ].
@@ -31,7 +31,7 @@ PWBTestSuiteSimple class >> testCaseForFunction: aFamixPWBBehavior in: aFolder [
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestSuiteSimple class >> updateData: aBuilder [
+PWBTestGeneratorSimple class >> updateData: aBuilder [
 	<worldMenu>
 	(aBuilder item: #GeneratePWBTestSimple)
 		parent: #PWBTools;
@@ -48,7 +48,7 @@ PWBTestSuiteSimple class >> updateData: aBuilder [
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple >> fileDeclaredTypeOn: stream [
+PWBTestGeneratorSimple >> fileDeclaredTypeOn: stream [
 	stream
 		<< 'global type';
 		space;
@@ -82,7 +82,7 @@ PWBTestSuiteSimple >> fileDeclaredTypeOn: stream [
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple >> forwardOn: stream [
+PWBTestGeneratorSimple >> forwardOn: stream [
 	stream
 		<< 'forward';
 		crlf;
@@ -102,12 +102,12 @@ PWBTestSuiteSimple >> forwardOn: stream [
 ]
 
 { #category : #accessors }
-PWBTestSuiteSimple >> mrlBehavior: aMrlBehavior [ 
+PWBTestGeneratorSimple >> mrlBehavior: aMrlBehavior [ 
 	mrlBehavior := aMrlBehavior
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple >> onCreateOn: stream [
+PWBTestGeneratorSimple >> onCreateOn: stream [
 	stream
 		<< 'on';
 		space;
@@ -122,7 +122,7 @@ PWBTestSuiteSimple >> onCreateOn: stream [
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple >> onDestroyOn: stream [
+PWBTestGeneratorSimple >> onDestroyOn: stream [
 	stream
 		<< 'on';
 		space;
@@ -137,7 +137,7 @@ PWBTestSuiteSimple >> onDestroyOn: stream [
 ]
 
 { #category : #printing }
-PWBTestSuiteSimple >> printPWBScript: aFolder [
+PWBTestGeneratorSimple >> printPWBScript: aFolder [
 	| testCreator |
 	testCreator := PWBUnitTestSimple new mrlBehavior: mrlBehavior.
 	mrlBehavior hasAssertions
@@ -158,7 +158,7 @@ PWBTestSuiteSimple >> printPWBScript: aFolder [
 ]
 
 { #category : #tests }
-PWBTestSuiteSimple >> testFileHeaderOn: stream [
+PWBTestGeneratorSimple >> testFileHeaderOn: stream [
 	stream
 		nextPut: $$;
 		<< 'PBExportHeader';

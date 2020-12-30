@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'mrlBehavior'
 	],
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #visiting }
@@ -107,6 +107,7 @@ PWBUnitTestSimple >> printPWBScriptOn: stream [
 	self headerEventOn: stream.
 	self ownerObjectOn: stream.
 	self parameterDeclarationOn: stream.
+	self returnDeclarationOn: stream.
 	mrlBehavior timestamps
 		do: [ :timestamp | self printPWBScriptTimestamp: timestamp on: stream ].
 	self footerEventOn: stream.
@@ -157,4 +158,13 @@ PWBUnitTestSimple >> returnAssertTimestamp: timestamp on: stream [
 		do: [ :return | 
 			return timestamp = timestamp
 				ifTrue: [ self return: return on: stream ] ]
+]
+
+{ #category : #printing }
+PWBUnitTestSimple >> returnDeclarationOn: stream [
+	stream
+		<< mrlBehavior returnType;
+		space;
+		<< 'l_result';
+		crlf
 ]

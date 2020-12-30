@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestInstanceVariableCreator,
 	#superclass : #Object,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #visiting }

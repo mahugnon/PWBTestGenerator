@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBTestDatawindowInstanceVariableAssertCreator,
 	#superclass : #PWBTestInstanceVariableAssertCreator,
-	#category : #'PWBTestGenerator-PWBTestCase'
+	#category : #'PWBTestGenerator-Core'
 }
 
 { #category : #'as yet unclassified' }
