@@ -24,7 +24,8 @@ PWBTestBehaviorCreator >> behaviorInvocation: mrlBehavior on: stream [
 { #category : #printing }
 PWBTestBehaviorCreator >> behaviorWithParams: mrlBehavior on: stream [
 	| param parameters |
-	parameters := mrlBehavior behaviorUnderTest sortAscending: #startPosition.
+	parameters := mrlBehavior behaviorUnderTest parameters
+		sortAscending: [ :aParam | aParam sourceAnchor startPos ].
 	stream
 		<< mrlBehavior behavior_name;
 		nextPut: $(.

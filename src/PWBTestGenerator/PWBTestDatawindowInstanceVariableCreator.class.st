@@ -6,7 +6,8 @@ Class {
 
 { #category : #visiting }
 PWBTestDatawindowInstanceVariableCreator class >> accept: anAccess [
-	^ anAccess variable isPWBDataWindow
+	^ anAccess beforeValueDataobject isNotEmpty
+		and: [ anAccess beforeValueDataobject isNotNil ]
 ]
 
 { #category : #'as yet unclassified' }

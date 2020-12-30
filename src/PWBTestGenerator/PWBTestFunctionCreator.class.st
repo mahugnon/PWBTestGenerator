@@ -12,7 +12,7 @@ PWBTestFunctionCreator class >> accept: mrlBehavior [
 { #category : #'as yet unclassified' }
 PWBTestFunctionCreator >> behaviorInvocation: mrlBehavior on: stream [
 	| localVar |
-	localVar := 'l' , mrlBehavior pwbObject.
+	localVar := 'l' , mrlBehavior pwb_object.
 	stream << 'l_result = '.
 	stream
 		<< localVar;

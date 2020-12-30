@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestBasicTypeInstanceVariableAssertCreator class >> accept: anAccess [
-	^ anAccess variable isPWBDataWindow not
+	^ anAccess beforeValueDataobject isEmptyOrNil
 ]
 
 { #category : #'as yet unclassified' }

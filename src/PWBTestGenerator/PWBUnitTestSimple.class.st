@@ -30,6 +30,11 @@ PWBUnitTestSimple >> behaviorInvocationTimestamp: timestamp on: stream [
 ]
 
 { #category : #printing }
+PWBUnitTestSimple >> footerEventOn: stream [
+	stream  << 'end event'
+]
+
+{ #category : #printing }
 PWBUnitTestSimple >> headerEventOn: stream [
 	^ stream
 		<< 'event';
@@ -43,7 +48,7 @@ PWBUnitTestSimple >> headerEventOn: stream [
 
 { #category : #printing }
 PWBUnitTestSimple >> instanceVariableAssertTimestamp: timestamp on: stream [
-	mrlBehavior instanceVariableAccesses
+	mrlBehavior mrlInstanceVariablesAccesses
 		do: [ :acc | 
 			acc timestamp = timestamp
 				ifTrue: [ PWBTestInstanceVariableAssertCreator access: acc on: stream ] ]
@@ -51,10 +56,15 @@ PWBUnitTestSimple >> instanceVariableAssertTimestamp: timestamp on: stream [
 
 { #category : #printing }
 PWBUnitTestSimple >> instanceVariableInitializationTimestamp: timestamp on: stream [
-	mrlBehavior instanceVariableAccesses
+	mrlBehavior mrlInstanceVariablesAccesses
 		do: [ :acc | 
 			acc timestamp = timestamp
 				ifTrue: [ PWBTestInstanceVariableCreator access: acc on: stream ] ]
+]
+
+{ #category : #accessors }
+PWBUnitTestSimple >> mrlBehavior: aMrlBehavior [ 
+	mrlBehavior := aMrlBehavior
 ]
 
 { #category : #printing }
@@ -71,14 +81,11 @@ self flag: #todo
 
 { #category : #printing }
 PWBUnitTestSimple >> parameterDeclarationOn: stream [
-	mrlBehavior parameters
+	mrlBehavior behaviorUnderTest parameters
 		do: [ :param | 
 			param isPWBDataWindow
 				ifTrue:
-					[ 
-					"In protect we have only one datawindow parameter"
-					
-					PWBTestObjectCreator objectNamed: 'w_PBUnitTest_window' on: stream ]
+					[ "In protect we have only one datawindow parameter" PWBTestObjectCreator objectNamed: 'w_PBUnitTest_window' on: stream ]
 				ifFalse: [ stream
 						<< param parameterType name;
 						space;
@@ -102,6 +109,7 @@ PWBUnitTestSimple >> printPWBScriptOn: stream [
 	self parameterDeclarationOn: stream.
 	mrlBehavior timestamps
 		do: [ :timestamp | self printPWBScriptTimestamp: timestamp on: stream ].
+	self footerEventOn: stream.
 	^ stream
 ]
 
@@ -134,7 +142,7 @@ PWBUnitTestSimple >> return: return on: stream [
 				<<
 					(PWBVariableInitializer
 						printValue: return mrlValue
-						ofType: return returnType name);
+						ofType: mrlBehavior returnType);
 				space;
 				<< '=';
 				space;
