@@ -12,7 +12,7 @@ PWBTestSubroutineCreator class >> accept: mrlBehavior [
 { #category : #'as yet unclassified' }
 PWBTestSubroutineCreator >> behaviorInvocation: mrlBehavior on: stream [
 	| localVar |
-	localVar := 'l' , mrlBehavior pwbObject.
+	localVar := 'l' , mrlBehavior pwb_object.
 	stream
 		<< localVar;
 		nextPut: $..
