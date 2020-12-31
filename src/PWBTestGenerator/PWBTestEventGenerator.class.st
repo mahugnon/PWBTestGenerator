@@ -17,13 +17,6 @@ PWBTestEventGenerator class >> acceptFunction: aFamixPWBFunction [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
-PWBTestEventGenerator class >> unitTestForFunction: aFamixPWBFunction [
-	^ (self allSubclasses
-		detect: [ :sub | sub acceptFunction: aFamixPWBFunction ]) new
-		behaviorUnderTest: aFamixPWBFunction
-]
-
 { #category : #printing }
 PWBTestEventGenerator >> behaviorInvocationTimestamp: timestamp on: stream [
 	PWBTestBehaviorCreator behaviorInvocation: mrlBehavior on: stream
@@ -85,7 +78,8 @@ PWBTestEventGenerator >> parameterDeclarationOn: stream [
 		do: [ :param | 
 			param isPWBDataWindow
 				ifTrue:
-					[ "In protect we have only one datawindow parameter" PWBTestObjectCreator objectNamed: 'w_PBUnitTest_window' on: stream ]
+					[ "In protect we have only one datawindow parameter" 
+					PWBTestObjectCreator objectNamed: 'w_PBUnitTest_window' on: stream ]
 				ifFalse: [ stream
 						<< param parameterType name;
 						space;

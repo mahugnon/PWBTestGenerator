@@ -138,8 +138,6 @@ PWBTestGeneratorSimple >> onDestroyOn: stream [
 
 { #category : #printing }
 PWBTestGeneratorSimple >> printPWBScript: aFolder [
-	| testCreator |
-	testCreator := PWBTestEventGenerator new mrlBehavior: mrlBehavior.
 	mrlBehavior hasAssertions
 		ifFalse: [ ^ self ].
 	^ (aFolder asFileReference
@@ -150,7 +148,9 @@ PWBTestGeneratorSimple >> printPWBScript: aFolder [
 			self forwardOn: stream.
 			self fileDeclaredTypeOn: stream.
 			stream crlf.
-			testCreator printPWBScriptOn: stream.
+			PWBTestEventGenerator new
+				mrlBehavior: mrlBehavior;
+				printPWBScriptOn: stream.
 			stream crlf.
 			self onCreateOn: stream.
 			stream crlf.
