@@ -7,7 +7,8 @@ Class {
 		'testFunction',
 		'testParam1',
 		'mrlBehavior',
-		'stream'
+		'stream',
+		'uo_test'
 	],
 	#category : #'PWBTestGenerator-Tests'
 }
@@ -31,6 +32,7 @@ PWBTestEventGeneratorTest >> setUp [
 		behavior_name: 'testFunction';
 		pwb_object: 'uo_test';
 		behaviorUnderTest: testFunction.
+	uo_test := FamixPWBUserObject named: 'uo_test' model: testModel.
 	testEventGenerator := PWBTestEventGenerator new.
 	testEventGenerator mrlBehavior: mrlBehavior
 ]
@@ -83,7 +85,33 @@ PWBTestEventGeneratorTest >> testInstanceVariableAssertTimestamp [
 
 { #category : #tests }
 PWBTestEventGeneratorTest >> testInstanceVariableInitializationTimestamp [
-	self skip
+	| acc variable |
+	FamixPWBInstanceVariable new
+		name: 'testInstvar';
+		parentType: uo_test;
+		attributeType: (FamixPWBBasicType named: 'string');
+		mooseModel: testModel.
+	variable := MrlnstanceVariable new
+		instance_variable_pwb_object: 'uo_test';
+		instance_variable_name: 'testInstvar'.
+	acc := MrlInstanceVariableAccess new variable: variable.
+	mrlBehavior addMrlInstanceVariablesAccess: acc.
+	testEventGenerator
+		instanceVariableInitializationTimestamp: '0'
+		on: stream.
+	self assert: self script equals: ''.
+	acc
+		mooseModel: testModel;
+		instance_variable_access_timestamp: '0';
+		beforeValue: (MrlVariableAccessBeforeValue new mrlvalue: 'aloba').
+	testEventGenerator
+		instanceVariableInitializationTimestamp: '0'
+		on: stream.
+	self
+		assert: self script
+		equals:
+		'luo_test.testInstvar = "aloba"
+'
 ]
 
 { #category : #tests }
@@ -99,7 +127,19 @@ luo_test = create uo_test
 
 { #category : #tests }
 PWBTestEventGeneratorTest >> testParameterInitializationTimestamp [
-		self skip
+	| param |
+	param := MrlParameter new.
+	mrlBehavior addMrlParameter: param.
+	testEventGenerator parameterInitializationTimestamp: '0' on: stream.
+	self assert: self script equals: ''.
+	param timestamp: '0'.
+	param
+		originalParameter: testParam1;
+		parameter_name: 'testParam1';
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'aloba').
+	testEventGenerator parameterInitializationTimestamp: '0' on: stream.
+	self assert: self script equals: 'lestParam1 = "aloba"
+'
 ]
 
 { #category : #tests }
