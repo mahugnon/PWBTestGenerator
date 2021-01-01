@@ -80,7 +80,30 @@ PWBTestEventGeneratorTest >> testFooterEventOn [
 
 { #category : #tests }
 PWBTestEventGeneratorTest >> testInstanceVariableAssertTimestamp [
-	self skip
+	| acc variable |
+	self skip.
+	FamixPWBInstanceVariable new
+		name: 'testInstvar';
+		parentType: uo_test;
+		attributeType: (FamixPWBBasicType named: 'string');
+		mooseModel: testModel.
+	variable := MrlnstanceVariable new
+		instance_variable_pwb_object: 'uo_test';
+		instance_variable_name: 'testInstvar'.
+	acc := MrlInstanceVariableAccess new variable: variable.
+	mrlBehavior addMrlInstanceVariablesAccess: acc.
+	testEventGenerator instanceVariableAssertTimestamp: '0' on: stream.
+	self assert: self script equals: ''.
+	acc
+		mooseModel: testModel;
+		instance_variable_access_timestamp: '0';
+		beforeValue: (MrlVariableAccessAfterValue new mrlvalue: 'aloba').
+	testEventGenerator instanceVariableAssertTimestamp: '0' on: stream.
+	self
+		assert: self script
+		equals:
+			'luo_test.testInstvar = "aloba"
+'
 ]
 
 { #category : #tests }
