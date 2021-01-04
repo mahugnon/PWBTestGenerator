@@ -3,10 +3,61 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'testFunction',
-		'testModel'
+		'testModel',
+		'stream'
 	],
 	#category : #'PWBTestGenerator-Tests'
 }
+
+{ #category : #accessing }
+PWBTypeSolverTest >> script [
+	^ stream contents copyReplaceAll: String crlf with: String cr
+]
+
+{ #category : #running }
+PWBTypeSolverTest >> setUp [
+	"Hooks that subclasses may override to define the fixture of test."
+
+	stream := WriteStream on: String new
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testAnyValueVariableInitializerRightSideOn [
+	| mrlParameter |
+	mrlParameter := MrlParameter new
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'aloba').
+	AnyValueVariableInitializer new
+		focus: mrlParameter;
+		rightSideOn: stream.
+	self assert: self script equals: '"aloba"
+'
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testBooleanVariableInitializerRightSideOn [
+	| mrlParameter |
+	mrlParameter := MrlParameter new
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'true').
+	BooleanVariableInitializer new
+		focus: mrlParameter;
+		rightSideOn: stream.
+	self
+		assert: self script
+		equals:
+			'true
+'
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testDataStoreVariableInitializerRightSideOn [
+	| mrlParameter |
+	mrlParameter := MrlParameter new
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'true').
+	DataStoreVariableInitializer new
+		focus: mrlParameter;
+		rightSideOn: stream.
+	self assert: self script isEmpty
+]
 
 { #category : #tests }
 PWBTypeSolverTest >> testTypeValueBooleanSolver [

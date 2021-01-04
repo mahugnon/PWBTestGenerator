@@ -38,6 +38,11 @@ PWBVariableInitializer class >> printValue: aValue ofType: aTypeName [
 		ifNil: [ NilVariableInitializer new printValue: aValue ]
 ]
 
+{ #category : #accessing }
+PWBVariableInitializer >> focus: aMrlParameter [ 
+	focus := aMrlParameter
+]
+
 { #category : #resolving }
 PWBVariableInitializer >> leftSideOn: stream [
 	varName := 'l'
