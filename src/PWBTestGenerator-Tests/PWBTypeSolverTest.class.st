@@ -75,17 +75,6 @@ PWBTypeSolverTest >> testBooleanVariableInitializerRightSideOn [
 ]
 
 { #category : #tests }
-PWBTypeSolverTest >> testDataStoreVariableInitializerRightSideOn [
-	| mrlParameter |
-	mrlParameter := MrlParameter new
-		parameter_before_value: (MrlParameter_before_value new parameter_value: 'true').
-	DataStoreVariableInitializer new
-		focus: mrlParameter;
-		rightSideOn: stream.
-	self assert: self script isEmpty
-]
-
-{ #category : #tests }
 PWBTypeSolverTest >> testDatastoreInitializerCreateDataStoreOn [
 	| mrlParameter |
 	mrlParameter := MrlParameter new parameter_name: 'ds_testParam'.
@@ -94,6 +83,32 @@ PWBTypeSolverTest >> testDatastoreInitializerCreateDataStoreOn [
 		focus: mrlParameter;
 		createDataStoreOn: stream.
 	self assert: self script equals: 'ls_testParam_before = create datastore
+'
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testDatastoreInitializerRowOn [
+	DataStoreVariableInitializer new
+		tag: 'before';
+		varName: 'ds_testParam';
+		rowOn: stream.
+	self
+		assert: self script
+		equals:
+			'ds_testParam.insertRow(0)
+'
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testDatastoreInitializerTransObjectOn [
+	DataStoreVariableInitializer new
+		tag: 'before';
+		varName: 'ds_testParam';
+		transObjectOn: stream.
+	self
+		assert: self script
+		equals:
+		'ds_testParam.setTrans(SQLCA)
 '
 ]
 
@@ -138,6 +153,17 @@ PWBTypeSolverTest >> testDatastoreVariableInitializerDataObjectOn [
 		equals:
 		'ds_testParam.dataobject ="dw_testParam"
 '
+]
+
+{ #category : #tests }
+PWBTypeSolverTest >> testDatastoreVariableInitializerRightSideOn [
+	| mrlParameter |
+	mrlParameter := MrlParameter new
+		parameter_before_value: (MrlParameter_before_value new parameter_value: 'true').
+	DataStoreVariableInitializer new
+		focus: mrlParameter;
+		rightSideOn: stream.
+	self assert: self script isEmpty
 ]
 
 { #category : #tests }
