@@ -119,3 +119,8 @@ DataStoreVariableInitializer >> transObjectOn: stream [
 		<< '.setTrans(SQLCA)';
 		crlf
 ]
+
+{ #category : #accessing }
+DataStoreVariableInitializer >> varName: aString [
+	varName := aString
+]

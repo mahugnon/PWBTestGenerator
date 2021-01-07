@@ -71,3 +71,8 @@ PWBVariableInitializer >> printValue: aString [
 PWBVariableInitializer >> rightSideOn: stream [
 	self subclassResponsibility
 ]
+
+{ #category : #accessing }
+PWBVariableInitializer >> tag: aString [ 
+	tag := aString
+]
