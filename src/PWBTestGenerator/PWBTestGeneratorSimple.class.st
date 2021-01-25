@@ -9,16 +9,25 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestGeneratorSimple class >> generateForModel: aFamixPWBModel in: aFolder [
-	aFamixPWBModel getBusinessRuleFunctions values flatten
-		do:
-			[ :aFamixPWBFunction | self testCaseForFunction: aFamixPWBFunction in: aFolder ]
+	MrlBehavior loadAll
+		do: [ :aMrlBehavior | 
+			| behaviorToTest |
+			behaviorToTest := aFamixPWBModel
+				entityNamed: aMrlBehavior pwb_object , '.' , aMrlBehavior behavior_name.
+			behaviorToTest ifNil: [ ^ self ].
+			behaviorToTest isPrivate
+				ifTrue: [ ^ self ].
+			aMrlBehavior loadParametersAccessesReturn.
+			aMrlBehavior behaviorUnderTest: behaviorToTest.
+			self new
+				mrlBehavior: aMrlBehavior;
+				printPWBScript: aFolder ]
+		displayingProgress: [ :aBehavior | aBehavior behavior_name ]
 ]
 
 { #category : #tests }
 PWBTestGeneratorSimple class >> testCaseForFunction: aFamixPWBBehavior in: aFolder [
 	| mrlBehavior |
-	aFamixPWBBehavior isPrivate
-		ifTrue: [ ^ self ].
 	mrlBehavior := (MrlBehavior
 		loadWithMrlParameterAndMrlReturnValuesWhere: [ :function | 
 			function behavior_name = aFamixPWBBehavior name
