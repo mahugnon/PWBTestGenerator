@@ -19,21 +19,6 @@ PWBBehaviorInvocation class >> behaviorUnderTest: aFamixPWBBehavior [
 		new behaviorUnderTest: aFamixPWBBehavior
 ]
 
-{ #category : #accessing }
-PWBBehaviorInvocation >> behaviorName [
-	^ behaviorUnderTest name
-]
-
-{ #category : #accessing }
-PWBBehaviorInvocation >> behaviorParent [
-	^ behaviorUnderTest parentType name
-]
-
-{ #category : #accessing }
-PWBBehaviorInvocation >> behaviorUnderTest: aFamixPWBBehavior [
-	behaviorUnderTest := aFamixPWBBehavior
-]
-
 { #category : #printing }
 PWBBehaviorInvocation >> behaviorWithParamsOn: stream [
 	| param |
@@ -69,33 +54,7 @@ PWBBehaviorInvocation >> behaviorWithParamsOn: stream [
 	^ stream crlf
 ]
 
-{ #category : #initialization }
-PWBBehaviorInvocation >> initialize [
-	super initialize.
-	pwbParameters := OrderedCollection new
-]
-
-{ #category : #testing }
-PWBBehaviorInvocation >> isBehaviorInvocation [
-	^ true
-]
-
 { #category : #printing }
 PWBBehaviorInvocation >> printPWBScriptOn: stream [
 	self subclassResponsibility
-]
-
-{ #category : #accessing }
-PWBBehaviorInvocation >> priority [
-	^ 20
-]
-
-{ #category : #accessing }
-PWBBehaviorInvocation >> pwbParameters [
-	^ pwbParameters sortAscending: #startPosition
-]
-
-{ #category : #accessing }
-PWBBehaviorInvocation >> pwbParameters: anObject [
-	pwbParameters := anObject
 ]

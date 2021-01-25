@@ -6,7 +6,7 @@ Class {
 		'varName',
 		'tag'
 	],
-	#category : #'PWBTestGenerator-VariableInitializers'
+	#category : #'PWBTestGenerator-VariableUtilities'
 }
 
 { #category : #'as yet unclassified' }
@@ -21,9 +21,11 @@ PWBVariableInitializer class >> acceptType: aTypeName [
 
 { #category : #'as yet unclassified' }
 PWBVariableInitializer class >> printParameter: aMrlParameter on: stream [
-	^ aMrlParameter parameter_before_value mrlValue
-		ifNil: [ NilVariableInitializer new printParameter: aMrlParameter on: stream ]
-		ifNotNil: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
+	^ (aMrlParameter parameter_before_value isNil
+		or: [ aMrlParameter parameter_before_value mrlValue isNil ])
+		ifTrue:
+			[ NilVariableInitializer new printParameter: aMrlParameter on: stream ]
+		ifFalse: [ (self subclasses detect: [ :sub | sub accept: aMrlParameter ]) new
 				printParameter: aMrlParameter
 				on: stream ]
 ]
@@ -34,6 +36,11 @@ PWBVariableInitializer class >> printValue: aValue ofType: aTypeName [
 		ifNotNil: [ (self subclasses detect: [ :sub | sub acceptType: aTypeName ]) new
 				printValue: aValue ]
 		ifNil: [ NilVariableInitializer new printValue: aValue ]
+]
+
+{ #category : #accessing }
+PWBVariableInitializer >> focus: aMrlParameter [ 
+	focus := aMrlParameter
 ]
 
 { #category : #resolving }
@@ -63,4 +70,9 @@ PWBVariableInitializer >> printValue: aString [
 { #category : #resolving }
 PWBVariableInitializer >> rightSideOn: stream [
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+PWBVariableInitializer >> tag: aString [ 
+	tag := aString
 ]

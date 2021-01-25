@@ -78,7 +78,8 @@ MrlParameter >> loadMrlParameter_before_value [
 	parameter_before_value := (MrlParameter_before_value
 		loadWhere:
 			[ :mrlParameter_value | mrlParameter_value parameter_id = self parameter_id ])
-		anyOne
+		ifNotEmpty: [ :val | val anyOne ]
+		ifEmpty: [ nil ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -110,6 +111,8 @@ MrlParameter >> parameterTypeName [
 { #category : #accessing }
 MrlParameter >> parameter_after_value [
 	^ parameter_after_value
+		ifNotNil: [ parameter_after_value parameter_value ]
+		ifNil: [ nil ]
 ]
 
 { #category : #accessing }

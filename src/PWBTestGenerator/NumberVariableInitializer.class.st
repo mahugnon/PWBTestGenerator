@@ -1,7 +1,7 @@
 Class {
 	#name : #NumberVariableInitializer,
 	#superclass : #PWBVariableInitializer,
-	#category : #'PWBTestGenerator-VariableInitializers'
+	#category : #'PWBTestGenerator-VariableUtilities'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #DataStoreVariableInitializer,
 	#superclass : #PWBVariableInitializer,
-	#category : #'PWBTestGenerator-VariableInitializers'
+	#category : #'PWBTestGenerator-VariableUtilities'
 }
 
 { #category : #'as yet unclassified' }
@@ -118,4 +118,9 @@ DataStoreVariableInitializer >> transObjectOn: stream [
 		<< varName;
 		<< '.setTrans(SQLCA)';
 		crlf
+]
+
+{ #category : #accessing }
+DataStoreVariableInitializer >> varName: aString [
+	varName := aString
 ]
