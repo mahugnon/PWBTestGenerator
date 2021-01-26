@@ -5,14 +5,12 @@ Class {
 		'behaviorUnderTest',
 		'behavior_name',
 		'pwb_object',
-		'sender',
 		'behavior_id',
 		'mrlParameters',
 		'mrlReturnValues',
-		'timestamps',
 		'mrlInstanceVariablesAccesses',
-		'taskList',
-		'currentTimestamp'
+		'currentTimestamp',
+		'mrlBehaviorDatas'
 	],
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
@@ -72,18 +70,6 @@ MrlBehavior >> addAllMrlReturnValues: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
-MrlBehavior >> addBehaviorInvocation: parameters [
-	| task |
-	task := (PWBBehaviorInvocation
-		behaviorUnderTest: self behaviorUnderTest)
-		time: currentTimestamp;
-		pwbParameters: parameters;
-		yourself.
-	taskList add: task.
-	^ taskList
-]
-
-{ #category : #'as yet unclassified' }
 MrlBehavior >> addMrlInstanceVariablesAccess: aMrlInstanceVariablesAccess [
 	mrlInstanceVariablesAccesses add: aMrlInstanceVariablesAccess
 ]
@@ -131,6 +117,29 @@ MrlBehavior >> behavior_name: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+MrlBehavior >> createMrlBehaviorDatas [
+	| timestamps |
+	timestamps := mrlParameters , mrlInstanceVariablesAccesses
+		, mrlReturnValues collectAsSet: #timestamp.
+	mrlBehaviorDatas := timestamps
+		collect: [ :time | 
+			MrlBehaviorData new
+				timestamp: time;
+				mrlParameters: (self mrlParameters select: [ :each | each timestamp = time ]);
+				mrlInstanceVariablesAccesses:
+					(self mrlInstanceVariablesAccesses
+						select: [ :each | each timestamp = time ]);
+				mrlReturnValues: (self mrlReturnValues select: [ :each | each timestamp = time ]);
+				yourSelf ].
+	^ mrlBehaviorDatas
+]
+
+{ #category : #comparing }
+MrlBehavior >> equals: anObject [
+	^ self behavior_name = anObject behavior_name
+]
+
+{ #category : #'as yet unclassified' }
 MrlBehavior >> hasAssertions [
 	^ self mrlReturnValues isNotEmpty
 		or: [ self mrlInstanceVariablesAccesses isNotEmpty ]
@@ -141,8 +150,7 @@ MrlBehavior >> initialize [
 	super initialize.
 	mrlParameters := OrderedCollection new.
 	mrlReturnValues := OrderedCollection new.
-	mrlInstanceVariablesAccesses := OrderedCollection new.
-	taskList := OrderedCollection new
+	mrlInstanceVariablesAccesses := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -181,6 +189,14 @@ MrlBehavior >> loadParametersAccessesReturn [
 		loadMrlReturnValues
 ]
 
+{ #category : #accessing }
+MrlBehavior >> mrlBehaviorDatas [
+	mrlBehaviorDatas isEmptyOrNil
+		ifTrue: [ self createMrlBehaviorDatas.
+			self removeRedundance ].
+	^ mrlBehaviorDatas
+]
+
 { #category : #'as yet unclassified' }
 MrlBehavior >> mrlInstanceVariablesAccesses [
 	^ mrlInstanceVariablesAccesses
@@ -197,6 +213,19 @@ MrlBehavior >> mrlReturnValues [
 	^ mrlReturnValues
 ]
 
+{ #category : #'as yet unclassified' }
+MrlBehavior >> populateMrlDatas [
+	mrlParameters := OrderedCollection new.
+	mrlReturnValues := OrderedCollection new.
+	mrlInstanceVariablesAccesses := OrderedCollection new.
+	mrlBehaviorDatas
+		do: [ :data | 
+			mrlParameters addAll: data mrlParameters.
+			mrlReturnValues addAll: data mrlReturnValues.
+			mrlInstanceVariablesAccesses
+				addAll: data mrlInstanceVariablesAccesses ]
+]
+
 { #category : #accessing }
 MrlBehavior >> pwbParameters [
 	^ (mrlParameters groupedBy: #timestamp) asOrderedDictionary
@@ -210,6 +239,18 @@ MrlBehavior >> pwb_object [
 { #category : #accessing }
 MrlBehavior >> pwb_object: anObject [
 	pwb_object := anObject
+]
+
+{ #category : #removing }
+MrlBehavior >> removeRedundance [
+	| result |
+	result := OrderedCollection new.
+	mrlBehaviorDatas
+		do: [ :each | 
+			result
+				detect: [ :data | data equals: each ]
+				ifNone: [ result add: each ] ].
+	mrlBehaviorDatas := result
 ]
 
 { #category : #accessing }
@@ -235,8 +276,5 @@ MrlBehavior >> setOriginalParameters [
 
 { #category : #accessing }
 MrlBehavior >> timestamps [
-	timestamps
-		ifNil: [ timestamps := mrlParameters , mrlInstanceVariablesAccesses
-				, mrlReturnValues collectAsSet: #timestamp ].
-	^ timestamps
+	^ self mrlBehaviorDatas collectAsSet: #timestamp
 ]

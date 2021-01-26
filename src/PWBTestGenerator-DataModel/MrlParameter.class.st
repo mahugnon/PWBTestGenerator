@@ -37,6 +37,12 @@ MrlParameter >> behavior_id: anObject [
 	behavior_id := anObject
 ]
 
+{ #category : #comparing }
+MrlParameter >> equals: aMrlParameter [
+	^ (aMrlParameter beforeValue equals: self beforeValue)
+		and: [ aMrlParameter afterValue equals: self afterValue ]
+]
+
 { #category : #testing }
 MrlParameter >> ifIsDataWindow: aBlock [
 	^ self isPWBDataWindow
@@ -110,9 +116,9 @@ MrlParameter >> parameterTypeName [
 
 { #category : #accessing }
 MrlParameter >> parameter_after_value [
-	^ parameter_after_value
-		ifNotNil: [ parameter_after_value parameter_value ]
-		ifNil: [ nil ]
+	^ parameter_after_value isEmptyOrNil
+		ifTrue: [ nil ]
+		ifFalse: [ parameter_after_value parameter_value ]
 ]
 
 { #category : #accessing }

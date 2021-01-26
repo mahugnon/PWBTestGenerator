@@ -54,6 +54,16 @@ MrlInstanceVariableAccess >> beforeValueDataobject [
 	^ self beforeValue dataobject
 ]
 
+{ #category : #comparing }
+MrlInstanceVariableAccess >> equals: aMrlInstanceVariableAccess [
+	^ (aMrlInstanceVariableAccess beforeValue equals: self beforeValue)
+		and: [ (aMrlInstanceVariableAccess afterValue equals: self afterValue)
+				and: [ aMrlInstanceVariableAccess instance_variable_access_accessed
+						= self instance_variable_access_accessed
+						and: [ aMrlInstanceVariableAccess instance_variable_access_accessor
+								= self instance_variable_access_accessor ] ] ]
+]
+
 { #category : #accessing }
 MrlInstanceVariableAccess >> instance_variable_access_accessed [
 	^ instance_variable_access_accessed

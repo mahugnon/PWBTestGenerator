@@ -20,6 +20,11 @@ MrlReturnValue >> behavior_id: anObject [
 	behavior_id := anObject
 ]
 
+{ #category : #comparing }
+MrlReturnValue >> equals: aMrlReturnValue [
+	^ aMrlReturnValue mrlValue = self mrlValue
+]
+
 { #category : #accessing }
 MrlReturnValue >> line_number [
 	^ line_number

@@ -12,9 +12,8 @@ PWBTestGeneratorSimple class >> generateForModel: aFamixPWBModel in: aFolder [
 	MrlBehavior loadAll
 		do: [ :aMrlBehavior | 
 			| behaviorToTest |
-			behaviorToTest := aFamixPWBModel
-				entityNamed: aMrlBehavior pwb_object , '.' , aMrlBehavior behavior_name.
-			behaviorToTest ifNil: [ ^ self ].
+			behaviorToTest := aFamixPWBModel allMethods
+				detect: [ :m | m name = aMrlBehavior behavior_name ].
 			behaviorToTest isPrivate
 				ifTrue: [ ^ self ].
 			aMrlBehavior loadParametersAccessesReturn.
@@ -23,20 +22,6 @@ PWBTestGeneratorSimple class >> generateForModel: aFamixPWBModel in: aFolder [
 				mrlBehavior: aMrlBehavior;
 				printPWBScript: aFolder ]
 		displayingProgress: [ :aBehavior | aBehavior behavior_name ]
-]
-
-{ #category : #tests }
-PWBTestGeneratorSimple class >> testCaseForFunction: aFamixPWBBehavior in: aFolder [
-	| mrlBehavior |
-	mrlBehavior := (MrlBehavior
-		loadWithMrlParameterAndMrlReturnValuesWhere: [ :function | 
-			function behavior_name = aFamixPWBBehavior name
-				AND: [ function pwb_object = aFamixPWBBehavior parentType name ] ])
-		anyOne.
-	mrlBehavior behaviorUnderTest: aFamixPWBBehavior.
-	^ self new
-		mrlBehavior: mrlBehavior;
-		printPWBScript: aFolder
 ]
 
 { #category : #'as yet unclassified' }

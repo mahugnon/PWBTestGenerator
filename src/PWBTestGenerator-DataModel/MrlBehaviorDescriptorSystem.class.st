@@ -14,8 +14,7 @@ MrlBehaviorDescriptorSystem >> allTableNames [
 MrlBehaviorDescriptorSystem >> classModelForMaryline_behavior: aClassModel [
 	aClassModel newAttributeNamed: #behavior_id.
 	aClassModel newAttributeNamed: #behavior_name.
-	aClassModel newAttributeNamed: #pwb_object.
-	aClassModel newAttributeNamed: #sender
+	aClassModel newAttributeNamed: #pwb_object
 ]
 
 { #category : #'as yet unclassified' }
@@ -30,9 +29,6 @@ MrlBehaviorDescriptorSystem >> descriptorForMrlBehavior: aDescriptor [
 		from: #behavior_name
 		to: (table fieldNamed: 'behavior_name').
 	(aDescriptor newMapping: DirectMapping)
-		from: #sender
-		to: (table fieldNamed: 'sender').
-	(aDescriptor newMapping: DirectMapping)
 		from: #pwb_object
 		to: (table fieldNamed: 'pwb_object')
 ]
@@ -44,6 +40,5 @@ MrlBehaviorDescriptorSystem >> tableForMARYLINE_BEHAVIOR: aTable [
 	aTable
 		createFieldNamed: 'behavior_name'
 		type: (platform varChar: 100).
-	aTable createFieldNamed: 'sender' type: (platform varChar: 100).
 	aTable createFieldNamed: 'pwb_object' type: (platform varChar: 100)
 ]

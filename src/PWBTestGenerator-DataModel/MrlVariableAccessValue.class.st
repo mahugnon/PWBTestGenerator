@@ -29,6 +29,11 @@ MrlVariableAccessValue >> dataobject: anObject [
 	dataobject := anObject
 ]
 
+{ #category : #comparing }
+MrlVariableAccessValue >> equals: aMrlVariableAccessValue [
+	^ aMrlVariableAccessValue mrlValue = self mrlValue
+]
+
 { #category : #accessing }
 MrlVariableAccessValue >> mrlValue [
 	^ mrlvalue

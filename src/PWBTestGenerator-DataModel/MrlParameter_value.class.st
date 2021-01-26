@@ -9,6 +9,11 @@ Class {
 	#category : #'PWBTestGenerator-DataModel-Model'
 }
 
+{ #category : #comparing }
+MrlParameter_value >> equals: aMrlParameter_value [
+	^ aMrlParameter_value parameter_value = self parameter_value
+]
+
 { #category : #accessing }
 MrlParameter_value >> mrlValue [
 	^ self parameter_value

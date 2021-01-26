@@ -41,18 +41,21 @@ PWBTestEventGenerator >> headerEventOn: stream [
 
 { #category : #printing }
 PWBTestEventGenerator >> instanceVariableAssertTimestamp: timestamp on: stream [
-	mrlBehavior mrlInstanceVariablesAccesses
-		do: [ :acc | 
-			acc timestamp = timestamp
-				ifTrue: [ PWBTestInstanceVariableAssertCreator access: acc on: stream ] ]
+	mrlBehavior mrlBehaviorDatas
+		do: [ :data | 
+			data timestamp = timestamp
+				ifTrue: [ data mrlInstanceVariablesAccesses
+						do:
+							[ :acc | PWBTestInstanceVariableAssertCreator access: acc on: stream ] ] ]
 ]
 
 { #category : #printing }
 PWBTestEventGenerator >> instanceVariableInitializationTimestamp: timestamp on: stream [
-	mrlBehavior mrlInstanceVariablesAccesses
-		do: [ :acc | 
-			acc timestamp = timestamp
-				ifTrue: [ PWBTestInstanceVariableCreator access: acc on: stream ] ]
+	mrlBehavior mrlBehaviorDatas
+		do: [ :data | 
+			data timestamp = timestamp
+				ifTrue: [ data mrlInstanceVariablesAccesses
+						do: [ :acc | PWBTestInstanceVariableCreator access: acc on: stream ] ] ]
 ]
 
 { #category : #accessors }
@@ -90,10 +93,11 @@ PWBTestEventGenerator >> parameterDeclarationOn: stream [
 
 { #category : #printing }
 PWBTestEventGenerator >> parameterInitializationTimestamp: timestamp on: stream [
-	mrlBehavior mrlParameters
-		do: [ :param | 
-			param timestamp = timestamp
-				ifTrue: [ PWBTestParameterCreator param: param on: stream ] ]
+	mrlBehavior mrlBehaviorDatas
+		do: [ :data | 
+			data timestamp = timestamp
+				ifTrue: [ data mrlParameters
+						do: [ :param | PWBTestParameterCreator param: param on: stream ] ] ]
 ]
 
 { #category : #printing }
@@ -103,7 +107,8 @@ PWBTestEventGenerator >> printPWBScriptOn: stream [
 	self parameterDeclarationOn: stream.
 	self returnDeclarationOn: stream.
 	mrlBehavior timestamps
-		do: [ :timestamp | self printPWBScriptTimestamp: timestamp on: stream ].
+		do:
+			[ :timestamp | self printPWBScriptTimestamp: timestamp on: stream ].
 	self footerEventOn: stream.
 	^ stream
 ]
@@ -148,10 +153,11 @@ PWBTestEventGenerator >> return: return on: stream [
 
 { #category : #printing }
 PWBTestEventGenerator >> returnAssertTimestamp: timestamp on: stream [
-	mrlBehavior mrlReturnValues
-		do: [ :return | 
-			return timestamp = timestamp
-				ifTrue: [ self return: return on: stream ] ]
+	mrlBehavior mrlBehaviorDatas
+		do: [ :data | 
+			data timestamp = timestamp
+				ifTrue: [ data mrlReturnValues
+						do: [ :return | self return: return on: stream ] ] ]
 ]
 
 { #category : #printing }

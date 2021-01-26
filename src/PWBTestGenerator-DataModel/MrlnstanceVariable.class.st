@@ -19,6 +19,11 @@ MrlnstanceVariable >> accesses [
 	^ (accesses groupedBy: #timestamp) asOrderedDictionary
 ]
 
+{ #category : #comparing }
+MrlnstanceVariable >> equals: anObject [
+	^ self instance_variable_name = anObject instance_variable_name
+]
+
 { #category : #initialization }
 MrlnstanceVariable >> initialize [
 	super initialize.

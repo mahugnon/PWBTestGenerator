@@ -80,6 +80,11 @@ PWBAbstractModel class >> setUpP3Driver [
 		ifAbsent: [ PharoDatabaseAccessor DefaultDriver: P3DatabaseDriver ]
 ]
 
+{ #category : #comparing }
+PWBAbstractModel >> equals: anObject [
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 PWBAbstractModel >> isPWBDataWindow [
 	^ false
