@@ -197,6 +197,11 @@ MrlBehavior >> mrlBehaviorDatas [
 	^ mrlBehaviorDatas
 ]
 
+{ #category : #accessing }
+MrlBehavior >> mrlBehaviorDatas: anUndefinedObject [ 
+	mrlBehaviorDatas := anUndefinedObject
+]
+
 { #category : #'as yet unclassified' }
 MrlBehavior >> mrlInstanceVariablesAccesses [
 	^ mrlInstanceVariablesAccesses

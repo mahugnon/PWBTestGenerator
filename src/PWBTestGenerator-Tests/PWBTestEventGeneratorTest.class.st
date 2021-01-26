@@ -81,7 +81,6 @@ PWBTestEventGeneratorTest >> testFooterEventOn [
 { #category : #tests }
 PWBTestEventGeneratorTest >> testInstanceVariableAssertTimestamp [
 	| acc variable |
-	self skip.
 	FamixPWBInstanceVariable new
 		name: 'testInstvar';
 		parentType: uo_test;
@@ -93,16 +92,18 @@ PWBTestEventGeneratorTest >> testInstanceVariableAssertTimestamp [
 	acc := MrlInstanceVariableAccess new variable: variable.
 	mrlBehavior addMrlInstanceVariablesAccess: acc.
 	testEventGenerator instanceVariableAssertTimestamp: '0' on: stream.
-	self assert: self script equals: ''.
+	self assert: self script isEmpty.
+	mrlBehavior mrlBehaviorDatas: nil.
 	acc
 		mooseModel: testModel;
 		instance_variable_access_timestamp: '0';
-		beforeValue: (MrlVariableAccessAfterValue new mrlvalue: 'aloba').
+		beforeValue: (MrlVariableAccessAfterValue new mrlvalue: 'bf_aloba');
+		afterValue: (MrlVariableAccessAfterValue new mrlvalue: 'af_aloba').
 	testEventGenerator instanceVariableAssertTimestamp: '0' on: stream.
 	self
 		assert: self script
 		equals:
-			'luo_test.testInstvar = "aloba"
+			'this.assert("af_aloba" =luo_test.testInstvar)
 '
 ]
 
@@ -122,6 +123,7 @@ PWBTestEventGeneratorTest >> testInstanceVariableInitializationTimestamp [
 	testEventGenerator
 		instanceVariableInitializationTimestamp: '0'
 		on: stream.
+	mrlBehavior mrlBehaviorDatas: nil.
 	self assert: self script equals: ''.
 	acc
 		mooseModel: testModel;
@@ -133,7 +135,7 @@ PWBTestEventGeneratorTest >> testInstanceVariableInitializationTimestamp [
 	self
 		assert: self script
 		equals:
-		'luo_test.testInstvar = "aloba"
+			'luo_test.testInstvar = "aloba"
 '
 ]
 
@@ -156,12 +158,16 @@ PWBTestEventGeneratorTest >> testParameterInitializationTimestamp [
 	testEventGenerator parameterInitializationTimestamp: '0' on: stream.
 	self assert: self script equals: ''.
 	param timestamp: '0'.
+	mrlBehavior mrlBehaviorDatas: nil.
 	param
 		originalParameter: testParam1;
 		parameter_name: 'testParam1';
 		parameter_before_value: (MrlParameter_before_value new parameter_value: 'aloba').
 	testEventGenerator parameterInitializationTimestamp: '0' on: stream.
-	self assert: self script equals: 'lestParam1 = "aloba"
+	self
+		assert: self script
+		equals:
+			'lestParam1 = "aloba"
 '
 ]
 
@@ -180,7 +186,7 @@ PWBTestEventGeneratorTest >> testReturnAssertTimestamp [
 	mrlBehavior addMrlReturnValue: MrlReturnValue new.
 	testEventGenerator returnAssertTimestamp: '0' on: stream.
 	self assert: self script isEmpty.
-	
+	mrlBehavior mrlBehaviorDatas: nil.
 	mrlBehavior
 		addMrlReturnValue:
 			(MrlReturnValue new
