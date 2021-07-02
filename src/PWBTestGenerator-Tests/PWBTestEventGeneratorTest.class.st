@@ -172,16 +172,6 @@ PWBTestEventGeneratorTest >> testParameterInitializationTimestamp [
 ]
 
 { #category : #tests }
-PWBTestEventGeneratorTest >> testPrintPWBScriptOn [
-		self skip
-]
-
-{ #category : #tests }
-PWBTestEventGeneratorTest >> testPrintPWBScriptTimestamp [
-	self skip
-]
-
-{ #category : #tests }
 PWBTestEventGeneratorTest >> testReturnAssertTimestamp [
 	mrlBehavior addMrlReturnValue: MrlReturnValue new.
 	testEventGenerator returnAssertTimestamp: '0' on: stream.

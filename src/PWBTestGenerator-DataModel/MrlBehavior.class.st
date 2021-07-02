@@ -154,8 +154,28 @@ MrlBehavior >> initialize [
 ]
 
 { #category : #testing }
+MrlBehavior >> isEvent [
+	^ behaviorUnderTest isEvent
+]
+
+{ #category : #testing }
+MrlBehavior >> isFunction [
+	^ behaviorUnderTest isFunction
+]
+
+{ #category : #testing }
+MrlBehavior >> isGlobal [
+	^ behaviorUnderTest isGlobal
+]
+
+{ #category : #testing }
 MrlBehavior >> isPrivate [
 	^ behaviorUnderTest isPrivate
+]
+
+{ #category : #testing }
+MrlBehavior >> isSubRoutine [
+	^ behaviorUnderTest isSubRoutine
 ]
 
 { #category : #'as yet unclassified' }

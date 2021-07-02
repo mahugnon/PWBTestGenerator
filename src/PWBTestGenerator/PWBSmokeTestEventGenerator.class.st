@@ -57,6 +57,31 @@ PWBSmokeTestEventGenerator >> footerEventOn: stream [
 	stream  << 'end event'
 ]
 
+{ #category : #'as yet unclassified' }
+PWBSmokeTestEventGenerator >> genericCommentOn: stream [
+	stream
+		<< '/*';
+		crlf;
+		<<
+			'Ce test est un test généré dans le cadre du projet de la CIM recherche en colaboration avec l''INRIA.';
+		crlf;
+		<<
+			'Trouver le projet de generation sur github:https://github.com/mahugnon/PWBTestGenerator.git';
+		crlf;
+		<< 'La method tester ici est:';
+		space;
+		<< behavior name;
+		space;
+		<< 'de ';
+		<< behavior parentType name;
+		crlf;
+		<< 'Autheur: HOUEKPETODJI Mahugnon Honoré';
+		crlf;
+		<< '*/';
+		crlf;
+		crlf
+]
+
 { #category : #printing }
 PWBSmokeTestEventGenerator >> headerEventOn: stream [
 	^ stream
@@ -82,6 +107,7 @@ PWBSmokeTestEventGenerator >> ownerObjectOn: stream [
 { #category : #printing }
 PWBSmokeTestEventGenerator >> printPWBScriptOn: stream [
 	self headerEventOn: stream.
+	self genericCommentOn: stream.
 	self beginTryOn: stream.
 	self ownerObjectOn: stream.
 	self behaviorInvocationOn: stream.

@@ -2,7 +2,7 @@ Class {
 	#name : #PWBSmokeTestGenerator,
 	#superclass : #Object,
 	#instVars : [
-		'behavior'
+		'majorObject'
 	],
 	#category : #'PWBTestGenerator-Core'
 }
@@ -34,9 +34,18 @@ PWBSmokeTestGenerator class >> generateForModel: aFamixPWBModel in: aFolder [
 		displayingProgress: [ :aBehavior | aBehavior name ]
 ]
 
-{ #category : #accessing }
-PWBSmokeTestGenerator >> behavior: aFamixPWBEvent [ 
-	behavior := aFamixPWBEvent
+{ #category : #tests }
+PWBSmokeTestGenerator >> declarePBUnitTestsOn: stream [
+	majorObject behaviorToTest
+		do: [ :behavior | 
+			stream
+				<< 'event';
+				space;
+				<< 'test_';
+				<< behavior name;
+				space;
+				<< '()';
+				crlf ]
 ]
 
 { #category : #tests }
@@ -45,30 +54,25 @@ PWBSmokeTestGenerator >> fileDeclaredTypeOn: stream [
 		<< 'global type';
 		space;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		space;
 		<< 'from';
 		space;
 		<< 'testcase';
-		crlf;
-		<< 'event';
-		space;
-		<< 'test_';
-		<< behavior name;
-		space;
-		<< '()';
-		crlf;
+		crlf.
+	self declarePBUnitTestsOn: stream.
+	stream
 		<< 'end type';
 		crlf;
 		<< 'global';
 		space;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		space;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		crlf
 ]
@@ -80,7 +84,7 @@ PWBSmokeTestGenerator >> forwardOn: stream [
 		crlf;
 		<< 'global type ';
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		space;
 		<< 'from';
@@ -99,7 +103,7 @@ PWBSmokeTestGenerator >> onCreateOn: stream [
 		<< 'on';
 		space;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		<< '.create';
 		crlf;
@@ -114,7 +118,7 @@ PWBSmokeTestGenerator >> onDestroyOn: stream [
 		<< 'on';
 		space;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		<< '.destroy';
 		crlf;
@@ -126,17 +130,19 @@ PWBSmokeTestGenerator >> onDestroyOn: stream [
 { #category : #printing }
 PWBSmokeTestGenerator >> printPWBScript: aFolder [
 	^ (aFolder asFileReference
-		/ ('test_' , behavior name , '_case_generated' , '.sru'))
+		/ ('test_' , majorObject name , '_case_generated' , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
 			self testFileHeaderOn: stream.
 			self forwardOn: stream.
 			self fileDeclaredTypeOn: stream.
 			stream crlf.
-			PWBSmokeTestEventGenerator new
-				behavior: behavior;
-				printPWBScriptOn: stream.
-			stream crlf.
+			majorObject behaviorToTest
+				do: [ :behavior | 
+					PWBSmokeTestEventGenerator new
+						behavior: behavior;
+						printPWBScriptOn: stream.
+					stream crlf ].
 			self onCreateOn: stream.
 			stream crlf.
 			self onDestroyOn: stream ]
@@ -149,7 +155,7 @@ PWBSmokeTestGenerator >> testFileHeaderOn: stream [
 		<< 'PBExportHeader';
 		<< $$;
 		<< 'test_';
-		<< behavior name;
+		<< majorObject name;
 		<< '_case_generated';
 		<< '.sru';
 		crlf
