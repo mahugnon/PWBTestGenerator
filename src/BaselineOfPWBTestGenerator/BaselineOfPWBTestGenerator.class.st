@@ -12,7 +12,6 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 		do: [ self
 				baselineOfP3: spec;
 				baselineOfGlorp: spec;
-				baselineOfPowerBuilderParser: spec;
 				baselineOfSmaCC: spec;
 				baselineOfPWBTestsDataGenerator: spec.
 			spec
@@ -20,7 +19,7 @@ BaselineOfPWBTestGenerator >> baseline: spec [
 				package: 'PWBTestGenerator-DataModel'
 					with: [ spec requires: #('Glorp' 'P3') ];
 				package: 'PWBTestGenerator'
-					with: [ spec requires: #('PowerBuilderParser' 'Glorp' 'P3') ] ]
+					with: [ spec requires: #('PWBTestsDataGenerator' 'Glorp' 'P3') ] ]
 ]
 
 { #category : #baselines }
@@ -45,14 +44,6 @@ BaselineOfPWBTestGenerator >> baselineOfPWBTestsDataGenerator: spec [
 	spec
 		baseline: 'PWBTestsDataGenerator'
 		with: [ spec repository: 'github://mahugnon/PWBTestsDataGenerator:main' ]
-]
-
-{ #category : #baselines }
-BaselineOfPWBTestGenerator >> baselineOfPowerBuilderParser: spec [
-	spec
-		baseline: 'PowerBuilderParser'
-		with: [ spec
-				repository: 'github://moosetechnology/PowerBuilderParser:main' ]
 ]
 
 { #category : #baselines }
