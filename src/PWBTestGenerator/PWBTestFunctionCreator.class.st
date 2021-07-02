@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestFunctionCreator class >> accept: mrlBehavior [
-	^ mrlBehavior behaviorUnderTest isFunction
+	^ mrlBehavior isFunction
 ]
 
 { #category : #'as yet unclassified' }

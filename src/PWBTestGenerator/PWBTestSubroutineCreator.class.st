@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestSubroutineCreator class >> accept: mrlBehavior [
-	^ mrlBehavior behaviorUnderTest isSubRoutine
+	^ mrlBehavior isSubRoutine
 ]
 
 { #category : #'as yet unclassified' }

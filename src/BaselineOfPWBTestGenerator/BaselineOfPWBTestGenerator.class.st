@@ -7,15 +7,14 @@ Class {
 { #category : #baselines }
 BaselineOfPWBTestGenerator >> baseline: spec [
 	<baseline>
-	self
-		baselineOfP3: spec;
-		baselineOfGlorp: spec;
-		baselineOfPowerBuilderParser: spec;
-		baselineOfSmaCC: spec;
-		baselineOfPWBTestsDataGenerator: spec.
 	spec
 		for: #common
-		do: [ self baselineOfPowerBuilderParser: spec.
+		do: [ self
+				baselineOfP3: spec;
+				baselineOfGlorp: spec;
+				baselineOfPowerBuilderParser: spec;
+				baselineOfSmaCC: spec;
+				baselineOfPWBTestsDataGenerator: spec.
 			spec
 				package: 'PWBTestGenerator-Tests';
 				package: 'PWBTestGenerator-DataModel'

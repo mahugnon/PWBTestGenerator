@@ -135,7 +135,7 @@ PWBTestGeneratorSimple >> printPWBScript: aFolder [
 	mrlBehavior hasAssertions
 		ifFalse: [ ^ self ].
 	^ (aFolder asFileReference
-		/ ('test_' , mrlBehavior behavior_name , '_case' , '.sru'))
+		/ ('test_' , mrlBehavior behavior_name , '_case_generated' , '.sru'))
 		ensureCreateFile;
 		writeStreamDo: [ :stream | 
 			self testFileHeaderOn: stream.

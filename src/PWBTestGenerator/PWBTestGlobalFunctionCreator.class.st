@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PWBTestGlobalFunctionCreator class >> accept: mrlBehavior [
-	^ mrlBehavior behaviorUnderTest isGlobal
+	^ mrlBehavior isGlobal
 ]
 
 { #category : #'as yet unclassified' }
