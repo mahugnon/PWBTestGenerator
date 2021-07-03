@@ -1,7 +1,7 @@
-Extension { #name : #FamixPWBWindow }
+Extension { #name : #FamixPWBmajorObject }
 
 { #category : #'*PWBTestGenerator' }
-FamixPWBWindow >> behaviorToTest [
+FamixPWBmajorObject >> behaviorToTest [
 	| list finalList |
 	finalList := OrderedCollection new.
 	list := self methods
