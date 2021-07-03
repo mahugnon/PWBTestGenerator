@@ -89,6 +89,7 @@ PWBSmokeTestEventGenerator >> headerEventOn: stream [
 		space;
 		<< 'test_';
 		<< behavior name;
+		<< '_smoke_generated';
 		<< '();';
 		crlf;
 		crlf
