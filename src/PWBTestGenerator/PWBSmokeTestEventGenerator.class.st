@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'behavior'
 	],
-	#category : #'PWBTestGenerator-Core'
+	#category : #'PWBTestGenerator-SmokeTests'
 }
 
 { #category : #visiting }
@@ -31,7 +31,7 @@ PWBSmokeTestEventGenerator >> behavior: aFamixPWBEvent [
 
 { #category : #printing }
 PWBSmokeTestEventGenerator >> behaviorInvocationOn: stream [
-	PWBTestBehaviorCreator behaviorInvocation: behavior on: stream
+	PWBSmokeTestBehaviorCreator behaviorInvocation: behavior on: stream
 ]
 
 { #category : #printing }

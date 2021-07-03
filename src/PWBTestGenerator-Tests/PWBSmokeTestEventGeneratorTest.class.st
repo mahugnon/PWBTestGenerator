@@ -32,34 +32,6 @@ PWBSmokeTestEventGeneratorTest >> testBeginTryOn [
 ]
 
 { #category : #tests }
-PWBSmokeTestEventGeneratorTest >> testBehaviorInvocationOn [
-	behavior
-		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
-	testEventGenerator behaviorInvocationOn: stream.
-	self
-		assert: self script
-		equals:
-			'luo_test.triggerEvent("ue_testEvent")
-'
-]
-
-{ #category : #tests }
-PWBSmokeTestEventGeneratorTest >> testBehaviorInvocationOn2 [
-	self skip.
-	behavior := FamixPWBSubRoutine named: 'uf_test' model: model.
-	behavior accessModifier: 'public'.
-	behavior
-		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
-	testEventGenerator behavior: behavior.
-	testEventGenerator behaviorInvocationOn: stream.
-	self
-		assert: self script
-		equals:
-			'luo_test.triggerEvent("ue_testEvent")
-'
-]
-
-{ #category : #tests }
 PWBSmokeTestEventGeneratorTest >> testEndTryOn [
 	behavior
 		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
@@ -72,6 +44,18 @@ this.assert(Er.getmessage(),false)
 FINALLY
 Destroy luo_test
 END TRY
+'
+]
+
+{ #category : #tests }
+PWBSmokeTestEventGeneratorTest >> testEventInvocationOn [
+	behavior
+		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
+	testEventGenerator behaviorInvocationOn: stream.
+	self
+		assert: self script
+		equals:
+			'luo_test.triggerEvent("ue_testEvent")
 '
 ]
 
@@ -101,7 +85,7 @@ Autheur: HOUEKPETODJI Mahugnon Honoré
 ]
 
 { #category : #tests }
-PWBSmokeTestEventGeneratorTest >> testPrintPWBScriptOn [
+PWBSmokeTestEventGeneratorTest >> testPrintPWBEventScriptOn [
 	behavior
 		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
 	testEventGenerator printPWBScriptOn: stream.
@@ -131,27 +115,29 @@ end event'
 ]
 
 { #category : #tests }
-PWBSmokeTestEventGeneratorTest >> testPrintPWBScriptOn2 [
-self skip
+PWBSmokeTestEventGeneratorTest >> testPrintPWBSubroutineTestScriptOn [
+	behavior := FamixPWBSubRoutine named: 'uf_test' model: model.
+	behavior accessModifier: 'public'.
 	behavior
 		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
+	testEventGenerator behavior: behavior.
 	testEventGenerator printPWBScriptOn: stream.
 	self
 		assert: self script
 		equals:
-			'event test_ue_testEvent_smoke_generated();
+			'event test_uf_test_smoke_generated();
 
 /*
 Ce test est un test généré dans le cadre du projet de la CIM recherche en colaboration avec l''INRIA.
 Trouver le projet de generation sur github:https://github.com/mahugnon/PWBTestGenerator.git
-La method tester ici est: ue_testEvent de uo_test
+La method tester ici est: uf_test de uo_test
 Autheur: HOUEKPETODJI Mahugnon Honoré
 */
 
 TRY
 uo_test luo_test
 luo_test = create uo_test
-luo_test.triggerEvent("ue_testEvent")
+luo_test.uf_test()
 this.assert(true)
 CATCH (runtimeerror er)
 this.assert(Er.getmessage(),false)
@@ -168,6 +154,21 @@ PWBSmokeTestEventGeneratorTest >> testSmokeAssertOn [
 		assert: self script
 		equals:
 		'this.assert(true)
+'
+]
+
+{ #category : #tests }
+PWBSmokeTestEventGeneratorTest >> testSubroutineInvocationOn [
+	behavior := FamixPWBSubRoutine named: 'uf_test' model: model.
+	behavior accessModifier: 'public'.
+	behavior
+		parentType: (FamixPWBUserObject named: 'uo_test' model: model).
+	testEventGenerator behavior: behavior.
+	testEventGenerator behaviorInvocationOn: stream.
+	self
+		assert: self script
+		equals:
+			'luo_test.uf_test()
 '
 ]
 

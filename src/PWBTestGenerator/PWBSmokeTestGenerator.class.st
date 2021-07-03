@@ -4,34 +4,19 @@ Class {
 	#instVars : [
 		'majorObject'
 	],
-	#category : #'PWBTestGenerator-Core'
+	#category : #'PWBTestGenerator-SmokeTests'
 }
 
 { #category : #'as yet unclassified' }
-PWBSmokeTestGenerator class >> generateForModel1: aFamixPWBModel in: aFolder [
-	(aFamixPWBModel allWithType: FamixPWBmajorObject)
-		do: [ :aBehavior | 
-			aBehavior isPrivate
-				ifTrue: [ ^ self ].
-			self new
-				behavior: aBehavior;
-				printPWBScript: aFolder ]
-		displayingProgress: [ :aBehavior | aBehavior name ]
-]
-
-{ #category : #'as yet unclassified' }
 PWBSmokeTestGenerator class >> generateForModel: aFamixPWBModel in: aFolder [
-	((aFamixPWBModel allWithType: FamixPWBEvent)
-		select: [ :each | 
-			each name ~= 'constructor'
-				and: [ each name ~= 'destructor' and: [ each parentType isNotNil ] ] ])
-		do: [ :aBehavior | 
-			aBehavior isPrivate
-				ifTrue: [ ^ self ].
-			self new
-				behavior: aBehavior;
-				printPWBScript: aFolder ]
-		displayingProgress: [ :aBehavior | aBehavior name ]
+	(aFamixPWBModel allWithType: FamixPWBWindow)
+		, (aFamixPWBModel allWithType: FamixPWBUserObject)
+		do: [ :major | 
+			major methods isEmpty
+				ifFalse: [ self new
+						majorObject: major;
+						printPWBScript: aFolder asFileReference ] ]
+		displayingProgress: [ :major | major name ]
 ]
 
 { #category : #tests }

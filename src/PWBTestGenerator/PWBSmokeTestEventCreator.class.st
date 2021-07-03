@@ -1,16 +1,16 @@
 Class {
-	#name : #PWBTestEventCreator,
-	#superclass : #PWBTestBehaviorCreator,
-	#category : #'PWBTestGenerator-Core'
+	#name : #PWBSmokeTestEventCreator,
+	#superclass : #PWBSmokeTestBehaviorCreator,
+	#category : #'PWBTestGenerator-SmokeTests'
 }
 
 { #category : #'as yet unclassified' }
-PWBTestEventCreator class >> accept: mrlBehavior [
+PWBSmokeTestEventCreator class >> accept: mrlBehavior [
 	^ mrlBehavior isEvent
 ]
 
 { #category : #'as yet unclassified' }
-PWBTestEventCreator >> behaviorInvocation: behavior on: stream [
+PWBSmokeTestEventCreator >> behaviorInvocation: behavior on: stream [
 	| localVar |
 	localVar := 'l' , behavior parentType name.
 	stream

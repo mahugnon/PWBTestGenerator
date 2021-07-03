@@ -33,8 +33,8 @@ PWBSmokeTestGeneratorTest >> testFileDeclaredTypeOn [
 	self
 		assert: self script
 		equals:
-			'global type test_uo_test_case_generated from testcase
-event test_ue_testEvent ()
+		'global type test_uo_test_case_generated from testcase
+event test_ue_testEvent_smoke_generated ()
 end type
 global test_uo_test_case_generated test_uo_test_case_generated
 '
