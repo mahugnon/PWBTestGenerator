@@ -1,5 +1,4 @@
 # PWBTestGenerator
-[![Build Status](https://travis-ci.com/mahugnon/PWBTestGenerator.svg?branch=master)](https://travis-ci.com/mahugnon/PWBTestGenerator) 
 [![Build status](https://ci.appveyor.com/api/projects/status/rp7h5bpu5kjstbih?svg=true)](https://ci.appveyor.com/project/mahugnon/pwbtestgenerator) 
 [![Build Status](https://ci.inria.fr/pharo-contribution/job/PWBTestGenerator/badge/icon)](https://ci.inria.fr/pharo-contribution/job/PWBTestGenerator/)
 ![Github Actions build](https://github.com/mahugnon/PWBTestGenerator/workflows/Github%20Actions%20build/badge.svg)
