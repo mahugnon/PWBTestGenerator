@@ -18,12 +18,8 @@ PWBTestUserObjectCreator >> objectNamed: anObjectName on: aStream [
 		space;
 		<< varName;
 		crlf;
+		<< 'w_app_mdi.openUserObject(';
 		<< varName;
-		space;
-		<< '=';
-		space;
-		<< 'create';
-		space;
-		<< anObjectName;
+		nextPut: $);
 		crlf
 ]

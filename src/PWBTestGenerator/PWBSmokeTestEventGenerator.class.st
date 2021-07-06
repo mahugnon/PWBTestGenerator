@@ -60,7 +60,7 @@ PWBSmokeTestEventGenerator >> genericCommentOn: stream [
 		<< '/*';
 		crlf;
 		<<
-			'Ce test est un test généré dans le cadre du projet de la CIM recherche en colaboration avec l''INRIA.';
+			'Ce test est un test genere dans le cadre du projet de la CIM recherche en colaboration avec l''INRIA.';
 		crlf;
 		<<
 			'Trouver le projet de generation sur github:https://github.com/mahugnon/PWBTestGenerator.git';
@@ -72,7 +72,7 @@ PWBSmokeTestEventGenerator >> genericCommentOn: stream [
 		<< 'de ';
 		<< behavior parentType name;
 		crlf;
-		<< 'Autheur: HOUEKPETODJI Mahugnon Honoré';
+		<< 'Autheur: HOUEKPETODJI Mahugnon Honore';
 		crlf;
 		<< '*/';
 		crlf;

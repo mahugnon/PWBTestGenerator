@@ -21,8 +21,5 @@ PWBTestVisualObjectCreator >> objectNamed: anObjectName on: aStream [
 		<< 'open(';
 		<< varName;
 		<< ')';
-		crlf;
-		<< varName;
-		<< '.hide()';
 		crlf
 ]

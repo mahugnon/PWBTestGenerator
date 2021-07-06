@@ -3,7 +3,8 @@ Extension { #name : #FamixPWBUserObject }
 { #category : #'*PWBTestGenerator' }
 FamixPWBUserObject >> closeOn: stream [
 	stream
-		<< 'destroy l';
+		<< 'w_app_mdi.closeUserObject(l';
 		<< self name;
+		nextPut: $);
 		crlf
 ]
