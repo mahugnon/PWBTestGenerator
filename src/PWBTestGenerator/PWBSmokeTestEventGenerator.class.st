@@ -42,12 +42,9 @@ PWBSmokeTestEventGenerator >> endTryOn: stream [
 		<< 'this.assert(Er.getmessage(),false)';
 		crlf;
 		<< 'FINALLY';
-		crlf;
-		<< 'Destroy';
-		space;
-		<< 'l';
-		<< behavior parentType name;
-		crlf;
+		crlf.
+	behavior parentType closeOn: stream.
+	stream
 		<< 'END TRY';
 		crlf
 ]
